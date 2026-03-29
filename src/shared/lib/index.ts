@@ -1,1 +1,1 @@
-export {}
+export { formatPhone } from './formatPhone'
