@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { Outlet } from 'react-router'
-import { Header } from '../../widgets'
-import { Footer } from '../../widgets'
+import { Header, Footer, Sidebar } from '../../widgets'
 import { UserInfo } from '../../entities'
 import type { User } from '../../entities'
 import { formatPhone } from '../../shared'
@@ -27,10 +26,10 @@ export default function DashboardLayout() {
     return (
         <>
             <Header/>
-            <main className="p-4">
+            <main className="p-4 flex flex-col gap-4 items-start">
                 <UserInfo fullName={ fullName } phone={ formattedPhone }/>
-                <div className="w-full grid-cols-[3fr,9fr]">
-
+                <div className="w-full grid grid-cols-[3fr_9fr] gap-4">
+                    <Sidebar />
                     <Outlet/>
                 </div>
             </main>
