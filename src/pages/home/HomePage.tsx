@@ -1,6 +1,9 @@
-import { UserCard, Tabs } from "../../shared"
+import { useState } from 'react'
+import { UserCard, Tabs, Modal } from "../../shared"
 
 export default function HomePage() {
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
     return (
         <div className="grid gap-4 grid-cols-[6fr_3fr]">
             <div className="w-full flex flex-col gap-4">
@@ -15,6 +18,12 @@ export default function HomePage() {
                         title="Silver staff"
                     />
                 </div>
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="self-start px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                    Balansni to'ldirish
+                </button>
                 <Tabs
                     tabs={[
                         {
@@ -38,6 +47,23 @@ export default function HomePage() {
             <div className="w-full">
 
             </div>
+
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="Balansni to'ldirish"
+            >
+                <div className="flex flex-col gap-3">
+                    <input
+                        type="number"
+                        placeholder="Summani kiriting"
+                        className="border border-gray-300 rounded-lg px-3 py-2"
+                    />
+                    <button className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
+                        To'lash
+                    </button>
+                </div>
+            </Modal>
         </div>
     )
 }
