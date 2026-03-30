@@ -15,7 +15,7 @@ const menuItems: SidebarItem[] = [
 
 export default function Sidebar() {
     return (
-        <aside className="w-full">
+        <aside className="w-full bg-white rounded-xl p-4">
             <ul className="w-full flex flex-col gap-2 items-start">
                 {menuItems.map(item => (
                     <li key={item.id}>
