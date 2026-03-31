@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, useTransition } from 'react'
+import { useState, useRef, useLayoutEffect, useTransition, useDeferredValue, useMemo } from 'react'
 
 interface Tariff {
     id: number
@@ -39,7 +39,39 @@ const tariffs: Tariff[] = [
     },
 ]
 
-// "Qimmat" komponent — ko'p elementlarni render qiladi (simulyatsiya)
+// Tarif xususiyatlarini qidirish ro'yxati
+function TariffSearchResults({ query }: { query: string }) {
+    const filtered = useMemo(() => {
+        if (!query) return tariffs
+
+        const q = query.toLowerCase()
+        return tariffs.filter(t =>
+            t.name.toLowerCase().includes(q) ||
+            t.price.includes(q) ||
+            t.features.some(f => f.toLowerCase().includes(q)) ||
+            t.details.toLowerCase().includes(q)
+        )
+    }, [query])
+
+    return (
+        <div className="flex flex-col gap-3">
+            {filtered.length === 0 ? (
+                <p className="text-gray-400 text-sm">Hech narsa topilmadi</p>
+            ) : (
+                filtered.map(t => (
+                    <div key={t.id} className="bg-white rounded-lg p-4 flex justify-between items-center">
+                        <div>
+                            <p className="font-medium">{t.name}</p>
+                            <p className="text-sm text-gray-500">{t.features.join(' • ')}</p>
+                        </div>
+                        <p className="font-bold text-blue-600">{t.price} so'm</p>
+                    </div>
+                ))
+            )}
+        </div>
+    )
+}
+
 function TariffComparison({ selectedId }: { selectedId: number }) {
     return (
         <div className="bg-white rounded-xl p-6">
@@ -85,6 +117,11 @@ export default function TariffsPage() {
     const [highlightStyle, setHighlightStyle] = useState({ left: 0, width: 0 })
     const tabsRef = useRef<HTMLDivElement>(null)
 
+    // Qidiruv — useDeferredValue misoli
+    const [searchQuery, setSearchQuery] = useState('')
+    const deferredQuery = useDeferredValue(searchQuery)
+    const isSearchStale = searchQuery !== deferredQuery
+
     useLayoutEffect(() => {
         const container = tabsRef.current
         if (!container) return
@@ -99,10 +136,7 @@ export default function TariffsPage() {
     }, [selectedId])
 
     function handleTabClick(id: number) {
-        // Muhim (urgent) yangilanish — tab darhol o'zgaradi
         setSelectedId(id)
-
-        // Past ustuvorlikdagi (non-urgent) yangilanish — jadval keyinroq yangilanadi
         startTransition(() => {
             setComparisonId(id)
         })
@@ -113,6 +147,19 @@ export default function TariffsPage() {
     return (
         <div className="flex flex-col gap-6">
             <h1 className="text-2xl font-bold">Tariflar</h1>
+
+            {/* Qidiruv — input DARHOL yangilanadi, natijalar KECHIKIB yangilanadi */}
+            <div className="flex flex-col gap-2">
+                <input
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                    placeholder="Tarif qidirish (masalan: cheksiz, telegram, 35 000)"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white"
+                />
+                <div className={`transition-opacity duration-150 ${isSearchStale ? 'opacity-50' : 'opacity-100'}`}>
+                    <TariffSearchResults query={deferredQuery} />
+                </div>
+            </div>
 
             {/* Tablar */}
             <div ref={tabsRef} className="relative flex gap-1 bg-white rounded-lg p-1">
@@ -136,7 +183,6 @@ export default function TariffsPage() {
                 ))}
             </div>
 
-            {/* Tanlangan tarif — DARHOL yangilanadi */}
             {selectedTariff && (
                 <div className="bg-white rounded-xl p-6 flex flex-col gap-4">
                     <div className="flex justify-between items-center">
@@ -155,7 +201,6 @@ export default function TariffsPage() {
                 </div>
             )}
 
-            {/* Solishtirish jadvali — useTransition bilan PAST ustuvorlikda yangilanadi */}
             <div className={`transition-opacity duration-200 ${isPending ? 'opacity-50' : 'opacity-100'}`}>
                 <TariffComparison selectedId={comparisonId} />
             </div>
