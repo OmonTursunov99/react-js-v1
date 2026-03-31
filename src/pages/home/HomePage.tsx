@@ -1,10 +1,38 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { UserCard, Tabs, Modal } from "../../shared"
 
 export default function HomePage() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [balance, setBalance] = useState(56.12)
     const [amount, setAmount] = useState('')
+    const [notifications, setNotifications] = useState<string[]>([])
+    const [isOnline, setIsOnline] = useState(navigator.onLine)
+
+    // 1. Sahifa ochilganda "API-dan" bildirishnomalar olish (bir marta)
+    useEffect(() => {
+        // API simulyatsiya
+        const timer = setTimeout(() => {
+            setNotifications(['Balans kam qoldi', 'Yangi tarif mavjud'])
+        }, 1000)
+
+        // Cleanup — komponent unmount bo'lganda timer tozalanadi
+        return () => clearTimeout(timer)
+    }, [])  // [] — faqat birinchi renderda
+
+    // 2. Online/offline holatni kuzatish
+    useEffect(() => {
+        const handleOnline = () => setIsOnline(true)
+        const handleOffline = () => setIsOnline(false)
+
+        window.addEventListener('online', handleOnline)
+        window.addEventListener('offline', handleOffline)
+
+        // Cleanup — event listenerlar olib tashlanadi
+        return () => {
+            window.removeEventListener('online', handleOnline)
+            window.removeEventListener('offline', handleOffline)
+        }
+    }, [])
 
     const openModal = useCallback(() => {
         setIsModalOpen(true)
@@ -67,8 +95,19 @@ export default function HomePage() {
                     ]}
                 />
             </div>
-            <div className="w-full">
-
+            <div className="w-full flex flex-col gap-4">
+                <div className="p-3 rounded-lg bg-white text-sm">
+                    {isOnline ? '🟢 Online' : '🔴 Offline'}
+                </div>
+                {notifications.length > 0 && (
+                    <div className="flex flex-col gap-2">
+                        {notifications.map((msg, i) => (
+                            <div key={i} className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-sm">
+                                {msg}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
             <Modal
