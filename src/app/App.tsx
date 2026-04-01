@@ -1,9 +1,12 @@
 import './styles/App.css'
+import ThemeProvider from './providers/ThemeProvider'
 import RouterProvider from './providers/RouterProvider'
 
 function App() {
   return (
-    <RouterProvider />
+    <ThemeProvider>
+      <RouterProvider />
+    </ThemeProvider>
   )
 }
 
