@@ -10,7 +10,8 @@ interface SidebarItem {
 const menuItems: SidebarItem[] = [
     { id: 1, path: "/", label: "Bosh sahifa", end: true },
     { id: 2, path: "/tariffs", label: "Tariflar" },
-    { id: 3, path: "/about", label: "Xizmatlar" },
+    { id: 3, path: "/internet", label: "Internet paketlar" },
+    { id: 4, path: "/about", label: "Xizmatlar" },
 ]
 
 export default function Sidebar() {
