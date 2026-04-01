@@ -24,7 +24,7 @@ export default function DashboardLayout() {
     }, [ userData.phone_number ])
 
     return (
-        <div className="bg-gray-100">
+        <>
             <Header/>
             <main className="p-4 flex flex-col gap-4 items-start">
                 <UserInfo fullName={ fullName } phone={ formattedPhone }/>
@@ -34,6 +34,6 @@ export default function DashboardLayout() {
                 </div>
             </main>
             <Footer/>
-        </div>
+        </>
     )
 }
