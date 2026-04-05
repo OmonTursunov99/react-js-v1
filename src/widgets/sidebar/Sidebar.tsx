@@ -12,6 +12,7 @@ const menuItems: SidebarItem[] = [
     { id: 2, path: "/tariffs", label: "Tariflar" },
     { id: 3, path: "/internet", label: "Internet paketlar" },
     { id: 4, path: "/about", label: "Xizmatlar" },
+    { id: 5, path: "/settings", label: "Sozlamalar" },
 ]
 
 export default function Sidebar() {

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router'
 import { DashboardLayout, EmptyLayout } from '../layouts'
-import { HomePage, AboutPage, NotFoundPage, TariffsPage, InternetPackagesPage } from '../../pages'
+import { HomePage, AboutPage, NotFoundPage, TariffsPage, InternetPackagesPage, SettingsPage } from '../../pages'
 
 export default function RouterProvider() {
     return (
@@ -12,6 +12,7 @@ export default function RouterProvider() {
                     <Route path="/about" element={ <AboutPage/> }/>
                     <Route path="/tariffs" element={ <TariffsPage /> } />
                     <Route path="/internet" element={ <InternetPackagesPage /> } />
+                    <Route path="/settings" element={ <SettingsPage /> } />
                 </Route>
 
                 {/* Header/Footer siz sahifalar */ }
