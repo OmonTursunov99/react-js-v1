@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SyntaxHighlighter from './SyntaxHighlighter'
 
 interface CodeBlockProps {
   code: string
@@ -24,8 +25,8 @@ export default function CodeBlock({ code, language = 'tsx', title }: CodeBlockPr
         </div>
       )}
       <div className="relative">
-        <pre className="p-4 overflow-x-auto bg-gray-950 text-gray-100 text-sm leading-relaxed">
-          <code>{code}</code>
+        <pre className="p-4 overflow-x-auto bg-gray-950 text-sm leading-relaxed font-mono">
+          <SyntaxHighlighter code={code} language={language} />
         </pre>
         <button
           onClick={handleCopy}

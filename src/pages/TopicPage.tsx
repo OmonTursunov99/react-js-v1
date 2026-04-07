@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router'
 import { useTopicData } from '@/hooks/useTopicData'
 import { useProgress } from '@/hooks/useProgress'
 import Tabs from '@/components/ui/Tabs'
+import ContentRenderer from '@/components/ui/ContentRenderer'
 import CodeBlock from '@/components/ui/CodeBlock'
 import Accordion from '@/components/ui/Accordion'
 import Checkbox from '@/components/ui/Checkbox'
@@ -28,11 +29,9 @@ export default function TopicPage() {
       id: 'info',
       label: "Ma'lumot",
       content: (
-        <div className="prose dark:prose-invert max-w-none">
+        <div>
           {topic.content ? (
-            <div className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
-              {topic.content}
-            </div>
+            <ContentRenderer content={topic.content} />
           ) : (
             <div className="text-center py-12 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-700">
               <p className="text-4xl mb-3">📝</p>
