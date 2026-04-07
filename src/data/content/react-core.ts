@@ -2774,13 +2774,13 @@ useEffect-da DOM o'zgartirsangiz "miltillash" (flicker) ko'rinadi:
 
   // useEffect bilan — MILTILLASH bor:
   useEffect(() => {
-    ref.current.style.left = \\\`\${position}px\\\`
+    ref.current.style.left = \`\${position}px\`
   }, [position])
   // Foydalanuvchi: eski pozitsiya -> paint -> yangi pozitsiya
 
   // useLayoutEffect bilan — MILTILLASH yo'q:
   useLayoutEffect(() => {
-    ref.current.style.left = \\\`\${position}px\\\`
+    ref.current.style.left = \`\${position}px\`
   }, [position])
   // Foydalanuvchi: faqat yangi pozitsiya ko'radi
 
@@ -3136,7 +3136,7 @@ function TabsExample() {
 // 10,000 ta mahsulot generatsiya qilish
 const allProducts = Array.from({ length: 10000 }, (_, i) => ({
   id: i + 1,
-  name: \\\`Mahsulot #\${i + 1}\\\`,
+  name: \`Mahsulot #\${i + 1}\`,
   category: ['Elektronika', 'Kiyim', 'Oziq-ovqat', 'Kitob'][i % 4],
   price: Math.round(Math.random() * 100000) / 100,
 }))
@@ -3320,7 +3320,7 @@ Search input + natijalar ro'yxati:
 // Katta ma'lumotlar bazasi
 const database = Array.from({ length: 10000 }, (_, i) => ({
   id: i + 1,
-  title: \\\`Maqola #\${i + 1}: \${['React', 'TypeScript', 'JavaScript', 'Node.js', 'CSS'][i % 5]} bo'yicha\\\`,
+  title: \`Maqola #\${i + 1}: \${['React', 'TypeScript', 'JavaScript', 'Node.js', 'CSS'][i % 5]} bo'yicha\`,
 }))
 
 function SearchResults({ query }: { query: string }) {
@@ -3392,7 +3392,7 @@ const HeavyChart = memo(function HeavyChart({ value }: { value: number }) {
           display: 'inline-block',
           width: 2,
           height,
-          background: \\\`hsl(\${(i + value) % 360}, 70%, 50%)\\\`,
+          background: \`hsl(\${(i + value) % 360}, 70%, 50%)\`,
           marginRight: 1,
         }}
       />
@@ -3601,7 +3601,7 @@ function SearchForm() {
   function handleSearch() {
     const value = inputRef.current?.getValue()
     if (value) {
-      alert(\\\`Qidirilmoqda: \${value}\\\`)
+      alert(\`Qidirilmoqda: \${value}\`)
     } else {
       inputRef.current?.focus()
     }
