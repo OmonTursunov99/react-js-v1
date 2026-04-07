@@ -1,0 +1,76 @@
+import type { Topic } from '../types'
+
+export const testingTopics: Topic[] = [
+  {
+    id: 'vitest-jest',
+    title: 'Vitest / Jest',
+    importance: 3,
+    status: 'to-learn',
+    description: 'Unit test yozish, test runner, assertion',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'testing', topicId: 'rtl', label: 'React Testing Library' },
+      { sectionId: 'testing', topicId: 'mocking', label: 'Mock qilish' },
+    ],
+  },
+  {
+    id: 'rtl',
+    title: 'React Testing Library (RTL)',
+    importance: 3,
+    status: 'to-learn',
+    description: 'render, screen, userEvent, waitFor',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'testing', topicId: 'vitest-jest', label: 'Vitest / Jest' },
+      { sectionId: 'testing', topicId: 'testing-patterns', label: 'Testing Patterns' },
+      { sectionId: 'architecture', topicId: 'accessibility', label: 'a11y (getByRole)' },
+    ],
+  },
+  {
+    id: 'testing-patterns',
+    title: 'Testing Patterns',
+    importance: 3,
+    status: 'to-learn',
+    description: 'Behavior test, not implementation — nima va qanday test qilinadi',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'testing', topicId: 'rtl', label: 'RTL (behavior testing)' },
+      { sectionId: 'testing', topicId: 'mocking', label: 'Mock qilish' },
+      { sectionId: 'component-patterns', topicId: 'custom-hooks', label: 'Custom Hooks testing' },
+    ],
+  },
+  {
+    id: 'mocking',
+    title: 'Mock',
+    importance: 2,
+    status: 'to-learn',
+    description: 'API mock, module mock, hook mock, vi.fn()',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'testing', topicId: 'vitest-jest', label: 'Vitest mock API' },
+      { sectionId: 'testing', topicId: 'testing-patterns', label: 'Testing Patterns' },
+    ],
+  },
+  {
+    id: 'e2e',
+    title: 'E2E Testing',
+    importance: 1,
+    status: 'to-learn',
+    description: 'Playwright / Cypress asoslari',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'testing', topicId: 'rtl', label: 'RTL (unit/integration)' },
+      { sectionId: 'architecture', topicId: 'ci-cd', label: 'CI/CD (E2E pipeline)' },
+    ],
+  },
+]

@@ -1,205 +1,141 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Buyruqlar
 
-## Команды
+- `yarn dev` — Vite dev server (HMR)
+- `yarn build` — `tsc -b && vite build` → `dist/`
+- `yarn lint` — ESLint tekshirish
+- `yarn preview` — production build preview
+- `yarn` — dependency o'rnatish
 
-- **Запуск dev-сервера:** `yarn dev` — запускает Vite с HMR (горячая перезагрузка модулей)
-- **Сборка проекта:** `yarn build` — сначала проверяет типы через `tsc -b`, затем собирает через `vite build` в папку `dist/`
-- **Линтинг:** `yarn lint` — проверка кода через ESLint (TypeScript + React hooks/refresh правила)
-- **Превью продакшн-сборки:** `yarn preview` — локальный сервер для собранного `dist/`
-- **Установка зависимостей:** `yarn`
+## Loyiha maqsadi
 
-## Стек технологий
+Bu **React Interview Prep Platform** — Senior React Frontend suxbatiga tayyorgarlik uchun interactive o'quv platformasi. Foydalanuvchi 9 bo'lim, 91 mavzuni o'rganadi. Har bir mavzuda dokumentatsiya, kod misollari, intervyu savollari bor. Progress localStorage-da saqlanadi.
 
-| Технология | Версия | Аналог во Vue | Назначение |
-|---|---|---|---|
-| React | 19.2 | Vue 3 | UI-фреймворк (библиотека) |
-| React DOM | 19.2 | Встроен в Vue | Рендеринг в браузер |
-| TypeScript | 5.9 | TypeScript | Типизация |
-| Vite | 8.0 | Vite | Сборщик и dev-сервер |
-| ESLint | 9.39 | ESLint | Линтер |
-| Babel | 7.29 | — | Транспиляция (для React Compiler) |
-| React Compiler | 1.0 | Vue Reactivity Transform (убран) | Автоматическая оптимизация рендеринга |
+## Stek
 
-## Архитектура проекта
-
-### Точка входа
-
-```
-index.html → src/main.tsx → <App />
-```
-
-**Сравнение с Vue:**
-- Во Vue: `main.ts` создаёт приложение через `createApp(App).mount('#app')`
-- В React: `main.tsx` создаёт корень через `createRoot(document.getElementById('root')!).render(<App />)`
-
-Ключевое отличие: Vue оборачивает приложение в экземпляр `App`, React просто рендерит JSX в DOM-узел.
-
-### Файл `src/main.tsx` — корень приложения
-
-```tsx
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
-```
-
-- `createRoot` — создаёт корневой React-узел (аналог `createApp()` во Vue)
-- `StrictMode` — режим разработки, который предупреждает о проблемах (аналогов во Vue нет — Vue предупреждает через devtools). В StrictMode React вызывает компоненты дважды в dev-режиме, чтобы найти побочные эффекты
-- `index.css` — глобальные стили (как в Vue, когда стили не scoped)
-
-### Файл `src/App.tsx` — главный компонент
-
-```tsx
-import { useState } from 'react'
-
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <button onClick={() => setCount((count) => count + 1)}>
-      Count is {count}
-    </button>
-  )
-}
-
-export default App
-```
-
-**Сравнение с Vue (Composition API):**
-
-| Концепция | React | Vue 3 (Composition API) |
+| Texnologiya | Versiya | Vazifasi |
 |---|---|---|
-| Реактивное состояние | `useState(0)` возвращает `[count, setCount]` | `const count = ref(0)` |
-| Изменение состояния | `setCount(count + 1)` или `setCount(prev => prev + 1)` | `count.value++` |
-| Шаблон/разметка | JSX прямо в функции `return (...)` | `<template>...</template>` |
-| CSS-классы | `className="counter"` | `class="counter"` |
-| Обработчик события | `onClick={() => ...}` | `@click="..."` |
-| Файл компонента | `.tsx` — всё в одном файле через JSX | `.vue` — разделение на `<template>`, `<script>`, `<style>` |
+| React | 19.2 | UI framework |
+| React Router | 7.13 | Routing (createBrowserRouter) |
+| TypeScript | 5.9 | Tipizatsiya (strict mode) |
+| Tailwind CSS | 4.2 | Styling |
+| Zustand | 5.0 | State management (progress, sidebar) |
+| Vite | 8.0 | Build tool |
+| React Compiler | 1.0 | Avtomatik memoizatsiya |
 
-### Ключевые отличия React от Vue
+Loyihada Redux Toolkit va TanStack Query ham o'rnatilgan (package.json), lekin hozirgi ilovada ishlatilmaydi — keyinchalik demo sifatida qo'shilishi mumkin.
 
-**1. Компоненты — это функции (не объекты и не SFC)**
+## Arxitektura
 
-В Vue компонент — это `.vue` файл с тремя секциями. В React компонент — это обычная функция, которая возвращает JSX. Нет `<template>`, нет `<style scoped>` — всё в JS/TS.
-
-**2. JSX вместо шаблонов**
-
-Vue использует HTML-подобные шаблоны с директивами (`v-if`, `v-for`, `v-bind`). React использует JSX — это JavaScript-выражения, которые выглядят как HTML:
-- `v-if="show"` → `{show && <Component />}` или `{show ? <A /> : <B />}`
-- `v-for="item in items"` → `{items.map(item => <Item key={item.id} />)}`
-- `:src="url"` (v-bind) → `src={url}`
-- `@click="handler"` (v-on) → `onClick={handler}`
-
-**3. Реактивность — явная, через хуки**
-
-Vue: реактивность автоматическая — обернул в `ref()` или `reactive()` и Vue сам отслеживает зависимости.
-
-React: нужно явно вызывать `setState` для обновления. React не отслеживает зависимости автоматически — ты сам говоришь, когда перерендерить.
-
-**4. Нет двусторонней привязки (v-model) из коробки**
-
-В Vue: `<input v-model="name" />` — данные автоматически синхронизируются.
-
-В React: нужно вручную:
-```tsx
-const [name, setName] = useState('')
-<input value={name} onChange={(e) => setName(e.target.value)} />
+### Kirish nuqtasi
+```
+index.html → src/main.tsx → <App /> → ThemeProvider → AppRouter → RootLayout → Outlet
 ```
 
-### React Compiler
-
-В этом проекте включён **React Compiler** (`babel-plugin-react-compiler` в `vite.config.ts`). Это новая функция React 19, которая автоматически мемоизирует компоненты и значения.
-
-**Что это значит:** Раньше разработчики вручную оборачивали в `useMemo`, `useCallback`, `React.memo`. Теперь компилятор делает это автоматически на этапе сборки.
-
-**Аналог во Vue:** Vue изначально работает иначе — его система реактивности сама отслеживает зависимости и обновляет только то, что нужно. React Compiler — это попытка приблизиться к такой же "автоматической" оптимизации.
-
-### Конфигурация Vite (`vite.config.ts`)
-
-```ts
-import { defineConfig } from 'vite'
-import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
-
-export default defineConfig({
-  plugins: [
-    react(),                                        // React Fast Refresh (HMR)
-    babel({ presets: [reactCompilerPreset()] })     // React Compiler
-  ],
-})
-```
-
-- `@vitejs/plugin-react` — обеспечивает Fast Refresh (мгновенное обновление при редактировании, как HMR во Vue)
-- `@rolldown/plugin-babel` с `reactCompilerPreset` — включает React Compiler
-
-Во Vue аналог: `@vitejs/plugin-vue` — один плагин, который обрабатывает `.vue` файлы.
-
-### TypeScript конфигурация (`tsconfig.app.json`)
-
-- `"strict": true` — строгий режим TypeScript
-- `"noUnusedLocals": true` — ошибка при неиспользуемых переменных
-- `"noUnusedParameters": true` — ошибка при неиспользуемых параметрах функций
-- `"jsx": "react-jsx"` — автоматический импорт JSX-рантайма (не нужно писать `import React from 'react'` в каждом файле)
-
-### ESLint конфигурация (`eslint.config.js`)
-
-Используется плоская конфигурация ESLint 9 (flat config) с правилами:
-- `js.configs.recommended` — базовые JS-правила
-- `tseslint.configs.recommended` — TypeScript-правила
-- `reactHooks.configs.flat.recommended` — правила для хуков React (обязательно для правильной работы хуков)
-- `reactRefresh.configs.vite` — правила для React Fast Refresh
-
-### Структура файлов
-
+### src/ tuzilmasi
 ```
 src/
-  main.tsx      — точка входа, рендеринг <App /> в DOM
-  App.tsx       — главный компонент
-  App.css       — стили компонента App (не scoped — в отличие от Vue <style scoped>)
-  index.css     — глобальные стили
-  assets/       — статические ресурсы (изображения, SVG)
+├── main.tsx                          # Kirish nuqtasi
+├── app/
+│   ├── App.tsx                       # ThemeProvider + AppRouter
+│   ├── router.tsx                    # Barcha routelar (lazy loading)
+│   ├── layouts/
+│   │   └── RootLayout.tsx            # Header + Sidebar + Outlet
+│   ├── providers/
+│   │   ├── ThemeProvider.tsx          # Dark/light tema (Context + localStorage)
+│   │   └── theme-context.ts          # ThemeContext (alohida fayl — ESLint react-refresh)
+│   └── styles/
+│       └── index.css                 # @import "tailwindcss"
+├── components/
+│   ├── ui/                           # Qayta ishlatiladigan UI komponentlar
+│   │   ├── Accordion.tsx             # Ochiluvchi savol-javob
+│   │   ├── Badge.tsx                 # "Bilasiz" / "O'rganish kerak" (learned: boolean)
+│   │   ├── Card.tsx                  # Dashboard section kartochka
+│   │   ├── Checkbox.tsx              # "O'rgandim" toggle
+│   │   ├── CodeBlock.tsx             # Kod ko'rsatish + nusxalash
+│   │   ├── ProgressBar.tsx           # Gradient progress bar
+│   │   ├── StarRating.tsx            # Muhimlik darajasi (1-3 yulduz)
+│   │   └── Tabs.tsx                  # Tab komponent
+│   ├── sidebar/
+│   │   ├── Sidebar.tsx               # 9 bo'limli sidebar
+│   │   ├── SidebarSection.tsx        # Ochiluvchi bo'lim
+│   │   └── SidebarTopic.tsx          # Topic NavLink
+│   └── layout/
+│       └── Header.tsx                # Logo, progress bar, tema toggle
+├── data/
+│   ├── types.ts                      # Section, Topic, RelatedTopic, CodeExample, InterviewQA
+│   ├── sections.ts                   # 9 bo'limning master indeksi
+│   └── content/                      # Har bir bo'lim uchun topic ma'lumotlari
+│       ├── react-core.ts             # 1. React Core (23 mavzu)
+│       ├── component-patterns.ts     # 2. Component Patterns (12 mavzu)
+│       ├── state-management.ts       # 3. State Management (8 mavzu)
+│       ├── routing.ts                # 4. Routing (6 mavzu)
+│       ├── performance.ts            # 5. Performance (10 mavzu)
+│       ├── typescript-react.ts       # 6. TypeScript + React (8 mavzu)
+│       ├── testing.ts                # 7. Testing (5 mavzu)
+│       ├── architecture.ts           # 8. Architecture (7 mavzu)
+│       └── theory-questions.ts       # 9. Nazariy Savollar (15 mavzu)
+├── stores/
+│   ├── progress-store.ts             # Zustand + persist (learnedTopics[])
+│   └── sidebar-store.ts              # Zustand (expandedSections[])
+├── pages/
+│   ├── DashboardPage.tsx             # Bosh sahifa — 3x3 grid kartochkalar
+│   ├── SectionPage.tsx               # Bo'lim — topic grid
+│   ├── TopicPage.tsx                 # Mavzu — tablar + bog'liq mavzular
+│   └── NotFoundPage.tsx              # 404
+└── hooks/
+    ├── useProgress.ts                # learnedTopics dan derived: isLearned, getSectionPercent
+    ├── useSectionData.ts             # Bo'limni ID bo'yicha topish
+    ├── useTopicData.ts               # Mavzuni sectionId+topicId bo'yicha topish
+    └── useTheme.ts                   # ThemeContext dan theme, toggleTheme
 ```
 
-## Зависимости в `package.json`
+### Routing
+```
+/                              → DashboardPage (3x3 section kartochkalar)
+/section/:sectionId            → SectionPage (topic grid)
+/section/:sectionId/:topicId   → TopicPage (tablar: Ma'lumot, Kod, Intervyu savollari)
+*                              → NotFoundPage
+```
+Barcha sahifalar `React.lazy()` + `Suspense` bilan lazy-loaded.
 
-### dependencies (продакшн)
+### Ma'lumotlar tuzilmasi
 
-| Пакет | Назначение |
-|---|---|
-| `react` | Ядро React — хуки, компоненты, виртуальный DOM |
-| `react-dom` | Рендеринг React-компонентов в браузерный DOM |
+**Topic** — asosiy birlik:
+```typescript
+interface Topic {
+  id: string                     // URL slug: "use-state"
+  title: string                  // Ko'rinish: "useState"
+  importance: 1 | 2 | 3          // Yulduzlar
+  status: 'known' | 'to-learn'   // Dastlabki holat (hozir hammasi to-learn)
+  description: string             // Qisqacha
+  content: string                 // To'liq dokumentatsiya (bo'sh = hali yozilmagan)
+  codeExamples: CodeExample[]     // Kod misollari
+  interviewQA: InterviewQA[]      // Savol-javoblar
+  relatedTopics?: RelatedTopic[]  // Cross-reference boshqa mavzularga
+}
+```
 
-Во Vue это один пакет `vue`, который включает и ядро, и рендерер. В React ядро (`react`) и рендерер (`react-dom`) разделены — это позволяет использовать одно ядро для web, mobile (React Native), VR и т.д.
+**Yangi mavzu qo'shish:** Faqat `src/data/content/<section>.ts` ga yangi topic object qo'shish yetarli — routing, sidebar, sahifalar avtomatik yangilanadi.
 
-### devDependencies (для разработки)
+**Kontent to'ldirish:** Har bir topic-da `content`, `codeExamples`, `interviewQA` maydonlarini to'ldirish. Skeleton tuzilma tayyor — kontent bosqichma-bosqich qo'shiladi.
 
-| Пакет | Назначение |
-|---|---|
-| `@vitejs/plugin-react` | Плагин Vite для React (Fast Refresh/HMR) — аналог `@vitejs/plugin-vue` |
-| `@rolldown/plugin-babel` | Babel через Rolldown (bundler Vite 8) для React Compiler |
-| `babel-plugin-react-compiler` | React Compiler — автооптимизация рендеринга |
-| `@babel/core` | Ядро Babel (нужно для React Compiler) |
-| `typescript` | TypeScript компилятор |
-| `@types/react` | Типы для React |
-| `@types/react-dom` | Типы для React DOM |
-| `@types/node` | Типы для Node.js |
-| `@types/babel__core` | Типы для Babel |
-| `eslint` | Линтер |
-| `@eslint/js` | Базовые правила ESLint |
-| `typescript-eslint` | TypeScript-интеграция для ESLint |
-| `eslint-plugin-react-hooks` | Правила для хуков React (Rules of Hooks) |
-| `eslint-plugin-react-refresh` | Правила для корректной работы HMR |
-| `globals` | Глобальные переменные для ESLint (browser, node и т.д.) |
-| `vite` | Сборщик и dev-сервер |
+### Zustand pattern
 
-### Менеджер пакетов
+**MUHIM:** Zustand store-da `get()` ishlatgan derived metodlar (`isExpanded()`, `isLearned()`) reaktiv EMAS — komponentni qayta renderlaMaydi. Store-dan faqat DATA select qilish kerak, derived logikani hook/komponent ichida hisoblash kerak:
 
-Проект использует **Yarn 1 (Classic)** — указан в поле `packageManager` в `package.json`. Используй `yarn` для установки зависимостей, не `npm`.
+```typescript
+// NOTO'G'RI — re-render bermaydi:
+const isLearned = useStore(s => s.isLearned(id))
+
+// TO'G'RI — learnedTopics o'zgarganda re-render beradi:
+const learnedTopics = useStore(s => s.learnedTopics)
+const isLearned = learnedTopics.includes(key)
+```
+
+### Path alias
+`@/` → `src/` (vite.config.ts va tsconfig.app.json da sozlangan)
+
+### docs/ papka
+`docs/` — o'rganilgan mavzular haqida .md fayllar va `interview-prep.md` — tayyorgarlik rejasi. Bu fayllar ilovada ishlatilmaydi, mustaqil hujjatlar.

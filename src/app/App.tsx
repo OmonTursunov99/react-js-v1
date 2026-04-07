@@ -1,18 +1,11 @@
-import './styles/App.css'
 import ThemeProvider from './providers/ThemeProvider'
-import StoreProvider from './providers/StoreProvider'
-import QueryProvider from './providers/QueryProvider'
-import RouterProvider from './providers/RouterProvider'
+import AppRouter from './router'
 
 function App() {
   return (
-    <StoreProvider>
-      <QueryProvider>
-        <ThemeProvider>
-          <RouterProvider />
-        </ThemeProvider>
-      </QueryProvider>
-    </StoreProvider>
+    <ThemeProvider>
+      <AppRouter />
+    </ThemeProvider>
   )
 }
 

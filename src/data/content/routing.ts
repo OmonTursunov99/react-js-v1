@@ -1,0 +1,88 @@
+import type { Topic } from '../types'
+
+export const routingTopics: Topic[] = [
+  {
+    id: 'react-router-basics',
+    title: 'React Router (asoslar)',
+    importance: 3,
+    status: 'to-learn',
+    description: 'BrowserRouter, Routes, Route, NavLink',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'routing', topicId: 'navigation-hooks', label: 'Navigation Hooks' },
+      { sectionId: 'routing', topicId: 'nested-layouts', label: 'Nested Layouts' },
+    ],
+  },
+  {
+    id: 'protected-routes',
+    title: 'Protected Routes',
+    importance: 3,
+    status: 'to-learn',
+    description: 'Auth guard qanday qilinadi',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'routing', topicId: 'navigation-hooks', label: 'useNavigate (redirect)' },
+      { sectionId: 'component-patterns', topicId: 'hoc', label: 'HOC (withAuth)' },
+    ],
+  },
+  {
+    id: 'lazy-routes',
+    title: 'Lazy Routes',
+    importance: 3,
+    status: 'to-learn',
+    description: 'React.lazy + Suspense bilan route code-splitting',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'component-patterns', topicId: 'suspense-lazy', label: 'Suspense + React.lazy' },
+      { sectionId: 'performance', topicId: 'code-splitting', label: 'Code Splitting' },
+    ],
+  },
+  {
+    id: 'loaders-actions',
+    title: 'Loaders / Actions',
+    importance: 2,
+    status: 'to-learn',
+    description: 'React Router v6.4+ data loading pattern',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'state-management', topicId: 'tanstack-query', label: 'TanStack Query (alternativa)' },
+      { sectionId: 'theory-questions', topicId: 'server-components', label: 'Server Components' },
+    ],
+  },
+  {
+    id: 'navigation-hooks',
+    title: 'useNavigate, useParams, useSearchParams',
+    importance: 3,
+    status: 'to-learn',
+    description: 'Programmatic navigation, URL params',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'routing', topicId: 'react-router-basics', label: 'Router asoslari' },
+      { sectionId: 'routing', topicId: 'protected-routes', label: 'Protected Routes' },
+    ],
+  },
+  {
+    id: 'nested-layouts',
+    title: 'Nested Layouts',
+    importance: 2,
+    status: 'to-learn',
+    description: 'Outlet pattern — ichma-ich layout',
+    content: '',
+    codeExamples: [],
+    interviewQA: [],
+    relatedTopics: [
+      { sectionId: 'routing', topicId: 'react-router-basics', label: 'Router asoslari' },
+      { sectionId: 'component-patterns', topicId: 'composition-vs-inheritance', label: 'Composition' },
+    ],
+  },
+]
