@@ -166,7 +166,7 @@ function Counter() {
     </div>
   )
 }`,
-        description: 'Eng oddiy useState misoli. "+" bosilganda count + 1 bo\'ladi, "-" bosilganda prev => prev - 1 (updater function).',
+        description: `Eng oddiy useState misoli. "+" bosilganda count + 1 bo'ladi, "-" bosilganda prev => prev - 1 (updater function).`,
       },
       {
         title: 'Object state — Form boshqaruvi',
@@ -203,7 +203,7 @@ function UserForm() {
     </form>
   )
 }`,
-        description: 'Object state — spread operator (...prev) bilan yangilash. DOIM yangi object yaratish kerak, aks holda React o\'zgarishni sezmaydi.',
+        description: `Object state — spread operator (...prev) bilan yangilash. DOIM yangi object yaratish kerak, aks holda React o'zgarishni sezmaydi.`,
       },
       {
         title: 'Array state — Todo list',
@@ -259,7 +259,7 @@ function TodoList() {
     </div>
   )
 }`,
-        description: 'Array state pattern — qo\'shish ([...prev, new]), o\'chirish (filter), yangilash (map). Hech qachon push/splice ishlatmang!',
+        description: `Array state pattern — qo'shish ([...prev, new]), o'chirish (filter), yangilash (map). Hech qachon push/splice ishlatmang!`,
       },
       {
         title: 'Lazy initialization',
@@ -283,7 +283,7 @@ function Settings() {
 
   return <div>Tema: {settings.theme}</div>
 }`,
-        description: 'Lazy initialization — boshlang\'ich qiymatni hisoblash qimmat bo\'lsa, funksiya bering (chaqirmang). React faqat birinchi renderda chaqiradi.',
+        description: `Lazy initialization — boshlang'ich qiymatni hisoblash qimmat bo'lsa, funksiya bering (chaqirmang). React faqat birinchi renderda chaqiradi.`,
       },
       {
         title: 'Functional update — Stale closure oldini olish',
@@ -316,7 +316,7 @@ function StaleClosureDemo() {
     </div>
   )
 }`,
-        description: 'Stale closure muammosi. count o\'zgaruvchisi eski render qiymatini ushlab turadi. prev => prev + 1 DOIM eng yangi qiymatni beradi.',
+        description: `Stale closure muammosi. count o'zgaruvchisi eski render qiymatini ushlab turadi. prev => prev + 1 DOIM eng yangi qiymatni beradi.`,
       },
       {
         title: 'TypeScript bilan useState',
@@ -350,35 +350,35 @@ const [data, setData] = useState({ x: 0, y: 0 }) // { x: number, y: number }`,
     interviewQA: [
       {
         question: 'useState qanday ishlaydi? Har renderda yangi state yaratadimi?',
-        answer: 'Yo\'q. React har bir komponent uchun fiber node yaratadi. Bu fiber ichida hooklar linked list sifatida saqlanadi. Birinchi renderda useState yangi state node yaratadi va boshlang\'ich qiymatni saqlaydi. Keyingi renderlarda React hook indeksiga qarab mavjud state-ni qaytaradi. Shuning uchun hooklar doim bir xil tartibda chaqirilishi shart (Rules of Hooks).',
+        answer: `Yo'q. React har bir komponent uchun fiber node yaratadi. Bu fiber ichida hooklar linked list sifatida saqlanadi. Birinchi renderda useState yangi state node yaratadi va boshlang'ich qiymatni saqlaydi. Keyingi renderlarda React hook indeksiga qarab mavjud state-ni qaytaradi. Shuning uchun hooklar doim bir xil tartibda chaqirilishi shart (Rules of Hooks).`,
       },
       {
         question: 'setState sinxronmi yoki asinxronmi?',
-        answer: 'setState asinxron — to\'g\'rirog\'i, u "batched". setState chaqirilganda React darhol renderlaMAYDI. Yangi qiymatni navbatga qo\'yadi va bir nechta setState-ni birlashtirib, BITTA render qiladi. Bu React 18 dan boshlab BARCHA kontekstlarda (event handler, setTimeout, Promise) ishlaydi. Yangi qiymatni ko\'rish uchun keyingi render-ni kutish kerak.',
+        answer: `setState asinxron — to'g'rirog'i, u "batched". setState chaqirilganda React darhol renderlaMAYDI. Yangi qiymatni navbatga qo'yadi va bir nechta setState-ni birlashtirib, BITTA render qiladi. Bu React 18 dan boshlab BARCHA kontekstlarda (event handler, setTimeout, Promise) ishlaydi. Yangi qiymatni ko'rish uchun keyingi render-ni kutish kerak.`,
       },
       {
         question: 'setCount(count + 1) va setCount(prev => prev + 1) farqi nima?',
-        answer: 'setCount(count + 1) — closure orqali SHU renderdagi count qiymatini ishlatadi. Agar bitta event ichida 3 marta chaqirilsa, har uchovi bir xil eski qiymatni ishlatadi. setCount(prev => prev + 1) — updater function. React har safar ENG YANGI qiymatni prev ga beradi. Shuning uchun 3 marta chaqirilsa, har biri oldingi natijaga +1 qiladi. Qoida: agar yangi state eski state-ga bog\'liq bo\'lsa, DOIM updater function ishlatish kerak.',
+        answer: `setCount(count + 1) — closure orqali SHU renderdagi count qiymatini ishlatadi. Agar bitta event ichida 3 marta chaqirilsa, har uchovi bir xil eski qiymatni ishlatadi. setCount(prev => prev + 1) — updater function. React har safar ENG YANGI qiymatni prev ga beradi. Shuning uchun 3 marta chaqirilsa, har biri oldingi natijaga +1 qiladi. Qoida: agar yangi state eski state-ga bog'liq bo'lsa, DOIM updater function ishlatish kerak.`,
       },
       {
         question: 'useState(value) va useState(() => value) farqi nima?',
-        answer: 'useState(value) — value HAR RENDERDA hisoblanadi, lekin faqat birinchi renderda ishlatiladi. useState(() => value) — funksiya faqat BIRINCHI RENDERDA chaqiriladi. Bu "lazy initialization" deyiladi. Qimmat operatsiyalar (JSON.parse, localStorage, katta array yaratish) uchun DOIM funksiya berish kerak, aks holda har renderda keraksiz hisoblash bo\'ladi.',
+        answer: `useState(value) — value HAR RENDERDA hisoblanadi, lekin faqat birinchi renderda ishlatiladi. useState(() => value) — funksiya faqat BIRINCHI RENDERDA chaqiriladi. Bu "lazy initialization" deyiladi. Qimmat operatsiyalar (JSON.parse, localStorage, katta array yaratish) uchun DOIM funksiya berish kerak, aks holda har renderda keraksiz hisoblash bo'ladi.`,
       },
       {
-        question: 'React state o\'zgarganini qanday aniqlaydi?',
-        answer: 'React Object.is() algoritmini ishlatadi (=== bilan deyarli bir xil). Primitiv tiplar uchun (string, number, boolean) qiymat taqqoslanadi. Object va array uchun REFERENS taqqoslanadi — yangi object yaratilmasa, React o\'zgarish bo\'lmagan deb hisoblaydi. Shuning uchun setState(sameObject) render qilMAYDI, setState({...sameObject}) render QILADI — chunki yangi referens.',
+        question: `React state o'zgarganini qanday aniqlaydi?`,
+        answer: `React Object.is() algoritmini ishlatadi (=== bilan deyarli bir xil). Primitiv tiplar uchun (string, number, boolean) qiymat taqqoslanadi. Object va array uchun REFERENS taqqoslanadi — yangi object yaratilmasa, React o'zgarish bo'lmagan deb hisoblaydi. Shuning uchun setState(sameObject) render qilMAYDI, setState({...sameObject}) render QILADI — chunki yangi referens.`,
       },
       {
-        question: 'Nima uchun useState ichida object/array-ni mutatsiya qilib bo\'lmaydi?',
-        answer: 'React state-ni referens bo\'yicha taqqoslaydi (Object.is). user.name = "Ali"; setUser(user) desangiz, React uchun user hali ham ESKI referens — o\'zgarish yo\'q deb render qilmaydi. DOIM yangi object/array yaratish kerak: setUser({...user, name: "Ali"}). Bu "immutability" prinsipi — React-ning butun rendering tizimi shunga asoslangan.',
+        question: `Nima uchun useState ichida object/array-ni mutatsiya qilib bo'lmaydi?`,
+        answer: `React state-ni referens bo'yicha taqqoslaydi (Object.is). user.name = "Ali"; setUser(user) desangiz, React uchun user hali ham ESKI referens — o'zgarish yo'q deb render qilmaydi. DOIM yangi object/array yaratish kerak: setUser({...user, name: "Ali"}). Bu "immutability" prinsipi — React-ning butun rendering tizimi shunga asoslangan.`,
       },
       {
         question: 'useState vs useReducer — qachon nima ishlatiladi?',
-        answer: 'useState — oddiy, mustaqil qiymatlar uchun (counter, toggle, input value). useReducer — murakkab, bog\'liq state logikasi uchun (form validation, multi-step wizard, state machine). Qoida: agar setState ichida ko\'p mantiq bo\'lsa (if/else, switch), useReducer-ga o\'tish kerak. Redux-ga o\'xshash action/reducer pattern beradi, lekin global emas — faqat komponent ichida.',
+        answer: `useState — oddiy, mustaqil qiymatlar uchun (counter, toggle, input value). useReducer — murakkab, bog'liq state logikasi uchun (form validation, multi-step wizard, state machine). Qoida: agar setState ichida ko'p mantiq bo'lsa (if/else, switch), useReducer-ga o'tish kerak. Redux-ga o'xshash action/reducer pattern beradi, lekin global emas — faqat komponent ichida.`,
       },
       {
         question: 'Props-ni state-ga nusxalash nima uchun yomon?',
-        answer: 'const [value, setValue] = useState(props.value) — boshlang\'ich qiymat faqat BIRINCHI renderda ishlatiladi. Keyingi renderlarda props o\'zgarsa ham, state eski qiymatda qoladi. Bu "stale props" muammosi. To\'g\'ri usul — props-ni to\'g\'ridan-to\'g\'ri ishlatish, yoki useEffect bilan sinxronlash. Agar props-ni lokal o\'zgartirish kerak bo\'lsa, key prop orqali komponentni qayta yaratish mumkin.',
+        answer: `const [value, setValue] = useState(props.value) — boshlang'ich qiymat faqat BIRINCHI renderda ishlatiladi. Keyingi renderlarda props o'zgarsa ham, state eski qiymatda qoladi. Bu "stale props" muammosi. To'g'ri usul — props-ni to'g'ridan-to'g'ri ishlatish, yoki useEffect bilan sinxronlash. Agar props-ni lokal o'zgartirish kerak bo'lsa, key prop orqali komponentni qayta yaratish mumkin.`,
       },
     ],
     relatedTopics: [
@@ -595,10 +595,10 @@ function Counter() {
     </button>
   )
 }`,
-        description: 'Eng oddiy useEffect misoli. count o\'zgarganda brauzer title-ni yangilaydi. Dependency array-da [count] bo\'lgani uchun faqat count o\'zgarganda ishlaydi.',
+        description: `Eng oddiy useEffect misoli. count o'zgarganda brauzer title-ni yangilaydi. Dependency array-da [count] bo'lgani uchun faqat count o'zgarganda ishlaydi.`,
       },
       {
-        title: 'API dan ma\'lumot olish (fetch)',
+        title: `API dan ma'lumot olish (fetch)`,
         language: 'tsx',
         code: `import { useState, useEffect } from 'react'
 
@@ -655,7 +655,7 @@ function UserProfile({ userId }: { userId: number }) {
     </div>
   )
 }`,
-        description: 'API fetch pattern — AbortController bilan. userId o\'zgarganda eski so\'rov bekor qilinadi (race condition oldini oladi). Production-da TanStack Query ishlatish yaxshiroq.',
+        description: `API fetch pattern — AbortController bilan. userId o'zgarganda eski so'rov bekor qilinadi (race condition oldini oladi). Production-da TanStack Query ishlatish yaxshiroq.`,
       },
       {
         title: 'Event listener (cleanup bilan)',
@@ -687,7 +687,7 @@ function WindowSize() {
     <p>{size.width} x {size.height}</p>
   )
 }`,
-        description: 'addEventListener + cleanup pattern. Bo\'sh dependency [] — faqat mount-da qo\'shiladi, unmount-da olib tashlanadi. Cleanup yo\'q bo\'lsa memory leak bo\'ladi.',
+        description: `addEventListener + cleanup pattern. Bo'sh dependency [] — faqat mount-da qo'shiladi, unmount-da olib tashlanadi. Cleanup yo'q bo'lsa memory leak bo'ladi.`,
       },
       {
         title: 'setInterval (timer) + cleanup',
@@ -713,7 +713,7 @@ function Timer() {
     <div>
       <p>{seconds} soniya</p>
       <button onClick={() => setIsRunning(r => !r)}>
-        {isRunning ? 'To\\'xtatish' : 'Boshlash'}
+        {isRunning ? 'To'xtatish' : 'Boshlash'}
       </button>
       <button onClick={() => { setIsRunning(false); setSeconds(0) }}>
         Reset
@@ -721,7 +721,7 @@ function Timer() {
     </div>
   )
 }`,
-        description: 'setInterval pattern. MUHIM: clearInterval cleanup-da bo\'lishi SHART, aks holda timerlar ko\'payib ketadi. setSeconds(prev => prev + 1) — stale closure muammosini oldini oladi.',
+        description: `setInterval pattern. MUHIM: clearInterval cleanup-da bo'lishi SHART, aks holda timerlar ko'payib ketadi. setSeconds(prev => prev + 1) — stale closure muammosini oldini oladi.`,
       },
       {
         title: 'localStorage bilan sinxronizatsiya',
@@ -761,7 +761,7 @@ function Settings() {
     </div>
   )
 }`,
-        description: 'Custom hook pattern — useLocalStorage. useState bilan useEffect birgalikda ishlaydi. Bu Real loyihalarda juda ko\'p ishlatiladi.',
+        description: `Custom hook pattern — useLocalStorage. useState bilan useEffect birgalikda ishlaydi. Bu Real loyihalarda juda ko'p ishlatiladi.`,
       },
       {
         title: 'Debounced search (cleanup + dependency)',
@@ -805,45 +805,45 @@ function Search() {
     </div>
   )
 }`,
-        description: 'Debounce pattern — useEffect + setTimeout + cleanup. Foydalanuvchi yozayotganda har harfda emas, 300ms to\'xtagandan keyin fetch qiladi. Cleanup eski timer-ni tozalaydi.',
+        description: `Debounce pattern — useEffect + setTimeout + cleanup. Foydalanuvchi yozayotganda har harfda emas, 300ms to'xtagandan keyin fetch qiladi. Cleanup eski timer-ni tozalaydi.`,
       },
     ],
     interviewQA: [
       {
         question: 'useEffect qachon ishlaydi? Rendering cycle-da qayerda turadi?',
-        answer: 'useEffect brauzer PAINT-dan KEYIN asinxron ishlaydi. Tartib: 1) React komponentni render qiladi (Virtual DOM), 2) React DOM-ni yangilaydi (commit fazasi), 3) Brauzer ekranga chizadi (paint), 4) useEffect ishlaydi. Shuning uchun useEffect ichida DOM o\'zgartirsangiz, foydalanuvchi bir lahzalik "miltillash" ko\'rishi mumkin — chunki avval eski holat chiziladi, keyin effect yangilaydi.',
+        answer: `useEffect brauzer PAINT-dan KEYIN asinxron ishlaydi. Tartib: 1) React komponentni render qiladi (Virtual DOM), 2) React DOM-ni yangilaydi (commit fazasi), 3) Brauzer ekranga chizadi (paint), 4) useEffect ishlaydi. Shuning uchun useEffect ichida DOM o'zgartirsangiz, foydalanuvchi bir lahzalik "miltillash" ko'rishi mumkin — chunki avval eski holat chiziladi, keyin effect yangilaydi.`,
       },
       {
         question: 'useEffect cleanup funksiyasi qachon ishlaydi?',
-        answer: 'Cleanup 2 ta holatda ishlaydi: 1) Komponent unmount bo\'lganda (DOM-dan o\'chirilganda) — bu componentWillUnmount-ga teng. 2) Dependency o\'zgarib, keyingi effect ishga tushishidan OLDIN — avval eski effect tozalanadi, keyin yangi effect ishlaydi. Bu muhim chunki aks holda subscription-lar, timer-lar, listener-lar ko\'payib ketadi (memory leak).',
+        answer: `Cleanup 2 ta holatda ishlaydi: 1) Komponent unmount bo'lganda (DOM-dan o'chirilganda) — bu componentWillUnmount-ga teng. 2) Dependency o'zgarib, keyingi effect ishga tushishidan OLDIN — avval eski effect tozalanadi, keyin yangi effect ishlaydi. Bu muhim chunki aks holda subscription-lar, timer-lar, listener-lar ko'payib ketadi (memory leak).`,
       },
       {
         question: 'useEffect dependency array-da [] va hech narsa bermaslik farqi nima?',
-        answer: '[] (bo\'sh massiv) — effect faqat MOUNT-da 1 marta ishlaydi, cleanup faqat UNMOUNT-da ishlaydi. componentDidMount + componentWillUnmount-ga teng. Dependency bermaslik — effect HAR RENDERDA ishlaydi (state yoki props o\'zgarganda). Bu odatda NOTO\'G\'RI va keraksiz — ko\'pincha dependency qo\'yish kerak. Har renderda ishlash kerak bo\'lgan holat juda kam.',
+        answer: `[] (bo'sh massiv) — effect faqat MOUNT-da 1 marta ishlaydi, cleanup faqat UNMOUNT-da ishlaydi. componentDidMount + componentWillUnmount-ga teng. Dependency bermaslik — effect HAR RENDERDA ishlaydi (state yoki props o'zgarganda). Bu odatda NOTO'G'RI va keraksiz — ko'pincha dependency qo'yish kerak. Har renderda ishlash kerak bo'lgan holat juda kam.`,
       },
       {
-        question: 'useEffect ichida async funksiya to\'g\'ridan-to\'g\'ri ishlatish mumkinmi?',
-        answer: 'Yo\'q! useEffect(() => async () => {}) deb yozsangiz, async funksiya Promise qaytaradi — lekin React cleanup uchun funksiya (yoki undefined) kutadi, Promise emas. To\'g\'ri usul: useEffect ichida alohida async funksiya e\'lon qilib chaqirish: useEffect(() => { async function fetchData() { await ... } fetchData() }, []). Yoki IIFE: useEffect(() => { (async () => { ... })() }, []).',
+        question: `useEffect ichida async funksiya to'g'ridan-to'g'ri ishlatish mumkinmi?`,
+        answer: `Yo'q! useEffect(() => async () => {}) deb yozsangiz, async funksiya Promise qaytaradi — lekin React cleanup uchun funksiya (yoki undefined) kutadi, Promise emas. To'g'ri usul: useEffect ichida alohida async funksiya e'lon qilib chaqirish: useEffect(() => { async function fetchData() { await ... } fetchData() }, []). Yoki IIFE: useEffect(() => { (async () => { ... })() }, []).`,
       },
       {
-        question: 'useEffect dependency-da object/array bersa nima bo\'ladi?',
-        answer: 'Cheksiz loop! React dependency-larni Object.is() bilan taqqoslaydi. Object/array har renderda YANGI referens oladi (hatto qiymati bir xil bo\'lsa ham). Natija: effect har renderda ishlaydi → state yangilaydi → qayta render → effect yana ishlaydi → cheksiz. Yechim: 1) Primitive qiymatlarni dependency qilish (url, id), 2) useMemo bilan object-ni memoizatsiya qilish, 3) JSON.stringify bilan taqqoslash.',
+        question: `useEffect dependency-da object/array bersa nima bo'ladi?`,
+        answer: `Cheksiz loop! React dependency-larni Object.is() bilan taqqoslaydi. Object/array har renderda YANGI referens oladi (hatto qiymati bir xil bo'lsa ham). Natija: effect har renderda ishlaydi → state yangilaydi → qayta render → effect yana ishlaydi → cheksiz. Yechim: 1) Primitive qiymatlarni dependency qilish (url, id), 2) useMemo bilan object-ni memoizatsiya qilish, 3) JSON.stringify bilan taqqoslash.`,
       },
       {
         question: 'React StrictMode-da useEffect nima uchun 2 marta ishlaydi?',
-        answer: 'StrictMode (faqat dev rejimda) har effect-ni mount → cleanup → mount qilib ishlaydi. Maqsad: cleanup to\'g\'ri yozilganini tekshirish. Agar 2 marta ishlanganda muammo bo\'lsa — cleanup-da subscription/timer/listener tozalanmagan. Bu production-da BO\'LMAYDI — faqat development-da. Masalan: WebSocket-ga 2 marta connect bo\'lsa, cleanup-da disconnect yo\'q degani.',
+        answer: `StrictMode (faqat dev rejimda) har effect-ni mount → cleanup → mount qilib ishlaydi. Maqsad: cleanup to'g'ri yozilganini tekshirish. Agar 2 marta ishlanganda muammo bo'lsa — cleanup-da subscription/timer/listener tozalanmagan. Bu production-da BO'LMAYDI — faqat development-da. Masalan: WebSocket-ga 2 marta connect bo'lsa, cleanup-da disconnect yo'q degani.`,
       },
       {
         question: 'useEffect vs useLayoutEffect — qachon nima ishlatiladi?',
-        answer: 'useEffect — asinxron, paint KEYIN. 95% hollarda shu ishlatiladi: API fetch, subscription, timer, localStorage. useLayoutEffect — sinxron, paint OLDIDAN. Faqat DOM o\'lchash kerak bo\'lganda: getBoundingClientRect, scroll pozitsiya, tooltip pozitsiya hisoblash. useLayoutEffect sekin ishlaydi (paint-ni bloklaydi), shuning uchun faqat zarurat bo\'lganda ishlatish kerak.',
+        answer: `useEffect — asinxron, paint KEYIN. 95% hollarda shu ishlatiladi: API fetch, subscription, timer, localStorage. useLayoutEffect — sinxron, paint OLDIDAN. Faqat DOM o'lchash kerak bo'lganda: getBoundingClientRect, scroll pozitsiya, tooltip pozitsiya hisoblash. useLayoutEffect sekin ishlaydi (paint-ni bloklaydi), shuning uchun faqat zarurat bo'lganda ishlatish kerak.`,
       },
       {
         question: 'useEffect ichida state yangilash xavflimi? Qanday anti-pattern-lar bor?',
-        answer: 'O\'zi xavfli emas, lekin keraksiz effect ko\'p. Anti-pattern-lar: 1) Props-dan derived state — effect bilan emas, render vaqtida hisoblash kerak (const fullName = first + " " + last). 2) Zanjirli effect-lar — bitta effect state yangilaydi, u boshqa effect-ni trigger qiladi = ortiqcha render. 3) Event handler logikasini effect-ga qo\'yish — onClick ichida qilish kerak, effect-da emas. Qoida: "Bu render vaqtida hisoblanishi mumkinmi?" — agar ha, effect KERAK EMAS.',
+        answer: `O'zi xavfli emas, lekin keraksiz effect ko'p. Anti-pattern-lar: 1) Props-dan derived state — effect bilan emas, render vaqtida hisoblash kerak (const fullName = first + " " + last). 2) Zanjirli effect-lar — bitta effect state yangilaydi, u boshqa effect-ni trigger qiladi = ortiqcha render. 3) Event handler logikasini effect-ga qo'yish — onClick ichida qilish kerak, effect-da emas. Qoida: "Bu render vaqtida hisoblanishi mumkinmi?" — agar ha, effect KERAK EMAS.`,
       },
       {
         question: 'Race condition nima va useEffect-da qanday oldini olish mumkin?',
-        answer: 'Race condition — 2 ta asinxron so\'rov yuborilganda, birinchisi ikkinchisidan KEYIN javob qaytarishi. Masalan: userId 1 uchun fetch, keyin userId 2 uchun fetch — lekin 2-ning javobi avval keladi, 1-niki keyin. Natija: ekranda noto\'g\'ri ma\'lumot. Yechim: 1) AbortController — eski so\'rovni bekor qilish (eng yaxshi). 2) Boolean flag — let cancelled = false; return () => { cancelled = true }. 3) TanStack Query — avtomatik boshqaradi.',
+        answer: `Race condition — 2 ta asinxron so'rov yuborilganda, birinchisi ikkinchisidan KEYIN javob qaytarishi. Masalan: userId 1 uchun fetch, keyin userId 2 uchun fetch — lekin 2-ning javobi avval keladi, 1-niki keyin. Natija: ekranda noto'g'ri ma'lumot. Yechim: 1) AbortController — eski so'rovni bekor qilish (eng yaxshi). 2) Boolean flag — let cancelled = false; return () => { cancelled = true }. 3) TanStack Query — avtomatik boshqaradi.`,
       },
     ],
     relatedTopics: [
@@ -858,7 +858,7 @@ function Search() {
     title: 'useRef',
     importance: 3,
     status: 'to-learn' as const,
-    description: 'DOM elementga murojaat va o\'zgarmas qiymat saqlash',
+    description: `DOM elementga murojaat va o'zgarmas qiymat saqlash`,
     content: `useRef — React-da ikki xil maqsadda ishlatiladigan hook: 1) DOM elementga to'g'ridan-to'g'ri murojaat qilish, 2) Renderlar orasida qiymat saqlash (lekin render QILMAYDI).
 
 ═══════════════════════════════════════
@@ -1030,7 +1030,7 @@ function FocusInput() {
     </div>
   )
 }`,
-        description: 'Eng ko\'p ishlatiladigan useRef pattern. inputRef.current input DOM elementiga teng. .focus() — brauzer API. ref={inputRef} orqali React DOM elementni ref.current ga yozadi.',
+        description: `Eng ko'p ishlatiladigan useRef pattern. inputRef.current input DOM elementiga teng. .focus() — brauzer API. ref={inputRef} orqali React DOM elementni ref.current ga yozadi.`,
       },
       {
         title: 'Oldingi qiymatni eslab qolish (previous value)',
@@ -1106,7 +1106,7 @@ function Stopwatch() {
     </div>
   )
 }`,
-        description: 'Timer ID ni useRef da saqlash — eng to\'g\'ri pattern. useState da saqlash NOTO\'G\'RI chunki clearInterval uchun render kerak emas. intervalRef.current o\'zgarganda qayta render bo\'lmaydi — bu to\'g\'ri xulq.',
+        description: `Timer ID ni useRef da saqlash — eng to'g'ri pattern. useState da saqlash NOTO'G'RI chunki clearInterval uchun render kerak emas. intervalRef.current o'zgarganda qayta render bo'lmaydi — bu to'g'ri xulq.`,
       },
       {
         title: 'Scroll to element',
@@ -1145,29 +1145,29 @@ function ScrollDemo() {
     </div>
   )
 }`,
-        description: 'scrollIntoView — brauzer API. useRef orqali har bir section-ga ref berib, button bosilganda o\'sha joyga smooth scroll qilish. Navigation komponentlarida ko\'p ishlatiladi.',
+        description: `scrollIntoView — brauzer API. useRef orqali har bir section-ga ref berib, button bosilganda o'sha joyga smooth scroll qilish. Navigation komponentlarida ko'p ishlatiladi.`,
       },
     ],
     interviewQA: [
       {
         question: 'useRef vs useState farqi nima?',
-        answer: 'useState qiymat o\'zgarganda komponentni QAYTA RENDERLAYDI va yangi qiymat keyingi renderda ko\'rinadi. useRef qiymat o\'zgarganda render BO\'LMAYDI va qiymat DARHOL (sinxron) yangilanadi. useState immutable — faqat setState orqali o\'zgartirish mumkin. useRef mutable — ref.current = newValue to\'g\'ridan-to\'g\'ri yozish mumkin. Qoida: ekranda ko\'rsatish kerak bo\'lsa useState, faqat saqlash kerak bo\'lsa useRef.',
+        answer: `useState qiymat o'zgarganda komponentni QAYTA RENDERLAYDI va yangi qiymat keyingi renderda ko'rinadi. useRef qiymat o'zgarganda render BO'LMAYDI va qiymat DARHOL (sinxron) yangilanadi. useState immutable — faqat setState orqali o'zgartirish mumkin. useRef mutable — ref.current = newValue to'g'ridan-to'g'ri yozish mumkin. Qoida: ekranda ko'rsatish kerak bo'lsa useState, faqat saqlash kerak bo'lsa useRef.`,
       },
       {
-        question: 'Nima uchun ref.current o\'zgarganda render bo\'lmaydi?',
-        answer: 'Chunki useRef oddiy JavaScript object qaytaradi: { current: value }. React bu object-ni kuzatmaydi (track qilmaydi). ref.current = newValue — bu oddiy JS property assignment, React buni bilmaydi. useState esa React-ning ichki tizimi orqali ishlaydi — setState chaqirilganda React maxsus navbatga qo\'yadi va render rejalashtiradi. Ref esa React rendering tizimidan TASHQARIDA ishlaydi.',
+        question: `Nima uchun ref.current o'zgarganda render bo'lmaydi?`,
+        answer: `Chunki useRef oddiy JavaScript object qaytaradi: { current: value }. React bu object-ni kuzatmaydi (track qilmaydi). ref.current = newValue — bu oddiy JS property assignment, React buni bilmaydi. useState esa React-ning ichki tizimi orqali ishlaydi — setState chaqirilganda React maxsus navbatga qo'yadi va render rejalashtiradi. Ref esa React rendering tizimidan TASHQARIDA ishlaydi.`,
       },
       {
-        question: 'DOM ref qachon null bo\'ladi?',
-        answer: 'DOM ref boshlang\'ich qiymati null. Komponent mount bo\'lgandan KEYIN React DOM elementni ref.current ga yozadi. Komponent unmount bo\'lganda yana null bo\'ladi. Shuning uchun render vaqtida ref.current null bo\'lishi mumkin — DOM hali tayyor emas. Xavfsiz ishlatish uchun useEffect ichida yoki event handler ichida murojaat qilish kerak. TypeScript-da ref.current?.focus() deb optional chaining ishlatish tavsiya etiladi.',
+        question: `DOM ref qachon null bo'ladi?`,
+        answer: `DOM ref boshlang'ich qiymati null. Komponent mount bo'lgandan KEYIN React DOM elementni ref.current ga yozadi. Komponent unmount bo'lganda yana null bo'ladi. Shuning uchun render vaqtida ref.current null bo'lishi mumkin — DOM hali tayyor emas. Xavfsiz ishlatish uchun useEffect ichida yoki event handler ichida murojaat qilish kerak. TypeScript-da ref.current?.focus() deb optional chaining ishlatish tavsiya etiladi.`,
       },
       {
         question: 'Callback ref nima va oddiy ref-dan farqi?',
-        answer: 'Callback ref — ref prop-ga object o\'rniga FUNKSIYA berish. React element mount bo\'lganda bu funksiyani DOM node bilan chaqiradi, unmount bo\'lganda null bilan chaqiradi. Oddiy ref={myRef} static element-lar uchun yaxshi. Callback ref dynamic element-lar uchun kerak: conditional rendering, list item-lar, element o\'lchami kerak bo\'lganda. Callback ref har render-da chaqirilishi mumkin, shuning uchun useCallback bilan o\'rash tavsiya etiladi.',
+        answer: `Callback ref — ref prop-ga object o'rniga FUNKSIYA berish. React element mount bo'lganda bu funksiyani DOM node bilan chaqiradi, unmount bo'lganda null bilan chaqiradi. Oddiy ref={myRef} static element-lar uchun yaxshi. Callback ref dynamic element-lar uchun kerak: conditional rendering, list item-lar, element o'lchami kerak bo'lganda. Callback ref har render-da chaqirilishi mumkin, shuning uchun useCallback bilan o'rash tavsiya etiladi.`,
       },
       {
-        question: 'Nima uchun render vaqtida ref.current o\'qish/yozish noto\'g\'ri?',
-        answer: 'React Concurrent Mode-da render bir necha marta ishga tushishi, to\'xtatilishi yoki bekor qilinishi mumkin. Agar render vaqtida ref.current ga yozsangiz, React renderni bekor qilsa — noto\'g\'ri qiymat yoziladi. O\'qish ham xavfli — boshqa renderlar ref-ni o\'zgartirgan bo\'lishi mumkin. Shuning uchun ref.current ni faqat useEffect, useLayoutEffect yoki event handler-lar ichida o\'qish/yozish kerak. Bu React-ning "pure rendering" tamoyiliga mos keladi.',
+        question: `Nima uchun render vaqtida ref.current o'qish/yozish noto'g'ri?`,
+        answer: `React Concurrent Mode-da render bir necha marta ishga tushishi, to'xtatilishi yoki bekor qilinishi mumkin. Agar render vaqtida ref.current ga yozsangiz, React renderni bekor qilsa — noto'g'ri qiymat yoziladi. O'qish ham xavfli — boshqa renderlar ref-ni o'zgartirgan bo'lishi mumkin. Shuning uchun ref.current ni faqat useEffect, useLayoutEffect yoki event handler-lar ichida o'qish/yozish kerak. Bu React-ning "pure rendering" tamoyiliga mos keladi.`,
       },
     ],
     relatedTopics: [
@@ -1300,7 +1300,7 @@ Compiler nima qiladi:
   const filtered = useMemo(() => items.filter(i => i.active), [items])`,
     codeExamples: [
       {
-        title: 'Katta ro\'yxatni filterlash — 10000 element',
+        title: `Katta ro'yxatni filterlash — 10000 element`,
         language: 'tsx' as const,
         code: `import { useState, useMemo } from 'react'
 
@@ -1355,7 +1355,7 @@ function ProductList({ products }: { products: Product[] }) {
     </div>
   )
 }`,
-        description: 'Katta ro\'yxat filter + sort. useMemo-siz har renderda 10000 ta elementni qayta filter/sort qiladi. useMemo bilan faqat query, sortBy yoki minPrice o\'zgarganda ishlaydi. Boshqa state o\'zgarsa — eski natija qaytadi.',
+        description: `Katta ro'yxat filter + sort. useMemo-siz har renderda 10000 ta elementni qayta filter/sort qiladi. useMemo bilan faqat query, sortBy yoki minPrice o'zgarganda ishlaydi. Boshqa state o'zgarsa — eski natija qaytadi.`,
       },
       {
         title: 'Object referens saqlash — child re-render oldini olish',
@@ -1406,7 +1406,7 @@ function Parent() {
     </div>
   )
 }`,
-        description: 'React.memo + useMemo kombinatsiyasi. useMemo-siz har renderda yangi { backgroundColor: ... } object yaratiladi — React.memo buni o\'zgardi deb hisoblaydi. useMemo bilan object referensi saqlanadi — child renderlanmaydi.',
+        description: `React.memo + useMemo kombinatsiyasi. useMemo-siz har renderda yangi { backgroundColor: ... } object yaratiladi — React.memo buni o'zgardi deb hisoblaydi. useMemo bilan object referensi saqlanadi — child renderlanmaydi.`,
       },
       {
         title: 'Qimmat hisoblash — Fibonacci',
@@ -1445,25 +1445,25 @@ function FibCalculator() {
     </div>
   )
 }`,
-        description: 'Qimmat hisoblash misoli. fibonacci(35) bir necha soniya olishi mumkin. useMemo-siz tema o\'zgarganda ham fibonacci qayta hisoblanadi. useMemo bilan faqat num o\'zgarganda ishlaydi — tema o\'zgarishi tezkor bo\'ladi.',
+        description: `Qimmat hisoblash misoli. fibonacci(35) bir necha soniya olishi mumkin. useMemo-siz tema o'zgarganda ham fibonacci qayta hisoblanadi. useMemo bilan faqat num o'zgarganda ishlaydi — tema o'zgarishi tezkor bo'ladi.`,
       },
     ],
     interviewQA: [
       {
         question: 'useMemo qachon kerak, qachon ortiqcha (premature optimization)?',
-        answer: 'useMemo kerak bo\'lgan holatlar: 1) Katta array filter/sort/map (1000+ element), 2) Murakkab matematik hisoblash, 3) React.memo-langan child-ga object/array props berish. useMemo ORTIQCHA bo\'lgan holatlar: oddiy hisoblash (a + b, string concatenation), primitive qiymatlar (number, string — referens muammosi yo\'q), dependency har renderda o\'zgarsa (kesh hech qachon ishlatilmaydi). Qoida: avval profiling qiling, keyin optimize qiling. Premature optimization — barcha yomonliklarning ildizi.',
+        answer: `useMemo kerak bo'lgan holatlar: 1) Katta array filter/sort/map (1000+ element), 2) Murakkab matematik hisoblash, 3) React.memo-langan child-ga object/array props berish. useMemo ORTIQCHA bo'lgan holatlar: oddiy hisoblash (a + b, string concatenation), primitive qiymatlar (number, string — referens muammosi yo'q), dependency har renderda o'zgarsa (kesh hech qachon ishlatilmaydi). Qoida: avval profiling qiling, keyin optimize qiling. Premature optimization — barcha yomonliklarning ildizi.`,
       },
       {
         question: 'useMemo vs useCallback farqi nima?',
-        answer: 'useMemo — QIYMAT (natija) ni keshlaydi: const value = useMemo(() => compute(), [deps]). useCallback — FUNKSIYA referensini keshlaydi: const fn = useCallback(() => doSomething(), [deps]). Aslida useCallback(fn, deps) === useMemo(() => fn, deps). useCallback faqat qulaylik uchun — funksiya uchun useMemo yozish uzunroq bo\'lardi. useMemo funksiyani CHAQIRADI va NATIJAsini saqlaydi. useCallback funksiyani chaqirMAYDI, O\'ZINi saqlaydi.',
+        answer: `useMemo — QIYMAT (natija) ni keshlaydi: const value = useMemo(() => compute(), [deps]). useCallback — FUNKSIYA referensini keshlaydi: const fn = useCallback(() => doSomething(), [deps]). Aslida useCallback(fn, deps) === useMemo(() => fn, deps). useCallback faqat qulaylik uchun — funksiya uchun useMemo yozish uzunroq bo'lardi. useMemo funksiyani CHAQIRADI va NATIJAsini saqlaydi. useCallback funksiyani chaqirMAYDI, O'ZINi saqlaydi.`,
       },
       {
         question: 'useMemo garantiya beradimi? Cache eviction nima?',
-        answer: 'React rasmiy hujjatlari aytadi: useMemo — "performance optimization, not a semantic guarantee". Ya\'ni React keshni istalgan vaqtda tashlashi MUMKIN (masalan, offscreen component uchun). Kelajakda React kesh hajmini cheklashi mumkin. Shuning uchun useMemo-ga bog\'liq mantiq yozish NOTO\'G\'RI: masalan, useMemo ichida faqat bir marta ishlaydigan side effect qo\'yish xavfli. useMemo faqat PERFORMANCE uchun ishlatish kerak, TO\'G\'RILIK uchun emas.',
+        answer: `React rasmiy hujjatlari aytadi: useMemo — "performance optimization, not a semantic guarantee". Ya'ni React keshni istalgan vaqtda tashlashi MUMKIN (masalan, offscreen component uchun). Kelajakda React kesh hajmini cheklashi mumkin. Shuning uchun useMemo-ga bog'liq mantiq yozish NOTO'G'RI: masalan, useMemo ichida faqat bir marta ishlaydigan side effect qo'yish xavfli. useMemo faqat PERFORMANCE uchun ishlatish kerak, TO'G'RILIK uchun emas.`,
       },
       {
         question: 'React Compiler useMemo-ni almashtira oladimi?',
-        answer: 'Ha, React 19 Compiler (bu loyihada yoqilgan) avtomatik memoizatsiya qiladi. Compiler kodni tahlil qilib, qayerda memoizatsiya kerakligini aniqlaydi va build vaqtida useMemo/useCallback ni avtomatik qo\'shadi. Lekin hozircha Compiler hali barcha holatlarni 100% qamrab olmagan. Shuningdek, eski loyihalarda Compiler yo\'q — u yerda qo\'lda useMemo yozish kerak. Interview uchun useMemo bilish SHART — chunki tushunchani bilish muhim, hatto Compiler avtomatik qilsa ham.',
+        answer: `Ha, React 19 Compiler (bu loyihada yoqilgan) avtomatik memoizatsiya qiladi. Compiler kodni tahlil qilib, qayerda memoizatsiya kerakligini aniqlaydi va build vaqtida useMemo/useCallback ni avtomatik qo'shadi. Lekin hozircha Compiler hali barcha holatlarni 100% qamrab olmagan. Shuningdek, eski loyihalarda Compiler yo'q — u yerda qo'lda useMemo yozish kerak. Interview uchun useMemo bilish SHART — chunki tushunchani bilish muhim, hatto Compiler avtomatik qilsa ham.`,
       },
     ],
     relatedTopics: [
@@ -1618,8 +1618,8 @@ const TodoItem = memo(function TodoItem({ todo, onToggle, onDelete }: {
 
 function TodoList() {
   const [todos, setTodos] = useState([
-    { id: 1, text: 'React o\\'rganish', done: false },
-    { id: 2, text: 'TypeScript o\\'rganish', done: true },
+    { id: 1, text: 'React o'rganish', done: false },
+    { id: 2, text: 'TypeScript o'rganish', done: true },
   ])
   const [input, setInput] = useState('')
 
@@ -1657,7 +1657,7 @@ function TodoList() {
     </div>
   )
 }`,
-        description: 'Eng asosiy useCallback use case. TodoItem — React.memo bilan o\'ralgan. handleToggle va handleDelete useCallback bilan keshlanadi. Natija: input yozganda 100 ta TodoItem renderlanMAYDI — faqat input render bo\'ladi.',
+        description: `Eng asosiy useCallback use case. TodoItem — React.memo bilan o'ralgan. handleToggle va handleDelete useCallback bilan keshlanadi. Natija: input yozganda 100 ta TodoItem renderlanMAYDI — faqat input render bo'ladi.`,
       },
       {
         title: 'useEffect dependency sifatida useCallback',
@@ -1698,7 +1698,7 @@ function SearchComponent({ apiUrl }: { apiUrl: string }) {
     </div>
   )
 }`,
-        description: 'useCallback useEffect dependency sifatida. useCallback bo\'lmasa, fetchResults har renderda yangi referens oladi va useEffect cheksiz ishlaydi. useCallback bilan faqat apiUrl o\'zgarganda yangi funksiya yaratiladi — effect barqaror ishlaydi.',
+        description: `useCallback useEffect dependency sifatida. useCallback bo'lmasa, fetchResults har renderda yangi referens oladi va useEffect cheksiz ishlaydi. useCallback bilan faqat apiUrl o'zgarganda yangi funksiya yaratiladi — effect barqaror ishlaydi.`,
       },
       {
         title: 'Event handler-larni keshlashtirish — list bilan',
@@ -1763,25 +1763,25 @@ function UserList() {
     </div>
   )
 }`,
-        description: 'List pattern — bitta useCallback barcha list item-lar uchun ishlaydi. id parameter orqali qaysi element ekanini aniqlaydi. Har element uchun alohida callback yaratish NOTO\'G\'RI — bitta umumiy callback + id pattern eng yaxshi.',
+        description: `List pattern — bitta useCallback barcha list item-lar uchun ishlaydi. id parameter orqali qaysi element ekanini aniqlaydi. Har element uchun alohida callback yaratish NOTO'G'RI — bitta umumiy callback + id pattern eng yaxshi.`,
       },
     ],
     interviewQA: [
       {
-        question: 'useCallback yolg\'iz (React.memo-siz) ishlatsa foyda bormi?',
-        answer: 'Deyarli yo\'q. useCallback funksiya REFERENSINI saqlaydi, lekin agar child komponent React.memo bilan o\'ralmagan bo\'lsa, u baribir har renderda renderlanadi — funksiya referensi bir xil bo\'lsa ham. Yagona foyda: useEffect dependency sifatida — useCallback bo\'lmasa useEffect cheksiz ishlashi mumkin. Qolgan hollarda useCallback YOLG\'IZ ishlatish faqat ortiqcha overhead qo\'shadi. Qoida: useCallback = React.memo bilan JUFTLIKDA ishlatish.',
+        question: `useCallback yolg'iz (React.memo-siz) ishlatsa foyda bormi?`,
+        answer: `Deyarli yo'q. useCallback funksiya REFERENSINI saqlaydi, lekin agar child komponent React.memo bilan o'ralmagan bo'lsa, u baribir har renderda renderlanadi — funksiya referensi bir xil bo'lsa ham. Yagona foyda: useEffect dependency sifatida — useCallback bo'lmasa useEffect cheksiz ishlashi mumkin. Qolgan hollarda useCallback YOLG'IZ ishlatish faqat ortiqcha overhead qo'shadi. Qoida: useCallback = React.memo bilan JUFTLIKDA ishlatish.`,
       },
       {
         question: 'React.memo + useCallback qachon kerak?',
-        answer: 'Kerak bo\'lgan holatlar: 1) Katta list render (100+ element) — har element uchun callback, 2) Og\'ir child komponent (ko\'p DOM element, murakkab hisoblash), 3) Child tez-tez renderlanmasligi kerak (animatsiya, chart, canvas). KERAK EMAS: oddiy button onClick, kichik komponentlar, yagona child. Qoida: avval React DevTools Profiler bilan tekshiring — muammo bormi? Muammo bo\'lsa — memo + useCallback qo\'shing. Muammo yo\'q bo\'lsa — keraksiz murakkablik.',
+        answer: `Kerak bo'lgan holatlar: 1) Katta list render (100+ element) — har element uchun callback, 2) Og'ir child komponent (ko'p DOM element, murakkab hisoblash), 3) Child tez-tez renderlanmasligi kerak (animatsiya, chart, canvas). KERAK EMAS: oddiy button onClick, kichik komponentlar, yagona child. Qoida: avval React DevTools Profiler bilan tekshiring — muammo bormi? Muammo bo'lsa — memo + useCallback qo'shing. Muammo yo'q bo'lsa — keraksiz murakkablik.`,
       },
       {
-        question: 'useCallback ichida stale closure qanday bo\'ladi?',
-        answer: 'useCallback dependency noto\'g\'ri berilsa, ichidagi o\'zgaruvchilar ESKi qiymatda qoladi. Masalan: useCallback(() => console.log(count), []) — count doim 0 bo\'lib qoladi. Yechim: 1) Barcha ishlatilgan o\'zgaruvchilarni dependency-ga qo\'shish, 2) setState updater function ishlatish: useCallback(() => setCount(prev => prev + 1), []) — prev doim yangi. ESLint react-hooks/exhaustive-deps qoidasi bu muammoni avtomatik topadi.',
+        question: `useCallback ichida stale closure qanday bo'ladi?`,
+        answer: `useCallback dependency noto'g'ri berilsa, ichidagi o'zgaruvchilar ESKi qiymatda qoladi. Masalan: useCallback(() => console.log(count), []) — count doim 0 bo'lib qoladi. Yechim: 1) Barcha ishlatilgan o'zgaruvchilarni dependency-ga qo'shish, 2) setState updater function ishlatish: useCallback(() => setCount(prev => prev + 1), []) — prev doim yangi. ESLint react-hooks/exhaustive-deps qoidasi bu muammoni avtomatik topadi.`,
       },
       {
-        question: 'Performance optimization strategiyasi qanday bo\'lishi kerak?',
-        answer: 'To\'g\'ri tartib: 1) Avval kodni TO\'G\'RI yozing — premature optimization qilmang, 2) Muammo bo\'lsa — React DevTools Profiler bilan ANIQ joyni toping, 3) State-ni ko\'tarish o\'rniga TUSHIRISH (lifting state down), 4) Katta komponentni BO\'LISH (composition), 5) Eng oxirida — React.memo + useCallback/useMemo. Ko\'p hollarda 3-4 qadam yetarli bo\'ladi. memo/useCallback/useMemo — eng OXIRGI qadam, eng birinchi emas.',
+        question: `Performance optimization strategiyasi qanday bo'lishi kerak?`,
+        answer: `To'g'ri tartib: 1) Avval kodni TO'G'RI yozing — premature optimization qilmang, 2) Muammo bo'lsa — React DevTools Profiler bilan ANIQ joyni toping, 3) State-ni ko'tarish o'rniga TUSHIRISH (lifting state down), 4) Katta komponentni BO'LISH (composition), 5) Eng oxirida — React.memo + useCallback/useMemo. Ko'p hollarda 3-4 qadam yetarli bo'ladi. memo/useCallback/useMemo — eng OXIRGI qadam, eng birinchi emas.`,
       },
     ],
     relatedTopics: [
@@ -1984,7 +1984,7 @@ function Header() {
     }}>
       <h1>Saytim</h1>
       <button onClick={toggleTheme}>
-        {theme === 'dark' ? 'Yorug\\' rejim' : 'Qorong\\'u rejim'}
+        {theme === 'dark' ? 'Yorug' rejim' : 'Qorong'u rejim'}
       </button>
     </header>
   )
@@ -1999,7 +1999,7 @@ function App() {
     </ThemeProvider>
   )
 }`,
-        description: 'To\'liq Theme Context pattern: createContext → Provider → useContext. Custom hook (useTheme) — null check va yaxshi xato xabari bilan. Bu pattern haqiqiy loyihalarda standart hisoblanadi.',
+        description: `To'liq Theme Context pattern: createContext → Provider → useContext. Custom hook (useTheme) — null check va yaxshi xato xabari bilan. Bu pattern haqiqiy loyihalarda standart hisoblanadi.`,
       },
       {
         title: 'Auth context — user, login, logout',
@@ -2082,7 +2082,7 @@ function App() {
     </AuthProvider>
   )
 }`,
-        description: 'Auth context — login/logout boshqaruvi. user null bo\'lsa — kirish tugmasi, bo\'lmasa — foydalanuvchi ismi va chiqish. Haqiqiy loyihada token boshqaruvi, localStorage va redirect ham qo\'shiladi.',
+        description: `Auth context — login/logout boshqaruvi. user null bo'lsa — kirish tugmasi, bo'lmasa — foydalanuvchi ismi va chiqish. Haqiqiy loyihada token boshqaruvi, localStorage va redirect ham qo'shiladi.`,
       },
       {
         title: 'Multi-context — ikki alohida context',
@@ -2156,25 +2156,25 @@ function Settings() {
     </div>
   )
 }`,
-        description: 'Multi-context pattern — har bir concern alohida context. Foyda: til o\'zgarganda faqat useLang consumer-lari renderlanadi, tema consumer-lari RENDERLANMAYDI. Context-ni bo\'lish — performance uchun eng yaxshi yechim.',
+        description: `Multi-context pattern — har bir concern alohida context. Foyda: til o'zgarganda faqat useLang consumer-lari renderlanadi, tema consumer-lari RENDERLANMAYDI. Context-ni bo'lish — performance uchun eng yaxshi yechim.`,
       },
     ],
     interviewQA: [
       {
         question: 'Context vs Redux/Zustand — qachon nima ishlatish kerak?',
-        answer: 'Context — kam o\'zgaradigan, keng tarqalgan ma\'lumot uchun (tema, til, auth). Redux/Zustand — tez-tez o\'zgaradigan, murakkab state uchun (server data, form state, UI state). Asosiy farq: Context value o\'zgarganda BARCHA consumer-lar renderlanadi, Redux/Zustand esa selector orqali faqat KERAKLI qismni kuzatadi. Shuning uchun input value yoki mouse position uchun Context ishlatish — performance muammo. Zustand bunday holatlarda 10x tezroq.',
+        answer: `Context — kam o'zgaradigan, keng tarqalgan ma'lumot uchun (tema, til, auth). Redux/Zustand — tez-tez o'zgaradigan, murakkab state uchun (server data, form state, UI state). Asosiy farq: Context value o'zgarganda BARCHA consumer-lar renderlanadi, Redux/Zustand esa selector orqali faqat KERAKLI qismni kuzatadi. Shuning uchun input value yoki mouse position uchun Context ishlatish — performance muammo. Zustand bunday holatlarda 10x tezroq.`,
       },
       {
         question: 'Context performance muammosi nima va qanday hal qilinadi?',
-        answer: 'Muammo: Provider value o\'zgarganda BARCHA useContext(MyContext) ishlatgan komponentlar re-render bo\'ladi — hatto ular faqat value ning bir qismini ishlatsa ham. Yechimlar: 1) Context-ni bo\'lish — UserContext, ThemeContext alohida (eng samarali), 2) Provider value-ni useMemo bilan o\'rash — keraksiz re-render oldini olish, 3) memo bilan child-larni o\'rash — lekin Context o\'zgarsa memo yordam bermaydi, 4) Zustand/Redux-ga o\'tish — selector pattern bilan faqat kerakli qism kuzatiladi.',
+        answer: `Muammo: Provider value o'zgarganda BARCHA useContext(MyContext) ishlatgan komponentlar re-render bo'ladi — hatto ular faqat value ning bir qismini ishlatsa ham. Yechimlar: 1) Context-ni bo'lish — UserContext, ThemeContext alohida (eng samarali), 2) Provider value-ni useMemo bilan o'rash — keraksiz re-render oldini olish, 3) memo bilan child-larni o'rash — lekin Context o'zgarsa memo yordam bermaydi, 4) Zustand/Redux-ga o'tish — selector pattern bilan faqat kerakli qism kuzatiladi.`,
       },
       {
         question: 'createContext defaultValue qachon ishlatiladi?',
-        answer: 'defaultValue faqat bitta holatda ishlatiladi: komponent HECH QANDAY Provider ichida bo\'lmaganda. Ya\'ni Provider yo\'q bo\'lsa — defaultValue qaytariladi. Amalda bu juda kam bo\'ladi chunki odatda Provider App darajasida qo\'yiladi. Ko\'p dasturchilar defaultValue ga null beradi va custom hook ichida null check qiladi — Provider yo\'q bo\'lsa aniq xato xabari chiqaradi. Bu yondoshuv yaxshiroq chunki xato tezda topiladi.',
+        answer: `defaultValue faqat bitta holatda ishlatiladi: komponent HECH QANDAY Provider ichida bo'lmaganda. Ya'ni Provider yo'q bo'lsa — defaultValue qaytariladi. Amalda bu juda kam bo'ladi chunki odatda Provider App darajasida qo'yiladi. Ko'p dasturchilar defaultValue ga null beradi va custom hook ichida null check qiladi — Provider yo'q bo'lsa aniq xato xabari chiqaradi. Bu yondoshuv yaxshiroq chunki xato tezda topiladi.`,
       },
       {
         question: 'Context nesting tartib muhimmi?',
-        answer: 'Ha, nesting tartibi muhim. Ichki Provider tashqi Provider-ni override qiladi. Masalan: <ThemeContext.Provider value="dark"> ichida <ThemeContext.Provider value="light"> bo\'lsa — ichidagi komponentlar "light" oladi. Bu feature — tree ning bir qismi uchun boshqa qiymat berish mumkin. Lekin turli context-lar (ThemeContext, AuthContext) tartibi muhim emas — ular mustaqil. Faqat BIR XIL context nesting qilganda tartib ahamiyatli.',
+        answer: `Ha, nesting tartibi muhim. Ichki Provider tashqi Provider-ni override qiladi. Masalan: <ThemeContext.Provider value="dark"> ichida <ThemeContext.Provider value="light"> bo'lsa — ichidagi komponentlar "light" oladi. Bu feature — tree ning bir qismi uchun boshqa qiymat berish mumkin. Lekin turli context-lar (ThemeContext, AuthContext) tartibi muhim emas — ular mustaqil. Faqat BIR XIL context nesting qilganda tartib ahamiyatli.`,
       },
     ],
     relatedTopics: [
@@ -2396,7 +2396,7 @@ function Counter() {
     </div>
   )
 }`,
-        description: 'Oddiy counter — lekin useReducer bilan. Ko\'p action-lar bo\'lganda useReducer aniqroq. dispatch({ type: \'INCREMENT\' }) — nima bo\'layotgani ANIQ ko\'rinadi. TypeScript discriminated union — har action uchun to\'g\'ri payload tipi.',
+        description: `Oddiy counter — lekin useReducer bilan. Ko'p action-lar bo'lganda useReducer aniqroq. dispatch({ type: 'INCREMENT' }) — nima bo'layotgani ANIQ ko'rinadi. TypeScript discriminated union — har action uchun to'g'ri payload tipi.`,
       },
       {
         title: 'Form state — murakkab form boshqaruvi (validation bilan)',
@@ -2439,7 +2439,7 @@ const initialState: FormState = {
 function validate(values: FormState['values']): FormState['errors'] {
   const errors: FormState['errors'] = {}
   if (!values.name.trim()) errors.name = 'Ism kerak'
-  if (!values.email.includes('@')) errors.email = 'Email noto\\'g\\'ri'
+  if (!values.email.includes('@')) errors.email = 'Email noto'g'ri'
   if (values.password.length < 6) errors.password = 'Kamida 6 belgi'
   return errors
 }
@@ -2517,7 +2517,7 @@ function RegistrationForm() {
       {state.errors.password && <span style={{ color: 'red' }}>{state.errors.password}</span>}
 
       <button type="submit" disabled={!state.isValid || state.isSubmitting}>
-        {state.isSubmitting ? 'Yuborilmoqda...' : 'Ro\\'yxatdan o\\'tish'}
+        {state.isSubmitting ? 'Yuborilmoqda...' : 'Ro'yxatdan o'tish'}
       </button>
       <button type="button" onClick={() => dispatch({ type: 'RESET' })}>
         Tozalash
@@ -2525,7 +2525,7 @@ function RegistrationForm() {
     </form>
   )
 }`,
-        description: 'Murakkab form — useReducer ideal. values, errors, isSubmitting, isValid — barchasi bir state-da. Har bir action aniq: SET_FIELD, SUBMIT_START, SUBMIT_SUCCESS. useState bilan 6-7 ta alohida state kerak bo\'lardi.',
+        description: `Murakkab form — useReducer ideal. values, errors, isSubmitting, isValid — barchasi bir state-da. Har bir action aniq: SET_FIELD, SUBMIT_START, SUBMIT_SUCCESS. useState bilan 6-7 ta alohida state kerak bo'lardi.`,
       },
       {
         title: 'useReducer + useContext — mini Redux',
@@ -2678,29 +2678,29 @@ function App() {
     </TodoProvider>
   )
 }`,
-        description: 'useReducer + useContext = mini Redux. Global state — Context orqali uzatiladi, dispatch orqali boshqariladi. AddTodo va TodoList alohida komponentlar — lekin bir xil state-ga ega. Kichik-o\'rta loyihalar uchun Redux o\'rniga yetarli.',
+        description: `useReducer + useContext = mini Redux. Global state — Context orqali uzatiladi, dispatch orqali boshqariladi. AddTodo va TodoList alohida komponentlar — lekin bir xil state-ga ega. Kichik-o'rta loyihalar uchun Redux o'rniga yetarli.`,
       },
     ],
     interviewQA: [
       {
         question: 'useState vs useReducer — qachon nima ishlatish kerak?',
-        answer: 'useState — oddiy, mustaqil qiymatlar: counter, toggle, input, boolean flag. useReducer — murakkab, bog\'liq state: form (values + errors + isSubmitting), todo list (items + filter), wizard (step + data + validation). Qoida: agar bitta event handler ichida 2-3 ta setState chaqirsangiz — useReducer-ga o\'tish vaqti kelgan. useReducer barcha logikani reducer-ga ajratadi — komponent toza qoladi, testing oson bo\'ladi.',
+        answer: `useState — oddiy, mustaqil qiymatlar: counter, toggle, input, boolean flag. useReducer — murakkab, bog'liq state: form (values + errors + isSubmitting), todo list (items + filter), wizard (step + data + validation). Qoida: agar bitta event handler ichida 2-3 ta setState chaqirsangiz — useReducer-ga o'tish vaqti kelgan. useReducer barcha logikani reducer-ga ajratadi — komponent toza qoladi, testing oson bo'ladi.`,
       },
       {
-        question: 'Reducer pure function bo\'lishi nima uchun muhim?',
-        answer: 'Pure function — bir xil kirish uchun DOIM bir xil natija qaytaradi va side effect yo\'q. Bu muhim chunki: 1) Predictable — har bir action uchun natija aniq, debug oson, 2) Testable — faqat input-output tekshirish yetarli, mock kerak emas, 3) React StrictMode reducer-ni 2 marta chaqirishi mumkin — pure bo\'lmasa natija buziladi, 4) Kelajakda React reducer-ni optimize qilishi mumkin (parallel execution). Side effect (API, console.log) reducer ICHIDA emas, useEffect yoki event handler-da bo\'lishi kerak.',
+        question: `Reducer pure function bo'lishi nima uchun muhim?`,
+        answer: `Pure function — bir xil kirish uchun DOIM bir xil natija qaytaradi va side effect yo'q. Bu muhim chunki: 1) Predictable — har bir action uchun natija aniq, debug oson, 2) Testable — faqat input-output tekshirish yetarli, mock kerak emas, 3) React StrictMode reducer-ni 2 marta chaqirishi mumkin — pure bo'lmasa natija buziladi, 4) Kelajakda React reducer-ni optimize qilishi mumkin (parallel execution). Side effect (API, console.log) reducer ICHIDA emas, useEffect yoki event handler-da bo'lishi kerak.`,
       },
       {
         question: 'useReducer + useContext vs Redux — farqi nima?',
-        answer: 'useReducer + useContext — kichik loyihalar uchun yetarli: oddiy setup, qo\'shimcha kutubxona kerak emas. Lekin kamchiliklari: 1) Context re-render muammosi — value o\'zgarganda BARCHA consumer-lar renderlanadi, 2) Middleware yo\'q — async logic uchun qo\'shimcha kod kerak, 3) DevTools yo\'q — debug qiyinroq, 4) Selector yo\'q — kerakli qismni ajratib olish imkoni yo\'q. Redux/Zustand katta loyihalarda yaxshiroq: selector, middleware, DevTools, ecosystem. Qoida: 5-10 ta component — Context yetarli, 50+ component — Redux/Zustand.',
+        answer: `useReducer + useContext — kichik loyihalar uchun yetarli: oddiy setup, qo'shimcha kutubxona kerak emas. Lekin kamchiliklari: 1) Context re-render muammosi — value o'zgarganda BARCHA consumer-lar renderlanadi, 2) Middleware yo'q — async logic uchun qo'shimcha kod kerak, 3) DevTools yo'q — debug qiyinroq, 4) Selector yo'q — kerakli qismni ajratib olish imkoni yo'q. Redux/Zustand katta loyihalarda yaxshiroq: selector, middleware, DevTools, ecosystem. Qoida: 5-10 ta component — Context yetarli, 50+ component — Redux/Zustand.`,
       },
       {
         question: 'Lazy initialization — useReducer(reducer, arg, init) nima?',
-        answer: 'Uchinchi argument — init funksiya. useReducer(reducer, initialArg, init) bo\'lsa, boshlang\'ich state init(initialArg) natijasi bo\'ladi. Faqat BIRINCHI renderda chaqiriladi (lazy). Bu useState(() => value) ga o\'xshash. Qachon kerak: 1) Boshlang\'ich state hisoblash qimmat bo\'lsa (localStorage, complex calculation), 2) RESET action uchun — dispatch({ type: \'RESET\' }) da init(initialArg) qayta chaqiriladi. Misol: useReducer(reducer, userId, (id) => loadFromStorage(id)) — faqat 1 marta localStorage o\'qiladi.',
+        answer: `Uchinchi argument — init funksiya. useReducer(reducer, initialArg, init) bo'lsa, boshlang'ich state init(initialArg) natijasi bo'ladi. Faqat BIRINCHI renderda chaqiriladi (lazy). Bu useState(() => value) ga o'xshash. Qachon kerak: 1) Boshlang'ich state hisoblash qimmat bo'lsa (localStorage, complex calculation), 2) RESET action uchun — dispatch({ type: 'RESET' }) da init(initialArg) qayta chaqiriladi. Misol: useReducer(reducer, userId, (id) => loadFromStorage(id)) — faqat 1 marta localStorage o'qiladi.`,
       },
     ],
     relatedTopics: [
-      { sectionId: 'state-management', topicId: 'redux-toolkit', label: 'Redux Toolkit (o\'xshash pattern)' },
+      { sectionId: 'state-management', topicId: 'redux-toolkit', label: `Redux Toolkit (o'xshash pattern)` },
       { sectionId: 'state-management', topicId: 'when-to-use-what', label: 'useState vs useReducer' },
       { sectionId: 'react-core', topicId: 'use-context', label: 'useContext bilan birga' },
     ],
@@ -2714,7 +2714,7 @@ function App() {
     title: 'useLayoutEffect',
     importance: 2,
     status: 'to-learn' as const,
-    description: 'DOM paint-dan OLDIN sinxron bajariladigan effect hook — o\'lcham hisoblash va miltillashsiz DOM o\'zgartirishlar uchun',
+    description: `DOM paint-dan OLDIN sinxron bajariladigan effect hook — o'lcham hisoblash va miltillashsiz DOM o'zgartirishlar uchun`,
     content: `useLayoutEffect — useEffect bilan deyarli bir xil sintaksisga ega, lekin TIMING (bajarilish vaqti) butunlay boshqa. Bu hook DOM-ga yozilgandan keyin, lekin brauzer ekranga chizishdan (paint) OLDIN ishlaydi.
 
 ═══════════════════════════════════════
@@ -2743,34 +2743,34 @@ Farq faqat QACHON ishlashida.
   5. ▶ useEffect ISHLAYDI (asinxron)
 
   useEffect — paint KEYIN (asinxron):
-    Foydalanuvchi avval ESKi holatni ko\\'radi,
-    keyin useEffect ishlaydi va yangi holat ko\\'rinadi.
+    Foydalanuvchi avval ESKi holatni ko'radi,
+    keyin useEffect ishlaydi va yangi holat ko'rinadi.
 
   useLayoutEffect — paint OLDIDAN (sinxron):
-    Foydalanuvchi FAQAT YANGI holatni ko\\'radi.
+    Foydalanuvchi FAQAT YANGI holatni ko'radi.
     DOM commit-dan keyin, paint-dan oldin ishlaydi.
 
 ═══════════════════════════════════════
   QACHON ISHLATISH
 ═══════════════════════════════════════
 
-1. DOM o\\'lcham o\\'lchash (getBoundingClientRect)
+1. DOM o'lcham o'lchash (getBoundingClientRect)
    — element kengligi, balandligi, pozitsiyasini bilish
 
 2. Scroll pozitsiya boshqarish
-   — scroll-ni ma\\'lum joyga o\\'rnatish
+   — scroll-ni ma'lum joyga o'rnatish
 
 3. Tooltip / Popover pozitsiya hisoblash
-   — target elementga qarab tooltip qo\\'yish
+   — target elementga qarab tooltip qo'yish
 
-4. Animatsiya boshlang\\'ich holati
-   — animatsiya boshlanishidan oldin CSS qiymatlarini o\\'rnatish
+4. Animatsiya boshlang'ich holati
+   — animatsiya boshlanishidan oldin CSS qiymatlarini o'rnatish
 
 ═══════════════════════════════════════
   NIMA UCHUN ODDIY useEffect YETARLI EMAS
 ═══════════════════════════════════════
 
-useEffect-da DOM o\\'zgartirsangiz "miltillash" (flicker) ko\\'rinadi:
+useEffect-da DOM o'zgartirsangiz "miltillash" (flicker) ko'rinadi:
 
   // useEffect bilan — MILTILLASH bor:
   useEffect(() => {
@@ -2778,15 +2778,15 @@ useEffect-da DOM o\\'zgartirsangiz "miltillash" (flicker) ko\\'rinadi:
   }, [position])
   // Foydalanuvchi: eski pozitsiya -> paint -> yangi pozitsiya
 
-  // useLayoutEffect bilan — MILTILLASH yo\\'q:
+  // useLayoutEffect bilan — MILTILLASH yo'q:
   useLayoutEffect(() => {
     ref.current.style.left = \\\`\${position}px\\\`
   }, [position])
-  // Foydalanuvchi: faqat yangi pozitsiya ko\\'radi
+  // Foydalanuvchi: faqat yangi pozitsiya ko'radi
 
 Sabab: useEffect paint-dan KEYIN ishlaydi, shuning uchun
 brauzer avval eski holatni chizib, keyin yangilaydi.
-useLayoutEffect paint-dan OLDIN ishlaydi — faqat to\\'g\\'ri holat chiziladi.
+useLayoutEffect paint-dan OLDIN ishlaydi — faqat to'g'ri holat chiziladi.
 
 ═══════════════════════════════════════
   OGOHLANTIRISH
@@ -2794,18 +2794,18 @@ useLayoutEffect paint-dan OLDIN ishlaydi — faqat to\\'g\\'ri holat chiziladi.
 
 useLayoutEffect SINXRON ishlaydi:
 - Agar sekin kod yozsangiz, paint BLOKLANADI
-- Foydalanuvchi interfeysning "qotib qolganini" ko\\'radi
-- Faqat DOM o\\'lchash/o\\'zgartirish uchun ishlatish kerak
+- Foydalanuvchi interfeysning "qotib qolganini" ko'radi
+- Faqat DOM o'lchash/o'zgartirish uchun ishlatish kerak
 
-NOTO\\'G\\'RI ishlatish:
+NOTO'G'RI ishlatish:
   useLayoutEffect(() => {
-    fetch('/api/data')  // ❌ Fetch — useEffect-da bo\\'lishi kerak
-    setTimeout(...)      // ❌ Timer — useEffect-da bo\\'lishi kerak
+    fetch('/api/data')  // ❌ Fetch — useEffect-da bo'lishi kerak
+    setTimeout(...)      // ❌ Timer — useEffect-da bo'lishi kerak
   }, [])
 
-TO\\'G\\'RI ishlatish:
+TO'G'RI ishlatish:
   useLayoutEffect(() => {
-    const rect = ref.current.getBoundingClientRect()  // ✅ DOM o\\'lchash
+    const rect = ref.current.getBoundingClientRect()  // ✅ DOM o'lchash
     setWidth(rect.width)
   }, [dependency])`,
     codeExamples: [
@@ -2878,10 +2878,10 @@ function App() {
     </div>
   )
 }`,
-        description: 'Tooltip pozitsiyasini target elementga qarab hisoblash. useLayoutEffect ishlatiladi chunki avval noto\'g\'ri pozitsiyada paydo bo\'lib, keyin sakrashi mumkin (flicker). useLayoutEffect bilan foydalanuvchi faqat to\'g\'ri pozitsiyani ko\'radi.',
+        description: `Tooltip pozitsiyasini target elementga qarab hisoblash. useLayoutEffect ishlatiladi chunki avval noto'g'ri pozitsiyada paydo bo'lib, keyin sakrashi mumkin (flicker). useLayoutEffect bilan foydalanuvchi faqat to'g'ri pozitsiyani ko'radi.`,
       },
       {
-        title: 'Element kengligi o\'lchash',
+        title: `Element kengligi o'lchash`,
         language: 'tsx' as const,
         code: `import { useState, useRef, useLayoutEffect } from 'react'
 
@@ -2944,21 +2944,21 @@ function useElementSize(ref: React.RefObject<HTMLElement | null>) {
 
   return size
 }`,
-        description: 'Element o\'lchamlarini o\'lchab state-ga saqlash. useLayoutEffect paint-dan oldin ishlaydi, shuning uchun foydalanuvchi 0 qiymatlarni ko\'rmaydi. ResizeObserver bilan custom hook versiya ham ko\'rsatilgan.',
+        description: `Element o'lchamlarini o'lchab state-ga saqlash. useLayoutEffect paint-dan oldin ishlaydi, shuning uchun foydalanuvchi 0 qiymatlarni ko'rmaydi. ResizeObserver bilan custom hook versiya ham ko'rsatilgan.`,
       },
     ],
     interviewQA: [
       {
-        question: 'useEffect va useLayoutEffect o\'rtasidagi asosiy farq nima? Timing qanday?',
-        answer: 'Asosiy farq BAJARILISH VAQTIDA. useEffect brauzer ekranga chizgandan (paint) KEYIN asinxron ishlaydi. useLayoutEffect esa DOM yangilangandan keyin, lekin paint-dan OLDIN sinxron ishlaydi. Siklda ko\'rsak: render -> DOM commit -> useLayoutEffect -> paint -> useEffect. Bu farq muhim chunki useLayoutEffect-da DOM o\'zgartirish qilsangiz foydalanuvchi faqat yakuniy natijani ko\'radi, useEffect-da esa avval eski holat ko\'rinib keyin yangilanadi (flicker/miltillash).',
+        question: `useEffect va useLayoutEffect o'rtasidagi asosiy farq nima? Timing qanday?`,
+        answer: `Asosiy farq BAJARILISH VAQTIDA. useEffect brauzer ekranga chizgandan (paint) KEYIN asinxron ishlaydi. useLayoutEffect esa DOM yangilangandan keyin, lekin paint-dan OLDIN sinxron ishlaydi. Siklda ko'rsak: render -> DOM commit -> useLayoutEffect -> paint -> useEffect. Bu farq muhim chunki useLayoutEffect-da DOM o'zgartirish qilsangiz foydalanuvchi faqat yakuniy natijani ko'radi, useEffect-da esa avval eski holat ko'rinib keyin yangilanadi (flicker/miltillash).`,
       },
       {
-        question: 'Qachon useLayoutEffect ishlatish SHART bo\'ladi? Misol bering.',
-        answer: 'useLayoutEffect ishlatish SHART bo\'ladigan holatlar: 1) DOM element o\'lchamlarini o\'lchash (getBoundingClientRect) — masalan tooltip yoki dropdown pozitsiya hisoblash. 2) Scroll pozitsiyani o\'zgartirish — masalan yangi xabar kelganda pastga scroll qilish. 3) DOM-ni vizual o\'zgartirish — masalan element pozitsiyasi yoki o\'lchamini dinamik o\'rnatish. Bu holatlarda useEffect ishlatilsa "miltillash" ko\'rinadi, chunki brauzer avval eski holatni chizadi. useLayoutEffect esa paint-dan oldin o\'zgartiradi — foydalanuvchi faqat to\'g\'ri holatni ko\'radi.',
+        question: `Qachon useLayoutEffect ishlatish SHART bo'ladi? Misol bering.`,
+        answer: `useLayoutEffect ishlatish SHART bo'ladigan holatlar: 1) DOM element o'lchamlarini o'lchash (getBoundingClientRect) — masalan tooltip yoki dropdown pozitsiya hisoblash. 2) Scroll pozitsiyani o'zgartirish — masalan yangi xabar kelganda pastga scroll qilish. 3) DOM-ni vizual o'zgartirish — masalan element pozitsiyasi yoki o'lchamini dinamik o'rnatish. Bu holatlarda useEffect ishlatilsa "miltillash" ko'rinadi, chunki brauzer avval eski holatni chizadi. useLayoutEffect esa paint-dan oldin o'zgartiradi — foydalanuvchi faqat to'g'ri holatni ko'radi.`,
       },
       {
         question: 'SSR (Server-Side Rendering) da useLayoutEffect bilan qanday muammo bor?',
-        answer: 'SSR da useLayoutEffect WARNING beradi chunki serverda brauzer DOM yo\'q — paint tushunchasi umuman mavjud emas. useLayoutEffect faqat client-da ishlaydi, serverda esa hech narsa qilmaydi va React console-da ogohlantirish chiqaradi. Yechim: SSR loyihalarda useLayoutEffect o\'rniga useEffect ishlatish kerak, yoki typeof window tekshiruvi qo\'yish. Next.js yoki Remix kabi SSR framework-larda bu ayniqsa muhim. Agar useLayoutEffect SHART bo\'lsa, uni faqat client-da ishlaydigan komponentga joylashtirish kerak ("use client" direktivasi bilan).',
+        answer: `SSR da useLayoutEffect WARNING beradi chunki serverda brauzer DOM yo'q — paint tushunchasi umuman mavjud emas. useLayoutEffect faqat client-da ishlaydi, serverda esa hech narsa qilmaydi va React console-da ogohlantirish chiqaradi. Yechim: SSR loyihalarda useLayoutEffect o'rniga useEffect ishlatish kerak, yoki typeof window tekshiruvi qo'yish. Next.js yoki Remix kabi SSR framework-larda bu ayniqsa muhim. Agar useLayoutEffect SHART bo'lsa, uni faqat client-da ishlaydigan komponentga joylashtirish kerak ("use client" direktivasi bilan).`,
       },
     ],
     relatedTopics: [
@@ -2974,7 +2974,7 @@ function useElementSize(ref: React.RefObject<HTMLElement | null>) {
     title: 'useTransition',
     importance: 2,
     status: 'to-learn' as const,
-    description: 'Og\'ir state yangilanishlarni past prioritetli qilib, UI responsiv saqlash uchun React 18+ concurrent hook',
+    description: `Og'ir state yangilanishlarni past prioritetli qilib, UI responsiv saqlash uchun React 18+ concurrent hook`,
     content: `useTransition — React 18 da qo'shilgan concurrent hook. U og'ir (sekin) state yangilanishlarni PAST prioritetli qiladi, shunda UI responsiv (javob beradigan) qoladi.
 
 ═══════════════════════════════════════
@@ -2990,8 +2990,8 @@ function useElementSize(ref: React.RefObject<HTMLElement | null>) {
   NIMA UCHUN KERAK
 ═══════════════════════════════════════
 
-Muammo: Ba\\'zi state yangilanishlar OG\\'IR bo\\'lishi mumkin:
-- Katta ro\\'yxatni filterlash (10,000+ element)
+Muammo: Ba'zi state yangilanishlar OG'IR bo'lishi mumkin:
+- Katta ro'yxatni filterlash (10,000+ element)
 - Murakkab komponentni qayta renderlash
 - Katta data-ni qayta hisoblash
 
@@ -3016,29 +3016,29 @@ keyin transition-ni.
 
   1. setActiveTab — yuqori prioritet, darhol bajariladi
   2. startTransition ichidagi setTabContent — past prioritet
-  3. React avval tab-ni o\\'zgartiradi
+  3. React avval tab-ni o'zgartiradi
   4. Keyin content-ni yangilaydi
-  5. Agar yangi tezkor yangilanish kelsa — transition-ni TO\\'XTATADI
+  5. Agar yangi tezkor yangilanish kelsa — transition-ni TO'XTATADI
 
 ═══════════════════════════════════════
   isPending — LOADING INDICATOR
 ═══════════════════════════════════════
 
-isPending = true bo\\'ladi transition boshlanganidan to
-tugagunicha. Bu vaqtda loading indicator ko\\'rsatish mumkin:
+isPending = true bo'ladi transition boshlanganidan to
+tugagunicha. Bu vaqtda loading indicator ko'rsatish mumkin:
 
   {isPending && <Spinner />}
   {isPending ? <Skeleton /> : <Content />}
 
 isPending UI-ni bloklaMASlik bilan loading holatini
-ko\\'rsatish imkonini beradi.
+ko'rsatish imkonini beradi.
 
 ═══════════════════════════════════════
   startTransition vs useDeferredValue
 ═══════════════════════════════════════
 
   startTransition — ACTION-ni kechiktiradi:
-    Siz setState chaqiruvini o\\'zingiz wrap qilasiz.
+    Siz setState chaqiruvini o'zingiz wrap qilasiz.
     Qachon transition boshlashni SIZ hal qilasiz.
 
   useDeferredValue — QIYMAT-ni kechiktiradi:
@@ -3053,13 +3053,13 @@ ko\\'rsatish imkonini beradi.
 ═══════════════════════════════════════
 
 useTransition — concurrent rendering-ning bir qismi:
-- React ish-ni kichik BO\\'LAKLARGA bo\\'ladi
-- Har bo\\'lak orasida foydalanuvchi interaksiyasini tekshiradi
-- Agar yangi input/click bo\\'lsa — transition-ni TO\\'XTATIB,
+- React ish-ni kichik BO'LAKLARGA bo'ladi
+- Har bo'lak orasida foydalanuvchi interaksiyasini tekshiradi
+- Agar yangi input/click bo'lsa — transition-ni TO'XTATIB,
   tezkor yangilanishni bajaradi
 - Keyin transition-ni DAVOM ettiradi
 
-Bu "time slicing" deyiladi — React vaqtni bo\\'laklarga bo\\'ladi.`,
+Bu "time slicing" deyiladi — React vaqtni bo'laklarga bo'ladi.`,
     codeExamples: [
       {
         title: 'Tab almashtirish — isPending bilan loading',
@@ -3126,10 +3126,10 @@ function TabsExample() {
     </div>
   )
 }`,
-        description: 'Tab bosilganda activeTab darhol o\'zgaradi (tezkor), lekin og\'ir content past prioritetda yangilanadi. isPending=true bo\'lganda opacity 0.5 va "Yuklanmoqda..." ko\'rsatiladi. Foydalanuvchi boshqa tab-larga bosishi mumkin — UI qotmaydi.',
+        description: `Tab bosilganda activeTab darhol o'zgaradi (tezkor), lekin og'ir content past prioritetda yangilanadi. isPending=true bo'lganda opacity 0.5 va "Yuklanmoqda..." ko'rsatiladi. Foydalanuvchi boshqa tab-larga bosishi mumkin — UI qotmaydi.`,
       },
       {
-        title: 'Katta ro\'yxat filterlash — input tezkor, list transition',
+        title: `Katta ro'yxat filterlash — input tezkor, list transition`,
         language: 'tsx' as const,
         code: `import { useState, useTransition, useMemo } from 'react'
 
@@ -3199,15 +3199,15 @@ function ProductFilter() {
     interviewQA: [
       {
         question: 'useTransition nima uchun kerak? Oddiy setState-dan farqi nima?',
-        answer: 'useTransition og\'ir (sekin) state yangilanishlarni past prioritetli qilish uchun kerak. Oddiy setState-da barcha yangilanishlar bir xil prioritetda — agar bittasi sekin bo\'lsa, UI qotib qoladi. useTransition bilan siz setState-ni startTransition ichiga o\'raysiz va React uni past prioritetli deb belgilaydi. Natijada React avval tezkor yangilanishlarni (input yozish, tugma bosish) bajaradi, keyin sekin transition-ni. Agar yangi tezkor yangilanish kelsa, React transition-ni to\'xtatib, avval tezkor ishni bajaradi.',
+        answer: `useTransition og'ir (sekin) state yangilanishlarni past prioritetli qilish uchun kerak. Oddiy setState-da barcha yangilanishlar bir xil prioritetda — agar bittasi sekin bo'lsa, UI qotib qoladi. useTransition bilan siz setState-ni startTransition ichiga o'raysiz va React uni past prioritetli deb belgilaydi. Natijada React avval tezkor yangilanishlarni (input yozish, tugma bosish) bajaradi, keyin sekin transition-ni. Agar yangi tezkor yangilanish kelsa, React transition-ni to'xtatib, avval tezkor ishni bajaradi.`,
       },
       {
         question: 'isPending qanday ishlatiladi? Nima uchun kerak?',
-        answer: 'isPending — useTransition qaytaradigan boolean qiymat. U transition boshlanganidan to tugaguncha true bo\'ladi. isPending yordamida foydalanuvchiga "ish bajarilmoqda" deb ko\'rsatish mumkin: loading spinner, skeleton, opacity kamaytirish, "Yuklanmoqda..." matni. Masalan: {isPending && <Spinner />} yoki style={{ opacity: isPending ? 0.5 : 1 }}. isPending muhim chunki u UI-ni bloklaMASdan foydalanuvchiga feedback beradi — yangilanish ketayotganini bildiradi.',
+        answer: `isPending — useTransition qaytaradigan boolean qiymat. U transition boshlanganidan to tugaguncha true bo'ladi. isPending yordamida foydalanuvchiga "ish bajarilmoqda" deb ko'rsatish mumkin: loading spinner, skeleton, opacity kamaytirish, "Yuklanmoqda..." matni. Masalan: {isPending && <Spinner />} yoki style={{ opacity: isPending ? 0.5 : 1 }}. isPending muhim chunki u UI-ni bloklaMASdan foydalanuvchiga feedback beradi — yangilanish ketayotganini bildiradi.`,
       },
       {
-        question: 'useTransition va useDeferredValue o\'rtasidagi farq nima? Qachon qaysi birini ishlatish kerak?',
-        answer: 'Asosiy farq: useTransition ACTION-ni (setState chaqiruvi) kechiktiradi, useDeferredValue esa QIYMAT-ni kechiktiradi. useTransition-da siz startTransition ichiga setState-ni o\'zingiz o\'raysiz — setState-ga to\'g\'ridan-to\'g\'ri kirishingiz bor. useDeferredValue-da esa tashqaridan kelgan value-ning (masalan props) eski versiyasini vaqtincha ushlab turadi. Qoida: agar setState-ga kirishingiz bor — useTransition, agar faqat props yoki boshqa qiymatni kechiktirish kerak — useDeferredValue. Ikkalasi ham React 18 concurrent feature.',
+        question: `useTransition va useDeferredValue o'rtasidagi farq nima? Qachon qaysi birini ishlatish kerak?`,
+        answer: `Asosiy farq: useTransition ACTION-ni (setState chaqiruvi) kechiktiradi, useDeferredValue esa QIYMAT-ni kechiktiradi. useTransition-da siz startTransition ichiga setState-ni o'zingiz o'raysiz — setState-ga to'g'ridan-to'g'ri kirishingiz bor. useDeferredValue-da esa tashqaridan kelgan value-ning (masalan props) eski versiyasini vaqtincha ushlab turadi. Qoida: agar setState-ga kirishingiz bor — useTransition, agar faqat props yoki boshqa qiymatni kechiktirish kerak — useDeferredValue. Ikkalasi ham React 18 concurrent feature.`,
       },
     ],
     relatedTopics: [
@@ -3223,7 +3223,7 @@ function ProductFilter() {
     title: 'useDeferredValue',
     importance: 2,
     status: 'to-learn' as const,
-    description: 'Qiymat yangilanishini kechiktirish uchun concurrent hook — tezkor UI bilan og\'ir hisoblashni ajratadi',
+    description: `Qiymat yangilanishini kechiktirish uchun concurrent hook — tezkor UI bilan og'ir hisoblashni ajratadi`,
     content: `useDeferredValue — React 18 da qo'shilgan concurrent hook. U qiymat yangilanishini kechiktiradi: asl qiymat o'zgarganda, deferred versiya "keyinroq" yangilanadi.
 
 ═══════════════════════════════════════
@@ -3232,7 +3232,7 @@ function ProductFilter() {
 
   const deferredValue = useDeferredValue(value)
 
-  - value — kechiktirmoqchi bo\\'lgan qiymat (state, props, yoki boshqa)
+  - value — kechiktirmoqchi bo'lgan qiymat (state, props, yoki boshqa)
   - deferredValue — value-ning "kechiktirilgan" versiyasi
 
   Birinchi renderda deferredValue = value (bir xil).
@@ -3243,57 +3243,57 @@ function ProductFilter() {
   NIMA UCHUN KERAK
 ═══════════════════════════════════════
 
-Muammo: Input-ga yozganda har harf uchun og\\'ir hisoblash
-bo\\'lsa (filterlash, rendering), UI sekinlashadi.
+Muammo: Input-ga yozganda har harf uchun og'ir hisoblash
+bo'lsa (filterlash, rendering), UI sekinlashadi.
 
-Yechim: Input TEZDA yangilanadi, lekin og\\'ir qism
+Yechim: Input TEZDA yangilanadi, lekin og'ir qism
 KECHIKTIRILGAN qiymat bilan ishlaydi.
 
   const [query, setQuery] = useState('')
   const deferredQuery = useDeferredValue(query)
 
-  // query — input-da ko\\'rinadigan (tezkor)
+  // query — input-da ko'rinadigan (tezkor)
   // deferredQuery — filterlash uchun (kechiktirilgan)
 
 ═══════════════════════════════════════
   QANDAY ISHLAYDI
 ═══════════════════════════════════════
 
-  1. query o\\'zgaradi: 'a' -> 'ab' -> 'abc'
+  1. query o'zgaradi: 'a' -> 'ab' -> 'abc'
   2. React har safar avval TEZKOR yangilanishlarni qiladi
   3. Keyin deferredQuery-ni yangilaydi
   4. Agar yangi tezkor yangilanish kelsa —
-     deferred yangilanishni TO\\'XTATADI
-  5. Faqat foydalanuvchi to\\'xtab turganda
-     deferred to\\'liq yangilanadi
+     deferred yangilanishni TO'XTATADI
+  5. Faqat foydalanuvchi to'xtab turganda
+     deferred to'liq yangilanadi
 
-  Vaqt chizig\\'i:
+  Vaqt chizig'i:
   query:         'a' → 'ab' → 'abc'  (DARHOL)
-  deferredQuery: 'a' →  'a' → 'abc'  ('ab' ni O\\'TKAZIB yuboradi)
+  deferredQuery: 'a' →  'a' → 'abc'  ('ab' ni O'TKAZIB yuboradi)
 
 ═══════════════════════════════════════
   ASOSIY USE CASE
 ═══════════════════════════════════════
 
-Search input + natijalar ro\\'yxati:
+Search input + natijalar ro'yxati:
 - Input tezda yangilanadi (foydalanuvchi erkin yozadi)
-- Natijalar ro\\'yxati kechiktirilgan qiymat bilan ishlaydi
-- Og\\'ir rendering foydalanuvchini TO\\'SLAMAYDI
+- Natijalar ro'yxati kechiktirilgan qiymat bilan ishlaydi
+- Og'ir rendering foydalanuvchini TO'SLAMAYDI
 
 ═══════════════════════════════════════
   useTransition vs useDeferredValue
 ═══════════════════════════════════════
 
   useTransition:
-    - setState-ni O\\'ZINGIZ wrap qilasiz
+    - setState-ni O'ZINGIZ wrap qilasiz
     - Action-ni kechiktiradi
     - isPending bor
-    - setState-ga to\\'g\\'ridan-to\\'g\\'ri kirish bor
+    - setState-ga to'g'ridan-to'g'ri kirish bor
 
   useDeferredValue:
     - Tashqaridan kelgan VALUE-ni kechiktiradi
     - Props yoki boshqa qiymatlar uchun
-    - isPending YO\\'Q (lekin value !== deferredValue tekshirish mumkin)
+    - isPending YO'Q (lekin value !== deferredValue tekshirish mumkin)
     - setState-ga kirish shart emas
 
 ═══════════════════════════════════════
@@ -3302,14 +3302,14 @@ Search input + natijalar ro\\'yxati:
 
   Debounce:
     - Belgilangan vaqt kutadi (masalan 300ms)
-    - Qurilma tezligidan qat\\'iy nazar DOIM kutadi
+    - Qurilma tezligidan qat'iy nazar DOIM kutadi
     - Tezkor qurilmada ham 300ms kutadi — bekorga
 
   useDeferredValue:
-    - React O\\'ZI boshqaradi
+    - React O'ZI boshqaradi
     - Qurilma tezligiga MOSLANADI
     - Tezkor qurilmada deyarli darhol
-    - Sekin qurilmada ko\\'proq kechiktiradi
+    - Sekin qurilmada ko'proq kechiktiradi
     - Vaqtni BELGILASH shart emas`,
     codeExamples: [
       {
@@ -3320,7 +3320,7 @@ Search input + natijalar ro\\'yxati:
 // Katta ma'lumotlar bazasi
 const database = Array.from({ length: 10000 }, (_, i) => ({
   id: i + 1,
-  title: \\\`Maqola #\${i + 1}: \${['React', 'TypeScript', 'JavaScript', 'Node.js', 'CSS'][i % 5]} bo\\'yicha\\\`,
+  title: \\\`Maqola #\${i + 1}: \${['React', 'TypeScript', 'JavaScript', 'Node.js', 'CSS'][i % 5]} bo'yicha\\\`,
 }))
 
 function SearchResults({ query }: { query: string }) {
@@ -3373,10 +3373,10 @@ function SearchPage() {
     </div>
   )
 }`,
-        description: 'Input-ga yozganda query darhol yangilanadi — input responsive. Lekin SearchResults komponenti deferredQuery bilan ishlaydi — kechiktirilgan. query !== deferredQuery bo\'lganda natijalar xiralashadi (opacity 0.6) — yangilanish davom etyaptini ko\'rsatadi.',
+        description: `Input-ga yozganda query darhol yangilanadi — input responsive. Lekin SearchResults komponenti deferredQuery bilan ishlaydi — kechiktirilgan. query !== deferredQuery bo'lganda natijalar xiralashadi (opacity 0.6) — yangilanish davom etyaptini ko'rsatadi.`,
       },
       {
-        title: 'Og\'ir komponent lazy yangilanish',
+        title: `Og'ir komponent lazy yangilanish`,
         language: 'tsx' as const,
         code: `import { useState, useDeferredValue, memo } from 'react'
 
@@ -3431,21 +3431,21 @@ function SliderWithChart() {
     </div>
   )
 }`,
-        description: 'Slider tezda harakatlanadi (value darhol yangilanadi), lekin og\'ir HeavyChart komponenti deferredValue bilan ishlaydi. memo bilan o\'ralgan — faqat deferredValue o\'zgarganda qayta renderlanadi. Slider silliq ishlaydi, chart "keyinroq" yangilanadi.',
+        description: `Slider tezda harakatlanadi (value darhol yangilanadi), lekin og'ir HeavyChart komponenti deferredValue bilan ishlaydi. memo bilan o'ralgan — faqat deferredValue o'zgarganda qayta renderlanadi. Slider silliq ishlaydi, chart "keyinroq" yangilanadi.`,
       },
     ],
     interviewQA: [
       {
         question: 'useDeferredValue qanday ishlaydi? Ichki mexanizmi qanday?',
-        answer: 'useDeferredValue qiymatning "kechiktirilgan" versiyasini yaratadi. Asl qiymat o\'zgarganda, React avval barcha tezkor (yuqori prioritetli) yangilanishlarni bajaradi — input, click va boshqalar. Keyin deferred qiymatni past prioritetda yangilaydi. Agar yangi tezkor yangilanish kelsa, React deferred yangilanishni TO\'XTATADI va avval tezkor ishni bajaradi. Bu concurrent rendering-ning bir qismi — React ish-ni bo\'laklarga bo\'lib bajaradi va foydalanuvchi interaksiyasiga doim javob beradi.',
+        answer: `useDeferredValue qiymatning "kechiktirilgan" versiyasini yaratadi. Asl qiymat o'zgarganda, React avval barcha tezkor (yuqori prioritetli) yangilanishlarni bajaradi — input, click va boshqalar. Keyin deferred qiymatni past prioritetda yangilaydi. Agar yangi tezkor yangilanish kelsa, React deferred yangilanishni TO'XTATADI va avval tezkor ishni bajaradi. Bu concurrent rendering-ning bir qismi — React ish-ni bo'laklarga bo'lib bajaradi va foydalanuvchi interaksiyasiga doim javob beradi.`,
       },
       {
-        question: 'Debounce va useDeferredValue o\'rtasidagi farq nima? Qaysi biri yaxshiroq?',
-        answer: 'Debounce belgilangan vaqt kutadi (masalan 300ms) — qurilma tezligidan qat\'iy nazar DOIM kutadi. Tezkor qurilmada ham 300ms kutadi, bu bekorga kechikish. useDeferredValue esa React tomonidan boshqariladi va qurilma tezligiga moslanadi: tezkor qurilmada deyarli darhol yangilanadi, sekin qurilmada ko\'proq kechiktiradi. Bundan tashqari useDeferredValue concurrent rendering bilan integratsiyalangan — React ish-ni bo\'laklaydi va foydalanuvchi interaksiyasini uzmasdan bajaradi. Debounce esa oddiy timer — React rendering siklidan xabarsiz.',
+        question: `Debounce va useDeferredValue o'rtasidagi farq nima? Qaysi biri yaxshiroq?`,
+        answer: `Debounce belgilangan vaqt kutadi (masalan 300ms) — qurilma tezligidan qat'iy nazar DOIM kutadi. Tezkor qurilmada ham 300ms kutadi, bu bekorga kechikish. useDeferredValue esa React tomonidan boshqariladi va qurilma tezligiga moslanadi: tezkor qurilmada deyarli darhol yangilanadi, sekin qurilmada ko'proq kechiktiradi. Bundan tashqari useDeferredValue concurrent rendering bilan integratsiyalangan — React ish-ni bo'laklaydi va foydalanuvchi interaksiyasini uzmasdan bajaradi. Debounce esa oddiy timer — React rendering siklidan xabarsiz.`,
       },
       {
         question: 'Qachon useTransition, qachon useDeferredValue ishlatish kerak?',
-        answer: 'Qoida oddiy: agar siz setState-ni chaqirayotgan bo\'lsangiz va unga to\'g\'ridan-to\'g\'ri kirishingiz bor — useTransition ishlatish yaxshiroq, chunki startTransition ichiga setState-ni wrap qilasiz va isPending ham olasiz. Agar esa value tashqaridan kelsa (props, context) va siz setState-ni chaqirmayapsiz — useDeferredValue ishlatish kerak. Masalan: child komponent props orqali query olsa, u useDeferredValue ishlatadi. Parent komponent esa o\'zining setState-ini useTransition bilan wrap qilishi mumkin.',
+        answer: `Qoida oddiy: agar siz setState-ni chaqirayotgan bo'lsangiz va unga to'g'ridan-to'g'ri kirishingiz bor — useTransition ishlatish yaxshiroq, chunki startTransition ichiga setState-ni wrap qilasiz va isPending ham olasiz. Agar esa value tashqaridan kelsa (props, context) va siz setState-ni chaqirmayapsiz — useDeferredValue ishlatish kerak. Masalan: child komponent props orqali query olsa, u useDeferredValue ishlatadi. Parent komponent esa o'zining setState-ini useTransition bilan wrap qilishi mumkin.`,
       },
     ],
     relatedTopics: [
@@ -3469,7 +3469,7 @@ function SliderWithChart() {
 ═══════════════════════════════════════
 
   useImperativeHandle(ref, () => ({
-    // parent ko\\'ra oladigan metodlar
+    // parent ko'ra oladigan metodlar
     focus() { ... },
     clear() { ... },
     scrollTo(pos: number) { ... },
@@ -3483,18 +3483,18 @@ function SliderWithChart() {
   NIMA UCHUN KERAK
 ═══════════════════════════════════════
 
-Odatda React-da ma\\'lumot YUQORIDAN PASTGA oqadi (props).
-Lekin ba\\'zan parent child-ning ICHKI funksiyalarini chaqirishi kerak:
+Odatda React-da ma'lumot YUQORIDAN PASTGA oqadi (props).
+Lekin ba'zan parent child-ning ICHKI funksiyalarini chaqirishi kerak:
 
   - Input-ga focus berish
   - Modal-ni ochish/yopish
-  - Scroll pozitsiyani o\\'zgartirish
+  - Scroll pozitsiyani o'zgartirish
   - Form-ni reset qilish
   - Animatsiyani boshlash
 
 Bu holatlarda parent ref orqali child-ga murojaat qiladi.
 useImperativeHandle esa child-ning QAYSI funksiyalarini
-parent ko\\'rishini NAZORAT QILADI.
+parent ko'rishini NAZORAT QILADI.
 
 ═══════════════════════════════════════
   forwardRef BILAN BIRGA
@@ -3533,11 +3533,11 @@ lekin oldingi versiyalarda forwardRef SHART edi:
   OGOHLANTIRISH
 ═══════════════════════════════════════
 
-useImperativeHandle-ni ko\\'p ishlatMANG:
+useImperativeHandle-ni ko'p ishlatMANG:
 - React-da asosiy pattern: PROPS orqali boshqarish
 - ref + useImperativeHandle — faqat IMPERATIVE amallar uchun
   (focus, scroll, animatsiya)
-- Agar props bilan qilib bo\\'lsa — props ishlatish yaxshiroq
+- Agar props bilan qilib bo'lsa — props ishlatish yaxshiroq
 - Bu hook "escape hatch" — oddiy emas, MAXSUS holat uchun`,
     codeExamples: [
       {
@@ -3616,17 +3616,17 @@ function SearchForm() {
     </div>
   )
 }`,
-        description: 'CustomInput komponenti useImperativeHandle orqali parent-ga focus, clear, getValue, select metodlarini ochadi. Parent bu metodlarni ref orqali chaqiradi. Ichki input ref va state parent-ga ko\'rinMAYDI — faqat ochilgan API ko\'rinadi.',
+        description: `CustomInput komponenti useImperativeHandle orqali parent-ga focus, clear, getValue, select metodlarini ochadi. Parent bu metodlarni ref orqali chaqiradi. Ichki input ref va state parent-ga ko'rinMAYDI — faqat ochilgan API ko'rinadi.`,
       },
     ],
     interviewQA: [
       {
         question: 'useImperativeHandle nima uchun kerak? Qachon ishlatiladi?',
-        answer: 'useImperativeHandle parent komponentga child-ning ichki funksiyalarini (API) ochish uchun kerak. React-da asosan ma\'lumot yuqoridan pastga oqadi (props), lekin ba\'zan parent child-ning IMPERATIVE amallarini chaqirishi kerak: input-ga focus berish, modal ochish/yopish, scroll pozitsiya o\'zgartirish. Bu holatlarda child useImperativeHandle bilan maxsus API ochadi va parent ref orqali bu API-ga murojaat qiladi. Bu hook forwardRef bilan birga ishlatiladi (React 19-da ref oddiy prop bo\'lishi ham mumkin).',
+        answer: `useImperativeHandle parent komponentga child-ning ichki funksiyalarini (API) ochish uchun kerak. React-da asosan ma'lumot yuqoridan pastga oqadi (props), lekin ba'zan parent child-ning IMPERATIVE amallarini chaqirishi kerak: input-ga focus berish, modal ochish/yopish, scroll pozitsiya o'zgartirish. Bu holatlarda child useImperativeHandle bilan maxsus API ochadi va parent ref orqali bu API-ga murojaat qiladi. Bu hook forwardRef bilan birga ishlatiladi (React 19-da ref oddiy prop bo'lishi ham mumkin).`,
       },
       {
-        question: 'useImperativeHandle va oddiy ref forwarding o\'rtasidagi farq nima?',
-        answer: 'Oddiy ref forwarding-da parent child-ning DOM elementiga TO\'LIQDAN-TO\'LIQ kirish oladi — barcha DOM metodlari va xossalari ochiq. Bu xavfli bo\'lishi mumkin chunki parent child-ning ichki DOM-ini o\'zgartirishi mumkin. useImperativeHandle esa parent-ga faqat SIZ tanlagan metodlarni ochadi — bu "controlled API" yaratadi. Masalan input uchun faqat focus() va clear() ochib, boshqa hamma narsani yashirish mumkin. Bu encapsulation printsipi — child o\'z ichki implementatsiyasini himoya qiladi.',
+        question: `useImperativeHandle va oddiy ref forwarding o'rtasidagi farq nima?`,
+        answer: `Oddiy ref forwarding-da parent child-ning DOM elementiga TO'LIQDAN-TO'LIQ kirish oladi — barcha DOM metodlari va xossalari ochiq. Bu xavfli bo'lishi mumkin chunki parent child-ning ichki DOM-ini o'zgartirishi mumkin. useImperativeHandle esa parent-ga faqat SIZ tanlagan metodlarni ochadi — bu "controlled API" yaratadi. Masalan input uchun faqat focus() va clear() ochib, boshqa hamma narsani yashirish mumkin. Bu encapsulation printsipi — child o'z ichki implementatsiyasini himoya qiladi.`,
       },
     ],
     relatedTopics: [
@@ -3650,12 +3650,12 @@ function SearchForm() {
   VIRTUAL DOM NIMA
 ═══════════════════════════════════════
 
-Virtual DOM — bu JavaScript object bo\\'lib, haqiqiy DOM-ning yengil nusxasi hisoblanadi.
+Virtual DOM — bu JavaScript object bo'lib, haqiqiy DOM-ning yengil nusxasi hisoblanadi.
 React bu object-ni xotirada saqlaydi va u bilan ishlaydi.
 
 Oddiy qilib aytganda:
-- Haqiqiy DOM = brauzer ko\\'rsatadigan HTML daraxti
-- Virtual DOM = JavaScript-da saqlangan o\\'sha daraxtning NUSXASI (copy)
+- Haqiqiy DOM = brauzer ko'rsatadigan HTML daraxti
+- Virtual DOM = JavaScript-da saqlangan o'sha daraxtning NUSXASI (copy)
 
 Misol:
 <div class="card">
@@ -3663,13 +3663,13 @@ Misol:
   <p>Matn</p>
 </div>
 
-Virtual DOM-da bu shunday ko\\'rinadi:
+Virtual DOM-da bu shunday ko'rinadi:
 {
-  type: \\'div\\',
-  props: { className: \\'card\\' },
+  type: 'div',
+  props: { className: 'card' },
   children: [
-    { type: \\'h1\\', props: {}, children: [\\'Salom\\'] },
-    { type: \\'p\\', props: {}, children: [\\'Matn\\'] }
+    { type: 'h1', props: {}, children: ['Salom'] },
+    { type: 'p', props: {}, children: ['Matn'] }
   ]
 }
 
@@ -3678,19 +3678,19 @@ Virtual DOM-da bu shunday ko\\'rinadi:
 ═══════════════════════════════════════
 
 Haqiqiy DOM bilan ishlash SEKIN:
-- Har bir o\\'zgarishda brauzer REFLOW (layout qayta hisoblash) va REPAINT (qayta chizish) qiladi
-- Bu ayniqsa ko\\'p elementli sahifalarda og\\'ir bo\\'ladi
+- Har bir o'zgarishda brauzer REFLOW (layout qayta hisoblash) va REPAINT (qayta chizish) qiladi
+- Bu ayniqsa ko'p elementli sahifalarda og'ir bo'ladi
 
 Virtual DOM bilan ishlash TEZROQ:
-- JavaScript object-da o\\'zgarish qilish — juda tez
-- React faqat FARQNI (diff) haqiqiy DOM-ga qo\\'llaydi
+- JavaScript object-da o'zgarish qilish — juda tez
+- React faqat FARQNI (diff) haqiqiy DOM-ga qo'llaydi
 - Minimal DOM operatsiyalari = maximum tezlik
 
 ═══════════════════════════════════════
   RECONCILIATION (SOLISHTIRISH)
 ═══════════════════════════════════════
 
-State o\\'zgarganda React quyidagilarni qiladi:
+State o'zgarganda React quyidagilarni qiladi:
 
 1. Yangi Virtual DOM yaratadi (yangi state asosida)
 2. Eski Virtual DOM bilan TAQQOSLAYDI (diffing)
@@ -3701,22 +3701,22 @@ Bu jarayon RECONCILIATION deyiladi.
 Masalan:
 - Eski: <h1>Salom</h1>
 - Yangi: <h1>Xayr</h1>
-- React faqat matn node-ni o\\'zgartiradi, h1 elementni qaytadan yaratmaydi
+- React faqat matn node-ni o'zgartiradi, h1 elementni qaytadan yaratmaydi
 
 ═══════════════════════════════════════
   DIFFING ALGORITHM
 ═══════════════════════════════════════
 
 React-ning diffing algoritmi O(n) murakkablikda ishlaydi.
-(Oddiy daraxt solishtirish — O(n^3), bu juda sekin bo\\'lardi)
+(Oddiy daraxt solishtirish — O(n^3), bu juda sekin bo'lardi)
 
 React 2 ta TAXMIN (heuristic) ishlatadi:
 
 1. BOSHQA TIP = BUTUN SUBTREE QAYTA YARATILADI
-   - <div> dan <span> ga o\\'zgarsa — eski daraxt o\\'chiriladi, yangi yaratiladi
-   - <ComponentA> dan <ComponentB> ga o\\'zgarsa — ham shunday
+   - <div> dan <span> ga o'zgarsa — eski daraxt o'chiriladi, yangi yaratiladi
+   - <ComponentA> dan <ComponentB> ga o'zgarsa — ham shunday
 
-2. KEY PROP — ro\\'yxatda elementlarni aniqlash
+2. KEY PROP — ro'yxatda elementlarni aniqlash
    - key orqali React qaysi element qaysi ekanligini biladi
    - key bilan React elementni QAYTA ISHLATADI, key-siz QAYTA YARATADI
 
@@ -3724,19 +3724,19 @@ React 2 ta TAXMIN (heuristic) ishlatadi:
   KEY PROP ROLI
 ═══════════════════════════════════════
 
-key — React-ga ro\\'yxatda qaysi element qaysi ekanligini aytadi.
+key — React-ga ro'yxatda qaysi element qaysi ekanligini aytadi.
 
-KEY YO\\'Q holat:
-- React index bo\\'yicha taqqoslaydi
-- Tartib o\\'zgarsa — XATO yangilanadi (input qiymatlari aralashadi)
+KEY YO'Q holat:
+- React index bo'yicha taqqoslaydi
+- Tartib o'zgarsa — XATO yangilanadi (input qiymatlari aralashadi)
 
 KEY BOR holat:
-- React har bir elementni key bo\\'yicha topadi
-- Tartib o\\'zgarsa ham TO\\'G\\'RI yangilanadi
+- React har bir elementni key bo'yicha topadi
+- Tartib o'zgarsa ham TO'G'RI yangilanadi
 
-QOIDA: key UNIKAL va BARQAROR bo\\'lishi kerak.
-- id ishlatish — TO\\'G\\'RI
-- index ishlatish — ko\\'p hollarda XATO (tartib o\\'zgarsa)
+QOIDA: key UNIKAL va BARQAROR bo'lishi kerak.
+- id ishlatish — TO'G'RI
+- index ishlatish — ko'p hollarda XATO (tartib o'zgarsa)
 - Math.random() — HAR DOIM XATO (har renderda yangi key = har renderda qayta yaratiladi)
 
 ═══════════════════════════════════════
@@ -3746,12 +3746,12 @@ QOIDA: key UNIKAL va BARQAROR bo\\'lishi kerak.
 React 16+ da Fiber arxitektura joriy etildi.
 
 ESKI (Stack Reconciler):
-- Rendering bir martalik — boshlangan bo\\'lsa to\\'xtab bo\\'lmaydi
-- Og\\'ir komponentlar brauzer-ni "muzlatadi"
+- Rendering bir martalik — boshlangan bo'lsa to'xtab bo'lmaydi
+- Og'ir komponentlar brauzer-ni "muzlatadi"
 
 YANGI (Fiber Reconciler):
-- Rendering ish-ni kichik bo\\'laklarga bo\\'ladi
-- To\\'xtatib, davom ettirishi mumkin
+- Rendering ish-ni kichik bo'laklarga bo'ladi
+- To'xtatib, davom ettirishi mumkin
 - Muhimroq ishlarni (masalan, foydalanuvchi inputi) oldin bajaradi
 
 Bu CONCURRENT RENDERING-ning asosi:
@@ -3810,10 +3810,10 @@ function GoodList() {
     </div>
   )
 }`,
-            description: 'index key ishlatilganda tartib o\'zgarsa input qiymatlari aralashib ketadi. Unikal id key ishlatilsa — React har elementni to\'g\'ri kuzatadi.',
+            description: `index key ishlatilganda tartib o'zgarsa input qiymatlari aralashib ketadi. Unikal id key ishlatilsa — React har elementni to'g'ri kuzatadi.`,
         },
         {
-            title: 'Reconciliation — tip o\'zgarganda',
+            title: `Reconciliation — tip o'zgarganda`,
             language: 'tsx' as const,
             code: `import { useState } from 'react'
 
@@ -3855,25 +3855,25 @@ function ReconciliationDemo() {
     </div>
   )
 }`,
-            description: 'Bir xil HTML tip (input → input) bo\'lsa React faqat props-ni yangilaydi (state saqlanadi). Boshqa tip (div → section) bo\'lsa butun subtree qayta yaratiladi (state yo\'qoladi).',
+            description: `Bir xil HTML tip (input → input) bo'lsa React faqat props-ni yangilaydi (state saqlanadi). Boshqa tip (div → section) bo'lsa butun subtree qayta yaratiladi (state yo'qoladi).`,
         },
     ],
     interviewQA: [
         {
             question: 'Virtual DOM nima va nima uchun kerak?',
-            answer: 'Virtual DOM — JavaScript object bo\'lib, haqiqiy DOM-ning yengil nusxasi. React uni xotirada saqlaydi. State o\'zgarganda React yangi Virtual DOM yaratadi, eski bilan solishtiradi (diffing), va faqat FARQLARNI haqiqiy DOM-ga qo\'llaydi. Bu haqiqiy DOM bilan to\'g\'ridan-to\'g\'ri ishlashdan tezroq, chunki DOM operatsiyalari og\'ir (reflow, repaint), JavaScript object bilan ishlash esa yengil.',
+            answer: `Virtual DOM — JavaScript object bo'lib, haqiqiy DOM-ning yengil nusxasi. React uni xotirada saqlaydi. State o'zgarganda React yangi Virtual DOM yaratadi, eski bilan solishtiradi (diffing), va faqat FARQLARNI haqiqiy DOM-ga qo'llaydi. Bu haqiqiy DOM bilan to'g'ridan-to'g'ri ishlashdan tezroq, chunki DOM operatsiyalari og'ir (reflow, repaint), JavaScript object bilan ishlash esa yengil.`,
         },
         {
             question: 'React diffing algoritmi qanday ishlaydi?',
-            answer: 'React diffing algoritmi O(n) murakkablikda ishlaydi (odatda daraxt solishtirish O(n^3)). Bu 2 ta taxmin (heuristic) tufayli: 1) Agar element tipi o\'zgarsa (masalan, div dan span ga) — butun subtree o\'chiriladi va qayta yaratiladi, 2) key prop orqali ro\'yxatda elementlar aniqlanadi — React qaysi element yangi, qaysi eski ekanini biladi. Shu ikki qoida tufayli React juda tez solishtirish amalga oshiradi.',
+            answer: `React diffing algoritmi O(n) murakkablikda ishlaydi (odatda daraxt solishtirish O(n^3)). Bu 2 ta taxmin (heuristic) tufayli: 1) Agar element tipi o'zgarsa (masalan, div dan span ga) — butun subtree o'chiriladi va qayta yaratiladi, 2) key prop orqali ro'yxatda elementlar aniqlanadi — React qaysi element yangi, qaysi eski ekanini biladi. Shu ikki qoida tufayli React juda tez solishtirish amalga oshiradi.`,
         },
         {
             question: 'Key nima uchun kerak va nima uchun index key sifatida yomon?',
-            answer: 'key — React-ga ro\'yxatdagi har bir elementni aniqlash uchun kerak. Key bo\'lmaganda React index bo\'yicha taqqoslaydi. Muammo: agar elementlar tartibi o\'zgarsa (qo\'shish, o\'chirish, saralash), index-lar ham o\'zgaradi va React XATO elementni yangilaydi. Masalan, ro\'yxat boshiga element qo\'shsangiz, barcha input-lar bir pozitsiyaga siljiydi va qiymatlar aralashadi. Unikal id ishlatilsa — React har elementni to\'g\'ri kuzatadi. Math.random() ham yomon — har renderda yangi key = har renderda qayta yaratish.',
+            answer: `key — React-ga ro'yxatdagi har bir elementni aniqlash uchun kerak. Key bo'lmaganda React index bo'yicha taqqoslaydi. Muammo: agar elementlar tartibi o'zgarsa (qo'shish, o'chirish, saralash), index-lar ham o'zgaradi va React XATO elementni yangilaydi. Masalan, ro'yxat boshiga element qo'shsangiz, barcha input-lar bir pozitsiyaga siljiydi va qiymatlar aralashadi. Unikal id ishlatilsa — React har elementni to'g'ri kuzatadi. Math.random() ham yomon — har renderda yangi key = har renderda qayta yaratish.`,
         },
         {
             question: 'Fiber nima va qanday afzallik beradi?',
-            answer: 'Fiber — React 16+ da joriy etilgan yangi reconciliation arxitektura. Eski Stack Reconciler rendering-ni bir martalik bajarar edi — boshlanganini to\'xtatib bo\'lmas edi, bu esa og\'ir komponentlarda brauzer-ni "muzlatar" edi. Fiber esa rendering ishini kichik bo\'laklarga (fiber unit) bo\'ladi. React istalgan vaqtda to\'xtatib, muhimroq ishni (masalan, foydalanuvchi inputi) bajarib, keyin davom ettirishi mumkin. Bu Concurrent Rendering-ning asosi — useTransition, useDeferredValue kabi hooklar shu tufayli ishlaydi.',
+            answer: `Fiber — React 16+ da joriy etilgan yangi reconciliation arxitektura. Eski Stack Reconciler rendering-ni bir martalik bajarar edi — boshlanganini to'xtatib bo'lmas edi, bu esa og'ir komponentlarda brauzer-ni "muzlatar" edi. Fiber esa rendering ishini kichik bo'laklarga (fiber unit) bo'ladi. React istalgan vaqtda to'xtatib, muhimroq ishni (masalan, foydalanuvchi inputi) bajarib, keyin davom ettirishi mumkin. Bu Concurrent Rendering-ning asosi — useTransition, useDeferredValue kabi hooklar shu tufayli ishlaydi.`,
         },
     ],
     relatedTopics: [
@@ -3903,19 +3903,19 @@ React rendering 2 fazadan iborat:
 1. RENDER FAZASI (Render Phase):
    - React komponentni chaqiradi (funksiyani ishga tushiradi)
    - Virtual DOM yaratadi
-   - Bu faza PURE bo\\'lishi kerak — side-effect yo\\'q!
+   - Bu faza PURE bo'lishi kerak — side-effect yo'q!
    - DOM-ga TEGMAYDI
 
 2. COMMIT FAZASI (Commit Phase):
-   - React Virtual DOM farqlarni haqiqiy DOM-ga qo\\'llaydi
-   - Bu faza haqiqiy DOM-ni o\\'zgartiradi
+   - React Virtual DOM farqlarni haqiqiy DOM-ga qo'llaydi
+   - Bu faza haqiqiy DOM-ni o'zgartiradi
 
 ═══════════════════════════════════════
   RENDER FAZASI BATAFSIL
 ═══════════════════════════════════════
 
 React tree-ni yuqoridan pastga yuradi:
-1. "Dirty" (o\\'zgargan) komponentni topadi
+1. "Dirty" (o'zgargan) komponentni topadi
 2. Bu komponentni CHAQIRADI (funksiyani ishlatadi)
 3. Barcha BOLALARINI ham render qiladi
 4. Virtual DOM natijasini qaytaradi
@@ -3923,9 +3923,9 @@ React tree-ni yuqoridan pastga yuradi:
 MUHIM: "Rendering" = komponent funksiyasi chaqirildi.
 Bu haqiqiy DOM yangilandi degani EMAS!
 
-Komponent "render bo\\'ldi" deyilsa:
+Komponent "render bo'ldi" deyilsa:
 - Funksiya ishladi ✅
-- DOM o\\'zgardi ❌ (balki o\\'zgarmagan — agar farq yo\\'q bo\\'lsa)
+- DOM o'zgardi ❌ (balki o'zgarmagan — agar farq yo'q bo'lsa)
 
 ═══════════════════════════════════════
   COMMIT FAZASI BATAFSIL
@@ -3947,12 +3947,12 @@ Render → DOM yangilanadi → useLayoutEffect → Paint → useEffect
 
 Rendering 3 ta sababdan boshlanadi:
 
-1. INITIAL RENDER — komponent birinchi marta DOM-ga qo\\'yilganda
-2. setState CHAQIRILGANDA — state o\\'zgarganda
+1. INITIAL RENDER — komponent birinchi marta DOM-ga qo'yilganda
+2. setState CHAQIRILGANDA — state o'zgarganda
 3. PARENT RE-RENDER — ota-komponent renderlaganda BARCHA bolalari ham renderlanadi
 
 3-chi sabab eng muhimi:
-- Parent renderlanadi → Child ham renderlanadi (props o\\'zgarmasam ham!)
+- Parent renderlanadi → Child ham renderlanadi (props o'zgarmasam ham!)
 - Bu React-ning default xatti-harakati
 - React.memo bilan oldini olish mumkin
 
@@ -3962,9 +3962,9 @@ Rendering 3 ta sababdan boshlanadi:
 
 Bir event ichidagi barcha setState-lar birlashtiriladi — BITTA render.
 
-setState(a)  // render yo\\'q
-setState(b)  // render yo\\'q
-setState(c)  // render yo\\'q
+setState(a)  // render yo'q
+setState(b)  // render yo'q
+setState(c)  // render yo'q
 // event tugadi → BITTA render
 
 React 18+ dan boshlab BARCHA kontekstlarda batching ishlaydi:
@@ -3977,14 +3977,14 @@ React 18+ dan boshlab BARCHA kontekstlarda batching ishlaydi:
   BAIL OUT (RENDER QILMASLIK)
 ═══════════════════════════════════════
 
-React ba\\'zi hollarda renderni O\\'TKAZIB YUBORADI:
+React ba'zi hollarda renderni O'TKAZIB YUBORADI:
 
 1. setState eski qiymat bilan chaqirilsa:
-   - Object.is(eskiQiymat, yangiQiymat) === true bo\\'lsa
+   - Object.is(eskiQiymat, yangiQiymat) === true bo'lsa
    - React renderlaMAYDI
 
 2. React.memo bilan:
-   - Props o\\'zgarmasam — child renderlaMAYDI`,
+   - Props o'zgarmasam — child renderlaMAYDI`,
     codeExamples: [
         {
             title: 'Render vs Commit — render sonini kuzatish',
@@ -4027,7 +4027,7 @@ function RenderCounter() {
     </div>
   )
 }`,
-            description: 'Har bir render fazasida console.log ishlaydi. useEffect faqat commit fazasidan keyin ishlaydi. setState eski qiymat bilan chaqirilsa — render bo\'lmaydi (bail out).',
+            description: `Har bir render fazasida console.log ishlaydi. useEffect faqat commit fazasidan keyin ishlaydi. setState eski qiymat bilan chaqirilsa — render bo'lmaydi (bail out).`,
         },
         {
             title: 'Bail out — setState eski qiymat bilan',
@@ -4037,7 +4037,7 @@ function RenderCounter() {
 function BailOutDemo() {
   const [name, setName] = useState('Ali')
 
-  console.log('Render bo\\'ldi!') // Bu chiqmasa = bail out ishladi
+  console.log('Render bo'ldi!') // Bu chiqmasa = bail out ishladi
 
   return (
     <div>
@@ -4059,25 +4059,25 @@ function BailOutDemo() {
     </div>
   )
 }`,
-            description: 'setState eski qiymat bilan chaqirilganda React Object.is() bilan taqqoslaydi. Agar teng bo\'lsa — render qilmaydi (bail out). Lekin object/array uchun bu ishlamaydi — chunki yangi object yaratiladi va referens boshqa bo\'ladi.',
+            description: `setState eski qiymat bilan chaqirilganda React Object.is() bilan taqqoslaydi. Agar teng bo'lsa — render qilmaydi (bail out). Lekin object/array uchun bu ishlamaydi — chunki yangi object yaratiladi va referens boshqa bo'ladi.`,
         },
     ],
     interviewQA: [
         {
             question: 'Render va Commit fazasi orasidagi farq nima?',
-            answer: 'Render fazasida React komponent funksiyasini chaqiradi va Virtual DOM yaratadi — bu faza PURE bo\'lishi kerak, hech qanday side-effect bo\'lmasligi kerak, DOM-ga tegmaydi. Commit fazasida esa React Virtual DOM dagi farqlarni haqiqiy DOM-ga qo\'llaydi, keyin useLayoutEffect ishlaydi, brauzer paint qiladi, va useEffect ishlaydi. Qisqasi: Render = hisoblash, Commit = DOM yangilash.',
+            answer: `Render fazasida React komponent funksiyasini chaqiradi va Virtual DOM yaratadi — bu faza PURE bo'lishi kerak, hech qanday side-effect bo'lmasligi kerak, DOM-ga tegmaydi. Commit fazasida esa React Virtual DOM dagi farqlarni haqiqiy DOM-ga qo'llaydi, keyin useLayoutEffect ishlaydi, brauzer paint qiladi, va useEffect ishlaydi. Qisqasi: Render = hisoblash, Commit = DOM yangilash.`,
         },
         {
             question: 'Rendering deganda DOM yangilanadimi?',
-            answer: 'Yo\'q! "Rendering" — bu faqat komponent funksiyasini chaqirish va Virtual DOM yaratish. DOM ga tegmaydi. DOM faqat Commit fazasida yangilanadi, va u ham faqat farq bo\'lsa. Masalan, komponent render bo\'lishi mumkin, lekin agar Virtual DOM-da farq yo\'q bo\'lsa — DOM umuman o\'zgarmaydi.',
+            answer: `Yo'q! "Rendering" — bu faqat komponent funksiyasini chaqirish va Virtual DOM yaratish. DOM ga tegmaydi. DOM faqat Commit fazasida yangilanadi, va u ham faqat farq bo'lsa. Masalan, komponent render bo'lishi mumkin, lekin agar Virtual DOM-da farq yo'q bo'lsa — DOM umuman o'zgarmaydi.`,
         },
         {
             question: 'Qanday holatda komponent renderlanadi?',
-            answer: '3 ta holat: 1) Initial render — komponent birinchi marta mount bo\'lganda, 2) setState chaqirilganda — agar yangi qiymat eskisidan farq qilsa (Object.is bilan tekshiriladi), 3) Parent re-render — ota-komponent re-render bo\'lganda BARCHA bolalari ham re-render bo\'ladi (props o\'zgarmasam ham!). 3-chi holatni React.memo bilan oldini olish mumkin.',
+            answer: `3 ta holat: 1) Initial render — komponent birinchi marta mount bo'lganda, 2) setState chaqirilganda — agar yangi qiymat eskisidan farq qilsa (Object.is bilan tekshiriladi), 3) Parent re-render — ota-komponent re-render bo'lganda BARCHA bolalari ham re-render bo'ladi (props o'zgarmasam ham!). 3-chi holatni React.memo bilan oldini olish mumkin.`,
         },
         {
             question: 'Batching qanday ishlaydi va nima uchun kerak?',
-            answer: 'Batching — bir event ichidagi barcha setState chaqiruvlarni birlashtirib bitta render qilish. Masalan, 3 ta setState chaqirilsa — 3 ta render emas, BITTA render bo\'ladi. React 17 da faqat event handler-larda ishlardi. React 18+ dan boshlab BARCHA kontekstlarda ishlaydi: setTimeout, Promise.then, native eventlarda ham. Bu performance uchun juda muhim — keraksiz re-render-lar oldini oladi. flushSync() bilan batching-ni o\'chirib, har bir setState-ni alohida render qilish mumkin.',
+            answer: `Batching — bir event ichidagi barcha setState chaqiruvlarni birlashtirib bitta render qilish. Masalan, 3 ta setState chaqirilsa — 3 ta render emas, BITTA render bo'ladi. React 17 da faqat event handler-larda ishlardi. React 18+ dan boshlab BARCHA kontekstlarda ishlaydi: setTimeout, Promise.then, native eventlarda ham. Bu performance uchun juda muhim — keraksiz re-render-lar oldini oladi. flushSync() bilan batching-ni o'chirib, har bir setState-ni alohida render qilish mumkin.`,
         },
     ],
     relatedTopics: [
@@ -4096,7 +4096,7 @@ function BailOutDemo() {
     importance: 3,
     status: 'to-learn' as const,
     description: 'React.memo bilan keraksiz re-render oldini olish, forwardRef bilan ref uzatish',
-    content: `React.memo — Higher Order Component (HOC) bo\\'lib, props o\\'zgarmaganda komponentni re-render qilmaydi.
+    content: `React.memo — Higher Order Component (HOC) bo'lib, props o'zgarmaganda komponentni re-render qilmaydi.
 forwardRef — parent-dan child-ga ref uzatish imkonini beradi.
 
 ═══════════════════════════════════════
@@ -4116,24 +4116,24 @@ const MemoComponent = React.memo(function MyComponent(props) {
 
 React.memo SHALLOW COMPARISON qiladi:
 - Oldingi props bilan yangi props-ni taqqoslaydi
-- Agar TENG bo\\'lsa — render qilMAYDI
-- Agar FARQ bo\\'lsa — render QILADI
+- Agar TENG bo'lsa — render qilMAYDI
+- Agar FARQ bo'lsa — render QILADI
 
 Shallow comparison qoidalari:
 - Primitive (string, number, boolean): QIYMAT taqqoslanadi
-  "hello" === "hello" → teng → render yo\\'q ✅
+  "hello" === "hello" → teng → render yo'q ✅
 
 - Object/Array/Function: REFERENS taqqoslanadi
-  { name: "Ali" } !== { name: "Ali" } → teng EMAS → render bo\\'ladi ❌
+  { name: "Ali" } !== { name: "Ali" } → teng EMAS → render bo'ladi ❌
 
-Shu sababli object/function prop bilan React.memo yolg\\'iz ISHLAMAYDI!
+Shu sababli object/function prop bilan React.memo yolg'iz ISHLAMAYDI!
 useMemo/useCallback kerak.
 
 ═══════════════════════════════════════
   CUSTOM COMPARATOR
 ═══════════════════════════════════════
 
-O\\'zingiz taqqoslash funksiyasini berishingiz mumkin:
+O'zingiz taqqoslash funksiyasini berishingiz mumkin:
 
 React.memo(Component, (prevProps, nextProps) => {
   // true qaytarsa = RENDER QILMA (teng)
@@ -4146,20 +4146,20 @@ React.memo(Component, (prevProps, nextProps) => {
 ═══════════════════════════════════════
 
 ✅ Ishlatish kerak:
-1. Komponent og\\'ir — ko\\'p elementli ro\\'yxat, murakkab hisoblashlar
-2. Tez-tez re-render bo\\'ladigan parent ichida
-3. Props kamdan-kam o\\'zgaradi
+1. Komponent og'ir — ko'p elementli ro'yxat, murakkab hisoblashlar
+2. Tez-tez re-render bo'ladigan parent ichida
+3. Props kamdan-kam o'zgaradi
 
 ❌ Ishlatish KERAK EMAS:
-1. Props har renderda o\\'zgarsa — memo foydasiz
+1. Props har renderda o'zgarsa — memo foydasiz
 2. Juda yengil komponentlarda — memo xarajati > render xarajati
-3. Object/function prop bilan (useCallback/useMemo kerak, aks holda referens o\\'zgaradi)
+3. Object/function prop bilan (useCallback/useMemo kerak, aks holda referens o'zgaradi)
 
 ═══════════════════════════════════════
   forwardRef
 ═══════════════════════════════════════
 
-Oddiy holatda parent child-ning DOM elementiga to\\'g\\'ridan-to\\'g\\'ri kira olmaydi.
+Oddiy holatda parent child-ning DOM elementiga to'g'ridan-to'g'ri kira olmaydi.
 forwardRef bu imkonni beradi:
 
 // React 18 va oldingi
@@ -4172,19 +4172,19 @@ function MyInput({ ref, ...props }) {
   return <input ref={ref} {...props} />
 }
 
-React 19 da forwardRef KERAK EMAS — ref to\\'g\\'ridan-to\\'g\\'ri props ichida keladi.
+React 19 da forwardRef KERAK EMAS — ref to'g'ridan-to'g'ri props ichida keladi.
 
 ═══════════════════════════════════════
-  TO\\'LIQ OPTIMIZATION PATTERN
+  TO'LIQ OPTIMIZATION PATTERN
 ═══════════════════════════════════════
 
-React.memo + useCallback + useMemo — uchala birga to\\'liq optimization:
+React.memo + useCallback + useMemo — uchala birga to'liq optimization:
 
 1. React.memo — child re-render oldini oladi
 2. useCallback — function prop referensini saqlaydi
 3. useMemo — object prop referensini saqlaydi
 
-Bu uchtasi BIRGA ishlatilishi kerak, biri yolg\\'iz foyda bermaydi.`,
+Bu uchtasi BIRGA ishlatilishi kerak, biri yolg'iz foyda bermaydi.`,
     codeExamples: [
         {
             title: 'React.memo — child re-render oldini olish',
@@ -4193,7 +4193,7 @@ Bu uchtasi BIRGA ishlatilishi kerak, biri yolg\\'iz foyda bermaydi.`,
 
 // ❌ MEMO-SIZ: Parent har render bo'lganda Child ham renderlanadi
 function SlowChild({ name }: { name: string }) {
-  console.log('SlowChild render bo\\'ldi!') // Har safar chiqadi
+  console.log('SlowChild render bo'ldi!') // Har safar chiqadi
   // Og'ir hisoblash simulyatsiyasi
   const items = Array.from({ length: 1000 }, (_, i) => (
     <div key={i}>{name} - element {i}</div>
@@ -4203,7 +4203,7 @@ function SlowChild({ name }: { name: string }) {
 
 // ✅ MEMO BILAN: Props o'zgarmasam render BO'LMAYDI
 const MemoSlowChild = memo(function SlowChild({ name }: { name: string }) {
-  console.log('MemoSlowChild render bo\\'ldi!') // Faqat name o'zgarganda
+  console.log('MemoSlowChild render bo'ldi!') // Faqat name o'zgarganda
   const items = Array.from({ length: 1000 }, (_, i) => (
     <div key={i}>{name} - element {i}</div>
   ))
@@ -4225,7 +4225,7 @@ function Parent() {
     </div>
   )
 }`,
-            description: 'React.memo bilan o\'ralgan komponent props o\'zgarmaganda re-render bo\'lmaydi. Bu ayniqsa og\'ir komponentlarda juda foydali.',
+            description: `React.memo bilan o'ralgan komponent props o'zgarmaganda re-render bo'lmaydi. Bu ayniqsa og'ir komponentlarda juda foydali.`,
         },
         {
             title: 'React.memo + useCallback — function prop bilan',
@@ -4269,7 +4269,7 @@ function App() {
     </div>
   )
 }`,
-            description: 'React.memo yolg\'iz function prop bilan ishlamaydi — chunki har renderda yangi funksiya yaratiladi. useCallback bilan funksiya referensini saqlab, memo to\'g\'ri ishlashini ta\'minlash kerak.',
+            description: `React.memo yolg'iz function prop bilan ishlamaydi — chunki har renderda yangi funksiya yaratiladi. useCallback bilan funksiya referensini saqlab, memo to'g'ri ishlashini ta'minlash kerak.`,
         },
         {
             title: 'forwardRef — parent-dan child input-ga focus',
@@ -4319,25 +4319,25 @@ function Form() {
     </div>
   )
 }`,
-            description: 'forwardRef orqali parent child ichidagi DOM elementiga ref uzatishi mumkin. React 19 da ref oddiy prop bo\'lib keladi — forwardRef kerak emas.',
+            description: `forwardRef orqali parent child ichidagi DOM elementiga ref uzatishi mumkin. React 19 da ref oddiy prop bo'lib keladi — forwardRef kerak emas.`,
         },
     ],
     interviewQA: [
         {
             question: 'React.memo nima va qanday ishlaydi?',
-            answer: 'React.memo — Higher Order Component (HOC) bo\'lib, komponentni props o\'zgarmaganda re-render qilmaydi. U shallow comparison qiladi: oldingi va yangi props-ni taqqoslaydi. Primitive (string, number) uchun qiymat taqqoslanadi, object/array/function uchun referens taqqoslanadi. Agar props teng bo\'lsa — render o\'tkazib yuboriladi. Custom comparator funksiya ham berish mumkin.',
+            answer: `React.memo — Higher Order Component (HOC) bo'lib, komponentni props o'zgarmaganda re-render qilmaydi. U shallow comparison qiladi: oldingi va yangi props-ni taqqoslaydi. Primitive (string, number) uchun qiymat taqqoslanadi, object/array/function uchun referens taqqoslanadi. Agar props teng bo'lsa — render o'tkazib yuboriladi. Custom comparator funksiya ham berish mumkin.`,
         },
         {
             question: 'Shallow comparison nima degani?',
-            answer: 'Shallow comparison — props-ni faqat "birinchi daraja"da taqqoslash. Primitive qiymatlar uchun: "hello" === "hello" — teng. Object uchun faqat REFERENS tekshiriladi: { name: "Ali" } !== { name: "Ali" } — teng EMAS, chunki 2 ta boshqa object. Nested object-lar ichiga KIRMAYDI. Shu sababli React.memo object prop bilan yolg\'iz ishlamaydi — useMemo kerak.',
+            answer: `Shallow comparison — props-ni faqat "birinchi daraja"da taqqoslash. Primitive qiymatlar uchun: "hello" === "hello" — teng. Object uchun faqat REFERENS tekshiriladi: { name: "Ali" } !== { name: "Ali" } — teng EMAS, chunki 2 ta boshqa object. Nested object-lar ichiga KIRMAYDI. Shu sababli React.memo object prop bilan yolg'iz ishlamaydi — useMemo kerak.`,
         },
         {
             question: 'React.memo + useCallback nima uchun birga kerak?',
-            answer: 'React.memo yolg\'iz function prop bilan ishlamaydi. Sabab: har render-da komponent ichida yaratilgan funksiya YANGI referensga ega bo\'ladi (const fn = () => {} har safar yangi object). Shallow comparison: eskiFn !== yangiFn — render bo\'ladi. useCallback funksiya referensini dependency o\'zgarmaguncha SAQLAYDI. Shunda React.memo shallow comparison-da eskiFn === yangiFn ko\'radi va render qilmaydi.',
+            answer: `React.memo yolg'iz function prop bilan ishlamaydi. Sabab: har render-da komponent ichida yaratilgan funksiya YANGI referensga ega bo'ladi (const fn = () => {} har safar yangi object). Shallow comparison: eskiFn !== yangiFn — render bo'ladi. useCallback funksiya referensini dependency o'zgarmaguncha SAQLAYDI. Shunda React.memo shallow comparison-da eskiFn === yangiFn ko'radi va render qilmaydi.`,
         },
         {
-            question: 'forwardRef nima uchun kerak va React 19 da qanday o\'zgardi?',
-            answer: 'forwardRef — parent-dan child komponent ichidagi DOM elementiga ref uzatish uchun kerak. Masalan, parent child ichidagi input-ga focus berishi kerak. Oddiy holda ref child-ga prop sifatida kelmaydi (React uni maxsus prop deb hisoblaydi). forwardRef bu muammoni hal qiladi. React 19 da esa ref oddiy prop bo\'lib keladi — forwardRef wrapper kerak emas, to\'g\'ridan-to\'g\'ri destructuring qilish mumkin: function Child({ ref }) { ... }.',
+            question: `forwardRef nima uchun kerak va React 19 da qanday o'zgardi?`,
+            answer: `forwardRef — parent-dan child komponent ichidagi DOM elementiga ref uzatish uchun kerak. Masalan, parent child ichidagi input-ga focus berishi kerak. Oddiy holda ref child-ga prop sifatida kelmaydi (React uni maxsus prop deb hisoblaydi). forwardRef bu muammoni hal qiladi. React 19 da esa ref oddiy prop bo'lib keladi — forwardRef wrapper kerak emas, to'g'ridan-to'g'ri destructuring qilish mumkin: function Child({ ref }) { ... }.`,
         },
     ],
     relatedTopics: [
@@ -4355,7 +4355,7 @@ function Form() {
     importance: 1,
     status: 'to-learn' as const,
     description: 'Unikal ID generatsiya qilish hooki — SSR va accessibility uchun',
-    content: `useId — React 18+ da qo\\'shilgan hook bo\\'lib, komponent ichida unikal va barqaror ID yaratadi.
+    content: `useId — React 18+ da qo'shilgan hook bo'lib, komponent ichida unikal va barqaror ID yaratadi.
 
 ═══════════════════════════════════════
   SINTAKSIS
@@ -4369,7 +4369,7 @@ const id = useId()
 ═══════════════════════════════════════
 
 1. SSR (Server-Side Rendering) da CLIENT va SERVER bir xil ID ishlatishi kerak.
-   Math.random() yoki counter ishlatsa — server-da bitta, client-da boshqa ID bo\\'ladi = HYDRATION MISMATCH xato.
+   Math.random() yoki counter ishlatsa — server-da bitta, client-da boshqa ID bo'ladi = HYDRATION MISMATCH xato.
    useId esa server va client-da BIR XIL ID beradi.
 
 2. ACCESSIBILITY uchun:
@@ -4377,7 +4377,7 @@ const id = useId()
    - Bir sahifada bir xil komponent bir nechta marta ishlatilsa — ID-lar TAKRORLANMASLIGI kerak
 
 ═══════════════════════════════════════
-  MATH.RANDOM() NIMA UCHUN ISHLATIB BO\\'LMAYDI
+  MATH.RANDOM() NIMA UCHUN ISHLATIB BO'LMAYDI
 ═══════════════════════════════════════
 
 - Server: id = "abc123"
@@ -4389,8 +4389,8 @@ const id = useId()
   MUHIM ESLATMA
 ═══════════════════════════════════════
 
-- useId ro\\'yxat key-lari uchun ISHLATMANG! Key uchun ma\\'lumot ichidagi id ishlatiladi.
-- useId faqat HTML atributlari (id, htmlFor, aria-*) uchun mo\\'ljallangan.`,
+- useId ro'yxat key-lari uchun ISHLATMANG! Key uchun ma'lumot ichidagi id ishlatiladi.
+- useId faqat HTML atributlari (id, htmlFor, aria-*) uchun mo'ljallangan.`,
     codeExamples: [
         {
             title: 'Form label + input id — accessibility',
@@ -4423,17 +4423,17 @@ function RegistrationForm() {
     </form>
   )
 }`,
-            description: 'useId har bir FormField uchun unikal ID yaratadi. Bir sahifada bir nechta marta ishlatilsa ham ID-lar hech qachon takrorlanmaydi. SSR da ham to\'g\'ri ishlaydi.',
+            description: `useId har bir FormField uchun unikal ID yaratadi. Bir sahifada bir nechta marta ishlatilsa ham ID-lar hech qachon takrorlanmaydi. SSR da ham to'g'ri ishlaydi.`,
         },
     ],
     interviewQA: [
         {
             question: 'useId nima uchun kerak va Math.random() dan nima farqi?',
-            answer: 'useId unikal va barqaror ID yaratadi. Asosiy farq SSR-da ko\'rinadi: Math.random() server-da bitta, client-da boshqa ID beradi — bu hydration mismatch xatosiga olib keladi. useId esa server va client-da BIR XIL ID kafolatlaydi. Shuningdek, useId bir komponent bir nechta marta ishlatilganda har biri uchun unikal ID beradi — accessibility (aria-describedby, htmlFor) uchun muhim.',
+            answer: `useId unikal va barqaror ID yaratadi. Asosiy farq SSR-da ko'rinadi: Math.random() server-da bitta, client-da boshqa ID beradi — bu hydration mismatch xatosiga olib keladi. useId esa server va client-da BIR XIL ID kafolatlaydi. Shuningdek, useId bir komponent bir nechta marta ishlatilganda har biri uchun unikal ID beradi — accessibility (aria-describedby, htmlFor) uchun muhim.`,
         },
         {
-            question: 'useId ni ro\'yxat key sifatida ishlatish mumkinmi?',
-            answer: 'Yo\'q! useId ro\'yxat key-lari uchun ISHLATILMAYDI. Key uchun ma\'lumot ichidagi unikal id (masalan, user.id, product.id) ishlatiladi. useId faqat HTML atributlari (id, htmlFor, aria-describedby) uchun mo\'ljallangan. Key va HTML id — boshqa-boshqa narsalar.',
+            question: `useId ni ro'yxat key sifatida ishlatish mumkinmi?`,
+            answer: `Yo'q! useId ro'yxat key-lari uchun ISHLATILMAYDI. Key uchun ma'lumot ichidagi unikal id (masalan, user.id, product.id) ishlatiladi. useId faqat HTML atributlari (id, htmlFor, aria-describedby) uchun mo'ljallangan. Key va HTML id — boshqa-boshqa narsalar.`,
         },
     ],
     relatedTopics: [
@@ -4450,14 +4450,14 @@ function RegistrationForm() {
     importance: 2,
     status: 'to-learn' as const,
     description: 'Tashqi store-larga ulanish hooki — Redux, Zustand va browser API uchun',
-    content: `useSyncExternalStore — React 18+ da qo\\'shilgan hook bo\\'lib, React TASHQARIDAGI (external) ma\\'lumot manbalariga ulanish uchun ishlatiladi.
+    content: `useSyncExternalStore — React 18+ da qo'shilgan hook bo'lib, React TASHQARIDAGI (external) ma'lumot manbalariga ulanish uchun ishlatiladi.
 
 ═══════════════════════════════════════
   SINTAKSIS
 ═══════════════════════════════════════
 
 const snapshot = useSyncExternalStore(
-  subscribe,    // store o\\'zgarganda chaqiriladigan callback-ni ro\\'yxatga olish
+  subscribe,    // store o'zgarganda chaqiriladigan callback-ni ro'yxatga olish
   getSnapshot,  // hozirgi qiymatni qaytarish (client)
   getServerSnapshot? // SSR uchun (ixtiyoriy)
 )
@@ -4466,8 +4466,8 @@ const snapshot = useSyncExternalStore(
   NIMA UCHUN KERAK
 ═══════════════════════════════════════
 
-React o\\'z state-ini (useState, useReducer) boshqaradi.
-Lekin ba\\'zi ma\\'lumotlar React TASHQARISIDA:
+React o'z state-ini (useState, useReducer) boshqaradi.
+Lekin ba'zi ma'lumotlar React TASHQARISIDA:
 - Redux store
 - Zustand store
 - Browser API: navigator.onLine, matchMedia, localStorage
@@ -4483,7 +4483,7 @@ Siz bevosita kamdan-kam ishlatasiz — lekin qanday ishlashini bilish muhim.
 ═══════════════════════════════════════
 
 navigator.onLine, window.matchMedia, document.visibilityState —
-bularning barchasi React tashqarisidagi ma\\'lumot manbalari.
+bularning barchasi React tashqarisidagi ma'lumot manbalari.
 useSyncExternalStore ular bilan xavfsiz ishlash imkonini beradi.`,
     codeExamples: [
         {
@@ -4525,21 +4525,21 @@ function StatusBar() {
       background: isOnline ? '#4caf50' : '#f44336',
       color: 'white',
     }}>
-      {isOnline ? '🟢 Internetga ulangan' : '🔴 Internet yo\\'q'}
+      {isOnline ? '🟢 Internetga ulangan' : '🔴 Internet yo'q'}
     </div>
   )
 }`,
-            description: 'navigator.onLine — React tashqarisidagi ma\'lumot. useSyncExternalStore orqali online/offline holatini kuzatish va React bilan sinxronlash.',
+            description: `navigator.onLine — React tashqarisidagi ma'lumot. useSyncExternalStore orqali online/offline holatini kuzatish va React bilan sinxronlash.`,
         },
     ],
     interviewQA: [
         {
             question: 'useSyncExternalStore nima uchun kerak?',
-            answer: 'React tashqarisidagi (external) ma\'lumot manbalariga ulanish uchun kerak. React o\'z state-ini useState/useReducer bilan boshqaradi, lekin ba\'zi ma\'lumotlar React tashqarisida: Redux/Zustand store, browser API (navigator.onLine, matchMedia), WebSocket. Bu hook ularni React bilan xavfsiz sinxronlaydi va concurrent rendering bilan to\'g\'ri ishlashini ta\'minlaydi.',
+            answer: `React tashqarisidagi (external) ma'lumot manbalariga ulanish uchun kerak. React o'z state-ini useState/useReducer bilan boshqaradi, lekin ba'zi ma'lumotlar React tashqarisida: Redux/Zustand store, browser API (navigator.onLine, matchMedia), WebSocket. Bu hook ularni React bilan xavfsiz sinxronlaydi va concurrent rendering bilan to'g'ri ishlashini ta'minlaydi.`,
         },
         {
-            question: 'Redux va Zustand bu hook bilan qanday bog\'liq?',
-            answer: 'Redux (useSelector) va Zustand (useStore) ICHIDA useSyncExternalStore ishlatadi. Ular tashqi store bo\'lgani uchun React-ga o\'zgarishlarni xabar qilish uchun shu hook kerak. Siz bevosita kamdan-kam ishlatasiz — ko\'pincha kutubxonalar ichida ishlaydi. Lekin browser API (navigator.onLine, matchMedia, localStorage) bilan ishlashda to\'g\'ridan-to\'g\'ri ishlatish mumkin.',
+            question: `Redux va Zustand bu hook bilan qanday bog'liq?`,
+            answer: `Redux (useSelector) va Zustand (useStore) ICHIDA useSyncExternalStore ishlatadi. Ular tashqi store bo'lgani uchun React-ga o'zgarishlarni xabar qilish uchun shu hook kerak. Siz bevosita kamdan-kam ishlatasiz — ko'pincha kutubxonalar ichida ishlaydi. Lekin browser API (navigator.onLine, matchMedia, localStorage) bilan ishlashda to'g'ridan-to'g'ri ishlatish mumkin.`,
         },
     ],
     relatedTopics: [
@@ -4555,8 +4555,8 @@ function StatusBar() {
     title: 'use() hook',
     importance: 2,
     status: 'to-learn' as const,
-    description: 'React 19 yangi hook — Promise va Context o\'qish, if ichida ishlatish mumkin',
-    content: `use() — React 19 da qo\\'shilgan yangi hook. U Promise va Context o\\'qish uchun ishlatiladi.
+    description: `React 19 yangi hook — Promise va Context o'qish, if ichida ishlatish mumkin`,
+    content: `use() — React 19 da qo'shilgan yangi hook. U Promise va Context o'qish uchun ishlatiladi.
 
 ═══════════════════════════════════════
   SINTAKSIS
@@ -4573,8 +4573,8 @@ const theme = use(ThemeContext)
 ═══════════════════════════════════════
 
 Boshqa hooklar (useState, useEffect):
-- if/else ichida ishlatib BO\\'LMAYDI
-- Loop ichida ishlatib BO\\'LMAYDI
+- if/else ichida ishlatib BO'LMAYDI
+- Loop ichida ishlatib BO'LMAYDI
 - Faqat komponent YUQORISIDA
 
 use() hook:
@@ -4587,9 +4587,9 @@ use() hook:
 ═══════════════════════════════════════
 
 use(promise) chaqirilganda:
-1. Promise hali tugamagan bo\\'lsa — komponent SUSPEND bo\\'ladi
-2. Suspense fallback ko\\'rsatadi (loading)
-3. Promise tugaganda — ma\\'lumot ko\\'rsatiladi
+1. Promise hali tugamagan bo'lsa — komponent SUSPEND bo'ladi
+2. Suspense fallback ko'rsatadi (loading)
+3. Promise tugaganda — ma'lumot ko'rsatiladi
 
 MUHIM: Promise TASHQARIDA yaratilishi kerak (render ichida emas!)
 Aks holda har renderda yangi promise = cheksiz loop.
@@ -4599,10 +4599,10 @@ Aks holda har renderda yangi promise = cheksiz loop.
 ═══════════════════════════════════════
 
 use(SomeContext) = useContext(SomeContext) bilan bir xil.
-Farqi: use() if ichida ishlatish mumkin — shartli context o\\'qish.`,
+Farqi: use() if ichida ishlatish mumkin — shartli context o'qish.`,
     codeExamples: [
         {
-            title: 'Promise o\'qish — Suspense bilan data fetch',
+            title: `Promise o'qish — Suspense bilan data fetch`,
             language: 'tsx' as const,
             code: `import { use, Suspense } from 'react'
 
@@ -4650,11 +4650,11 @@ function App() {
     interviewQA: [
         {
             question: 'use() hook nima va boshqa hooklardan nima farqi?',
-            answer: 'use() — React 19 dagi yangi hook. U Promise va Context o\'qish uchun ishlatiladi. Boshqa hooklardan asosiy farqi: if/else va loop ichida ishlatish MUMKIN. Boshqa hooklar (useState, useEffect) faqat komponent yuqorisida, shartlarsiz chaqirilishi shart. use() bu cheklovdan ozod.',
+            answer: `use() — React 19 dagi yangi hook. U Promise va Context o'qish uchun ishlatiladi. Boshqa hooklardan asosiy farqi: if/else va loop ichida ishlatish MUMKIN. Boshqa hooklar (useState, useEffect) faqat komponent yuqorisida, shartlarsiz chaqirilishi shart. use() bu cheklovdan ozod.`,
         },
         {
             question: 'use() bilan Promise qanday ishlaydi?',
-            answer: 'use(promise) chaqirilganda, agar promise hali tugamagan bo\'lsa — komponent "suspend" bo\'ladi va Suspense fallback ko\'rsatiladi (masalan, loading spinner). Promise tugaganda — natija qaytariladi va komponent renderlanadi. MUHIM: Promise komponent tashqarisida yaratilishi kerak — render ichida yaratilsa har renderda yangi promise bo\'ladi va cheksiz loop hosil bo\'ladi.',
+            answer: `use(promise) chaqirilganda, agar promise hali tugamagan bo'lsa — komponent "suspend" bo'ladi va Suspense fallback ko'rsatiladi (masalan, loading spinner). Promise tugaganda — natija qaytariladi va komponent renderlanadi. MUHIM: Promise komponent tashqarisida yaratilishi kerak — render ichida yaratilsa har renderda yangi promise bo'ladi va cheksiz loop hosil bo'ladi.`,
         },
     ],
     relatedTopics: [
@@ -4672,20 +4672,20 @@ function App() {
     importance: 2,
     status: 'to-learn' as const,
     description: 'React 19 — server javob bermay turib UI-ni optimistik yangilash',
-    content: `useOptimistic — React 19 da qo\\'shilgan hook. Optimistic UI pattern-ni amalga oshirish uchun ishlatiladi.
+    content: `useOptimistic — React 19 da qo'shilgan hook. Optimistic UI pattern-ni amalga oshirish uchun ishlatiladi.
 
 ═══════════════════════════════════════
   OPTIMISTIC UI NIMA
 ═══════════════════════════════════════
 
 Optimistic UI — server javob qaytarmasdan OLDIN UI-ni yangilash.
-Foydalanuvchi harakatni darhol ko\\'radi, server javob kelganda tasdiqlanadi.
+Foydalanuvchi harakatni darhol ko'radi, server javob kelganda tasdiqlanadi.
 
 Masalan:
-- Like bosish → darhol +1 ko\\'rinadi → server javob kelganda tasdiqlaydi
-- Xabar yuborish → darhol ro\\'yxatda ko\\'rinadi → server saqlaydi
+- Like bosish → darhol +1 ko'rinadi → server javob kelganda tasdiqlaydi
+- Xabar yuborish → darhol ro'yxatda ko'rinadi → server saqlaydi
 
-Agar xato bo\\'lsa — eski holatga qaytadi (rollback).
+Agar xato bo'lsa — eski holatga qaytadi (rollback).
 
 ═══════════════════════════════════════
   SINTAKSIS
@@ -4696,8 +4696,8 @@ const [optimisticState, addOptimistic] = useOptimistic(
   updateFn              // (currentState, optimisticValue) => newState
 )
 
-- optimisticState — ko\\'rsatiladigan qiymat (optimistik yoki haqiqiy)
-- addOptimistic — optimistik yangilanishni qo\\'shish
+- optimisticState — ko'rsatiladigan qiymat (optimistik yoki haqiqiy)
+- addOptimistic — optimistik yangilanishni qo'shish
 - async action tugaganda avtomatik haqiqiy state-ga qaytadi
 
 ═══════════════════════════════════════
@@ -4706,9 +4706,9 @@ const [optimisticState, addOptimistic] = useOptimistic(
 
 1. Foydalanuvchi harakat qiladi (like bosadi)
 2. addOptimistic chaqiriladi → UI darhol yangilanadi
-3. Server-ga so\\'rov yuboriladi (async)
+3. Server-ga so'rov yuboriladi (async)
 4. Server javob beradi → haqiqiy state yangilanadi
-5. Agar xato bo\\'lsa → optimistik qiymat bekor, eski state qaytadi`,
+5. Agar xato bo'lsa → optimistik qiymat bekor, eski state qaytadi`,
     codeExamples: [
         {
             title: 'Like button — optimistik yangilash',
@@ -4753,17 +4753,17 @@ function LikeButton({ postId, initialLikes }: { postId: number; initialLikes: nu
     </button>
   )
 }`,
-            description: 'Like bosilganda darhol +1 ko\'rsatiladi (optimistic). Server javob qaytarganda haqiqiy qiymatga almashadi. Xato bo\'lsa — eski qiymatga qaytadi.',
+            description: `Like bosilganda darhol +1 ko'rsatiladi (optimistic). Server javob qaytarganda haqiqiy qiymatga almashadi. Xato bo'lsa — eski qiymatga qaytadi.`,
         },
     ],
     interviewQA: [
         {
             question: 'useOptimistic nima va qachon ishlatiladi?',
-            answer: 'useOptimistic — React 19 dagi hook. Optimistic UI pattern uchun: server javob bermay turib UI-ni darhol yangilash. Like bosish, xabar yuborish, forma submit kabi holatlarda ishlatiladi. Foydalanuvchi kutmasdan natijani ko\'radi. Xato bo\'lsa avtomatik eski holatga qaytadi (rollback).',
+            answer: `useOptimistic — React 19 dagi hook. Optimistic UI pattern uchun: server javob bermay turib UI-ni darhol yangilash. Like bosish, xabar yuborish, forma submit kabi holatlarda ishlatiladi. Foydalanuvchi kutmasdan natijani ko'radi. Xato bo'lsa avtomatik eski holatga qaytadi (rollback).`,
         },
         {
             question: 'useOptimistic va oddiy setState dan farqi nima?',
-            answer: 'setState bilan qiymatni o\'zgartirsangiz — u doimiy. Xato bo\'lsa o\'zingiz qo\'lda qaytarishingiz kerak. useOptimistic VAQTINCHALIK o\'zgartiradi — async action tugaguncha optimistik qiymat ko\'rsatadi, keyin haqiqiy state-ga avtomatik qaytadi. Server xato qaytarsa, rollback avtomatik ishlaydi. Shuningdek, useOptimistic useTransition bilan birga ishlaydi.',
+            answer: `setState bilan qiymatni o'zgartirsangiz — u doimiy. Xato bo'lsa o'zingiz qo'lda qaytarishingiz kerak. useOptimistic VAQTINCHALIK o'zgartiradi — async action tugaguncha optimistik qiymat ko'rsatadi, keyin haqiqiy state-ga avtomatik qaytadi. Server xato qaytarsa, rollback avtomatik ishlaydi. Shuningdek, useOptimistic useTransition bilan birga ishlaydi.`,
         },
     ],
     relatedTopics: [
@@ -4780,7 +4780,7 @@ function LikeButton({ postId, initialLikes }: { postId: number; initialLikes: nu
     importance: 2,
     status: 'to-learn' as const,
     description: 'React 19 — form action-larni boshqarish (state + pending + progressive enhancement)',
-    content: `useActionState — React 19 da qo\\'shilgan hook. Form action-larni boshqarish uchun ishlatiladi.
+    content: `useActionState — React 19 da qo'shilgan hook. Form action-larni boshqarish uchun ishlatiladi.
 
 ═══════════════════════════════════════
   SINTAKSIS
@@ -4793,7 +4793,7 @@ const [state, formAction, isPending] = useActionState(
 
 - state — hozirgi holat (success, error, data)
 - formAction — <form action={formAction}> ga berish
-- isPending — form submit bo\\'lyaptimi (loading holat)
+- isPending — form submit bo'lyaptimi (loading holat)
 
 ═══════════════════════════════════════
   NIMA UCHUN KERAK
@@ -4821,8 +4821,8 @@ Bu "progressive enhancement" deyiladi.
 
 Next.js da Server Actions bilan bevosita ishlaydi:
 - action funksiya server-da ishlaydi
-- Client-da faqat form ko\\'rsatiladi
-- JavaScript yo\\'q bo\\'lsa ham form ishlaydi`,
+- Client-da faqat form ko'rsatiladi
+- JavaScript yo'q bo'lsa ham form ishlaydi`,
     codeExamples: [
         {
             title: 'Form submit — loading + error + success',
@@ -4843,7 +4843,7 @@ async function submitForm(
 
   // Validatsiya
   if (!name || !email) {
-    return { message: 'Barcha maydonlarni to\\'ldiring!', status: 'error' }
+    return { message: 'Barcha maydonlarni to'ldiring!', status: 'error' }
   }
 
   // Server-ga yuborish simulyatsiyasi
@@ -4851,7 +4851,7 @@ async function submitForm(
 
   // Tasodifiy xato simulyatsiyasi
   if (Math.random() > 0.7) {
-    return { message: 'Server xatosi! Qayta urinib ko\\'ring.', status: 'error' }
+    return { message: 'Server xatosi! Qayta urinib ko'ring.', status: 'error' }
   }
 
   return { message: \`Rahmat, \${name}! Ma'lumot saqlandi.\`, status: 'success' }
@@ -4894,11 +4894,11 @@ function ContactForm() {
     interviewQA: [
         {
             question: 'useActionState nima va qanday ishlaydi?',
-            answer: 'useActionState — React 19 dagi hook, form action-larni boshqarish uchun. U 3 ta narsa beradi: state (hozirgi holat — success/error/data), formAction (form action-ga berish), isPending (loading holat). Oddiy useState + fetch + try/catch o\'rniga BITTA hook ishlatiladi. Progressive enhancement — JS yo\'q bo\'lsa ham form ishlaydi.',
+            answer: `useActionState — React 19 dagi hook, form action-larni boshqarish uchun. U 3 ta narsa beradi: state (hozirgi holat — success/error/data), formAction (form action-ga berish), isPending (loading holat). Oddiy useState + fetch + try/catch o'rniga BITTA hook ishlatiladi. Progressive enhancement — JS yo'q bo'lsa ham form ishlaydi.`,
         },
         {
             question: 'useActionState va oddiy onSubmit handler farqi nima?',
-            answer: 'Oddiy onSubmit bilan: preventDefault, useState(loading), useState(error), fetch, try/catch — ko\'p boilerplate. useActionState bularni HAMMASINI bitta hook-da hal qiladi. Yana muhim farq: form action={formAction} — bu native HTML form submit, JS yuklanmasdan ham ishlaydi (progressive enhancement). Next.js da Server Actions bilan bevosita integratsiya ham bor.',
+            answer: `Oddiy onSubmit bilan: preventDefault, useState(loading), useState(error), fetch, try/catch — ko'p boilerplate. useActionState bularni HAMMASINI bitta hook-da hal qiladi. Yana muhim farq: form action={formAction} — bu native HTML form submit, JS yuklanmasdan ham ishlaydi (progressive enhancement). Next.js da Server Actions bilan bevosita integratsiya ham bor.`,
         },
     ],
     relatedTopics: [
@@ -4950,7 +4950,7 @@ REACT 18+ — AUTOMATIC BATCHING — HAMMASI:
 Bu React 18-ning eng muhim yangiliklaridam biri — createRoot() orqali yoqiladi.
 
 ═══════════════════════════════════════
-  flushSync — BATCHING-NI O\\'CHIRISH
+  flushSync — BATCHING-NI O'CHIRISH
 ═══════════════════════════════════════
 
 import { flushSync } from 'react-dom'
@@ -4963,14 +4963,14 @@ flushSync(() => {
 })
 // 2 ta alohida render bo'ladi
 
-flushSync kamdan-kam kerak — faqat DOM o\\'lchamlarini o\\'qish kerak bo\\'lganda.
+flushSync kamdan-kam kerak — faqat DOM o'lchamlarini o'qish kerak bo'lganda.
 
 ═══════════════════════════════════════
   NIMA UCHUN KERAK (PERFORMANCE)
 ═══════════════════════════════════════
 
 Har bir render = Virtual DOM yaratish + diff + commit.
-3 ta state o\\'zgarsa va 3 ta render bo\\'lsa — 3 MARTA bu jarayon.
+3 ta state o'zgarsa va 3 ta render bo'lsa — 3 MARTA bu jarayon.
 Batching bilan 1 MARTA — 3x tezroq.`,
     codeExamples: [
         {
@@ -5027,13 +5027,13 @@ function BatchingDemo() {
     </div>
   )
 }`,
-            description: 'React 18+ da barcha kontekstlarda automatic batching ishlaydi. 3 ta setState = 1 ta render. flushSync bilan batching-ni o\'chirish mumkin (kamdan-kam kerak).',
+            description: `React 18+ da barcha kontekstlarda automatic batching ishlaydi. 3 ta setState = 1 ta render. flushSync bilan batching-ni o'chirish mumkin (kamdan-kam kerak).`,
         },
     ],
     interviewQA: [
         {
             question: 'State batching nima?',
-            answer: 'Batching — React-ning bir nechta setState chaqiruvlarni birlashtirib BITTA render qilish mexanizmi. Masalan, 3 ta setState chaqirilsa — 3 ta render emas, 1 ta render bo\'ladi. Bu performance uchun juda muhim — har render Virtual DOM yaratish + diff + commit degani.',
+            answer: `Batching — React-ning bir nechta setState chaqiruvlarni birlashtirib BITTA render qilish mexanizmi. Masalan, 3 ta setState chaqirilsa — 3 ta render emas, 1 ta render bo'ladi. Bu performance uchun juda muhim — har render Virtual DOM yaratish + diff + commit degani.`,
         },
         {
             question: 'React 17 va React 18 da batching qanday farq qiladi?',
@@ -5041,7 +5041,7 @@ function BatchingDemo() {
         },
         {
             question: 'flushSync nima va qachon ishlatiladi?',
-            answer: 'flushSync — batching-ni o\'chirib, setState-ni darhol render qilish funksiyasi (react-dom dan import). Kamdan-kam kerak — faqat DOM o\'zgarishini DARHOL ko\'rish kerak bo\'lganda. Masalan, setState-dan keyin element o\'lchamini o\'qish kerak bo\'lsa. Oddiy hollarda ishlatish TAVSIYA ETILMAYDI — batching performance uchun yaxshi.',
+            answer: `flushSync — batching-ni o'chirib, setState-ni darhol render qilish funksiyasi (react-dom dan import). Kamdan-kam kerak — faqat DOM o'zgarishini DARHOL ko'rish kerak bo'lganda. Masalan, setState-dan keyin element o'lchamini o'qish kerak bo'lsa. Oddiy hollarda ishlatish TAVSIYA ETILMAYDI — batching performance uchun yaxshi.`,
         },
     ],
     relatedTopics: [
@@ -5066,10 +5066,10 @@ function BatchingDemo() {
 ═══════════════════════════════════════
 
 1. 2x RENDER: Har komponentni IKKI MARTA render qiladi
-   - Nima uchun: Pure bo\\'lmagan komponentlarni topish (side-effect render ichida)
+   - Nima uchun: Pure bo'lmagan komponentlarni topish (side-effect render ichida)
 
 2. 2x EFFECT: useEffect setup+cleanup-ni IKKI MARTA ishlaydi
-   - Nima uchun: Cleanup to\\'g\\'ri yozilganini tekshirish
+   - Nima uchun: Cleanup to'g'ri yozilganini tekshirish
 
 3. DEPRECATED API WARNING: Eskirgan API ishlatilsa ogohlantiradi
    - componentWillMount, componentWillReceiveProps va boshqalar
@@ -5084,7 +5084,7 @@ function BatchingDemo() {
 - Concurrent rendering uchun tayyorgarlik
 
 ═══════════════════════════════════════
-  PRODUCTION-DA BO\\'LMAYDI
+  PRODUCTION-DA BO'LMAYDI
 ═══════════════════════════════════════
 
 StrictMode faqat development build-da ishlaydi.
@@ -5121,7 +5121,7 @@ function Timer() {
 
     // ✅ Cleanup TO'G'RI yozilgan — StrictMode buni tekshiradi
     return () => {
-      console.log('Effect CLEANUP — timer to\\'xtatildi')
+      console.log('Effect CLEANUP — timer to'xtatildi')
       clearInterval(id)
     }
   }, [])
@@ -5155,17 +5155,17 @@ function App() {
     </StrictMode>
   )
 }`,
-            description: 'StrictMode development-da effect-ni ikki marta ishlaydi (setup → cleanup → setup). Bu cleanup to\'g\'ri yozilganini tekshiradi. Cleanup bo\'lmasa — xato aniqlanadi.',
+            description: `StrictMode development-da effect-ni ikki marta ishlaydi (setup → cleanup → setup). Bu cleanup to'g'ri yozilganini tekshiradi. Cleanup bo'lmasa — xato aniqlanadi.`,
         },
     ],
     interviewQA: [
         {
             question: 'React StrictMode nima qiladi?',
-            answer: 'StrictMode faqat development rejimida ishlaydi va 3 ta narsa qiladi: 1) Har komponentni 2 marta render qiladi — pure bo\'lmagan komponentlarni topish uchun, 2) useEffect setup+cleanup-ni 2 marta ishlaydi — cleanup to\'g\'ri yozilganini tekshirish uchun, 3) Eskirgan API ishlatilsa ogohlantiradi. Production-da StrictMode kodi butunlay olib tashlanadi.',
+            answer: `StrictMode faqat development rejimida ishlaydi va 3 ta narsa qiladi: 1) Har komponentni 2 marta render qiladi — pure bo'lmagan komponentlarni topish uchun, 2) useEffect setup+cleanup-ni 2 marta ishlaydi — cleanup to'g'ri yozilganini tekshirish uchun, 3) Eskirgan API ishlatilsa ogohlantiradi. Production-da StrictMode kodi butunlay olib tashlanadi.`,
         },
         {
             question: 'Nima uchun useEffect StrictMode da ikki marta ishlaydi?',
-            answer: 'StrictMode effect-ni ikki marta ishlatadi (setup → cleanup → setup) cleanup funksiyasi TO\'G\'RI yozilganini tekshirish uchun. Masalan, setInterval boshlasangiz lekin cleanup-da clearInterval qilmasangiz — StrictMode da 2 ta timer ishlaydi va xato aniq ko\'rinadi. Bu concurrent rendering uchun tayyorgarlik ham — React istalgan vaqtda effect-ni qayta ishlashi mumkin.',
+            answer: `StrictMode effect-ni ikki marta ishlatadi (setup → cleanup → setup) cleanup funksiyasi TO'G'RI yozilganini tekshirish uchun. Masalan, setInterval boshlasangiz lekin cleanup-da clearInterval qilmasangiz — StrictMode da 2 ta timer ishlaydi va xato aniq ko'rinadi. Bu concurrent rendering uchun tayyorgarlik ham — React istalgan vaqtda effect-ni qayta ishlashi mumkin.`,
         },
     ],
     relatedTopics: [
@@ -5182,7 +5182,7 @@ function App() {
     importance: 2,
     status: 'to-learn' as const,
     description: 'SyntheticEvent, Event Delegation, React event tizimi ishlash prinsipi',
-    content: `React o\\'zining event tizimiga ega — SyntheticEvent. Bu brauzerlar orasidagi farqlarni yo\\'qotadi va performance-ni oshiradi.
+    content: `React o'zining event tizimiga ega — SyntheticEvent. Bu brauzerlar orasidagi farqlarni yo'qotadi va performance-ni oshiradi.
 
 ═══════════════════════════════════════
   SYNTHETICEVENT NIMA
@@ -5191,7 +5191,7 @@ function App() {
 SyntheticEvent — React-ning cross-browser event wrapper-i.
 Barcha brauzerlarda BIR XIL ishlaydi.
 
-React native brauzer event-ni o\\'rab oladi:
+React native brauzer event-ni o'rab oladi:
 onClick → SyntheticEvent(MouseEvent)
 onChange → SyntheticEvent(InputEvent)
 onKeyDown → SyntheticEvent(KeyboardEvent)
@@ -5202,8 +5202,8 @@ Native event-ga kirish: event.nativeEvent
   EVENT DELEGATION
 ═══════════════════════════════════════
 
-React BARCHA event-larni root elementga qo\\'yadi (bitta listener).
-Har bir button-ga alohida listener qo\\'yMAYDI.
+React BARCHA event-larni root elementga qo'yadi (bitta listener).
+Har bir button-ga alohida listener qo'yMAYDI.
 
 1000 ta button = 1000 ta listener ❌ (oddiy JS)
 1000 ta button = 1 ta listener ✅ (React)
@@ -5211,14 +5211,14 @@ Har bir button-ga alohida listener qo\\'yMAYDI.
 Bu "Event Delegation" deyiladi — performance uchun yaxshi.
 
 React 17+: root container-ga (document emas)
-React 16: document-ga qo\\'yardi
+React 16: document-ga qo'yardi
 
 ═══════════════════════════════════════
   onClick vs addEventListener
 ═══════════════════════════════════════
 
 React: <button onClick={handler}> — JSX ichida, declarative
-JS: element.addEventListener(\\'click\\', handler) — imperative
+JS: element.addEventListener('click', handler) — imperative
 
 React usulining afzalliklari:
 - Avtomatik cleanup (unmount-da listener olib tashlanadi)
@@ -5229,11 +5229,11 @@ React usulining afzalliklari:
   event.preventDefault() va event.stopPropagation()
 ═══════════════════════════════════════
 
-preventDefault(): Brauzer default harakatni to\\'xtatish
-- Form submit → sahifa yangilanishini to\\'xtatish
-- Link click → sahifa o\\'tishini to\\'xtatish
+preventDefault(): Brauzer default harakatni to'xtatish
+- Form submit → sahifa yangilanishini to'xtatish
+- Link click → sahifa o'tishini to'xtatish
 
-stopPropagation(): Event yuqoriga (parent-ga) ko\\'tarilishini to\\'xtatish
+stopPropagation(): Event yuqoriga (parent-ga) ko'tarilishini to'xtatish
 - Child onClick ishlaydi, Parent onClick ISHLAMAYDI
 
 ═══════════════════════════════════════
@@ -5294,21 +5294,21 @@ function EventDemo() {
     </form>
   )
 }`,
-            description: 'preventDefault form submit-ni, stopPropagation event bubbling-ni to\'xtatadi. TypeScript bilan FormEvent, ChangeEvent, MouseEvent tiplarini ishlatish.',
+            description: `preventDefault form submit-ni, stopPropagation event bubbling-ni to'xtatadi. TypeScript bilan FormEvent, ChangeEvent, MouseEvent tiplarini ishlatish.`,
         },
     ],
     interviewQA: [
         {
             question: 'SyntheticEvent nima?',
-            answer: 'SyntheticEvent — React-ning cross-browser event wrapper-i. React native brauzer eventni o\'rab oladi va barcha brauzerlarda BIR XIL interfeys beradi. Masalan, onClick SyntheticEvent(MouseEvent) qaytaradi. Native event-ga event.nativeEvent orqali kirish mumkin. React 17+ da event pooling olib tashlangan — event.persist() kerak emas.',
+            answer: `SyntheticEvent — React-ning cross-browser event wrapper-i. React native brauzer eventni o'rab oladi va barcha brauzerlarda BIR XIL interfeys beradi. Masalan, onClick SyntheticEvent(MouseEvent) qaytaradi. Native event-ga event.nativeEvent orqali kirish mumkin. React 17+ da event pooling olib tashlangan — event.persist() kerak emas.`,
         },
         {
             question: 'React Event Delegation qanday ishlaydi?',
-            answer: 'React BARCHA event listener-larni root elementga qo\'yadi (bitta listener). Har bir elementga alohida listener qo\'ymaydi. 1000 ta button bo\'lsa ham React faqat 1 ta listener ishlatadi — bu Event Delegation. Event sodir bo\'lganda React uni root-da ushlaydi va to\'g\'ri komponentga yo\'naltiradi. React 17+ dan boshlab listener document emas, root container-ga qo\'yiladi.',
+            answer: `React BARCHA event listener-larni root elementga qo'yadi (bitta listener). Har bir elementga alohida listener qo'ymaydi. 1000 ta button bo'lsa ham React faqat 1 ta listener ishlatadi — bu Event Delegation. Event sodir bo'lganda React uni root-da ushlaydi va to'g'ri komponentga yo'naltiradi. React 17+ dan boshlab listener document emas, root container-ga qo'yiladi.`,
         },
         {
             question: 'preventDefault va stopPropagation farqi nima?',
-            answer: 'preventDefault — brauzer default harakatini to\'xtatadi. Masalan, form submit-da sahifa yangilanishini, link click-da sahifa o\'tishini to\'xtatadi. stopPropagation — event bubbling-ni to\'xtatadi, ya\'ni event parent elementlarga ko\'tarilmaydi. Masalan, child onClick ishlaydi, lekin parent onClick ISHLAMAYDI. Ikkalasi ham turli muammolarni hal qiladi.',
+            answer: `preventDefault — brauzer default harakatini to'xtatadi. Masalan, form submit-da sahifa yangilanishini, link click-da sahifa o'tishini to'xtatadi. stopPropagation — event bubbling-ni to'xtatadi, ya'ni event parent elementlarga ko'tarilmaydi. Masalan, child onClick ishlaydi, lekin parent onClick ISHLAMAYDI. Ikkalasi ham turli muammolarni hal qiladi.`,
         },
     ],
     relatedTopics: [
@@ -5325,14 +5325,14 @@ function EventDemo() {
     importance: 2,
     status: 'to-learn' as const,
     description: 'JSX nima, qanday JavaScript-ga aylanadi, old va new transform farqi',
-    content: `JSX — JavaScript-ning kengaytmasi bo\\'lib, HTML-ga o\\'xshash sintaksis bilan UI yozish imkonini beradi. Brauzer JSX-ni TUSHMAYDI — u avval JavaScript-ga aylantiriladi.
+    content: `JSX — JavaScript-ning kengaytmasi bo'lib, HTML-ga o'xshash sintaksis bilan UI yozish imkonini beradi. Brauzer JSX-ni TUSHMAYDI — u avval JavaScript-ga aylantiriladi.
 
 ═══════════════════════════════════════
   JSX NIMA
 ═══════════════════════════════════════
 
 JSX = JavaScript XML — syntax sugar.
-Bu HTML EMAS, JavaScript EMAS — ikkalasi orasidagi ko\\'prik.
+Bu HTML EMAS, JavaScript EMAS — ikkalasi orasidagi ko'prik.
 
 const element = <h1 className="title">Salom</h1>
 
@@ -5346,9 +5346,9 @@ Bu brauzerga TUSHMAYDI. Build vaqtida JavaScript-ga aylanadi.
 const element = <h1 className="title">Salom</h1>
 
 // Aylanadi:
-const element = React.createElement(\\'h1\\', { className: \\'title\\' }, \\'Salom\\')
+const element = React.createElement('h1', { className: 'title' }, 'Salom')
 
-MUAMMO: Har bir faylda "import React from \\'react\\'" yozish SHART edi.
+MUAMMO: Har bir faylda "import React from 'react'" yozish SHART edi.
 Chunki React.createElement() ishlatiladi.
 
 ═══════════════════════════════════════
@@ -5359,8 +5359,8 @@ Chunki React.createElement() ishlatiladi.
 const element = <h1 className="title">Salom</h1>
 
 // Aylanadi:
-import { jsx as _jsx } from \\'react/jsx-runtime\\'
-const element = _jsx(\\'h1\\', { className: \\'title\\', children: \\'Salom\\' })
+import { jsx as _jsx } from 'react/jsx-runtime'
+const element = _jsx('h1', { className: 'title', children: 'Salom' })
 
 AFZALLIGI:
 - "import React" yozish KERAK EMAS — avtomatik import
@@ -5372,17 +5372,17 @@ AFZALLIGI:
 ═══════════════════════════════════════
 
 1. BITTA ROOT element: <div>...</div> yoki <Fragment> yoki <>...</>
-2. className (class emas — JS da class kalit so\\'z)
-3. htmlFor (for emas — JS da for kalit so\\'z)
+2. className (class emas — JS da class kalit so'z)
+3. htmlFor (for emas — JS da for kalit so'z)
 4. camelCase atributlar: onClick, onChange, tabIndex
-5. style object: style={{ color: \\'red\\', fontSize: 16 }}
+5. style object: style={{ color: 'red', fontSize: 16 }}
 6. {expression} — JS ifodalar: {name}, {1 + 2}, {isAdmin && <Admin />}
 
 ═══════════════════════════════════════
   FRAGMENT (<> </>)
 ═══════════════════════════════════════
 
-Qo\\'shimcha DOM element yaratmasdan bir nechta elementni qaytarish:
+Qo'shimcha DOM element yaratmasdan bir nechta elementni qaytarish:
 
 // Keraksiz div
 <div><h1>A</h1><p>B</p></div>
@@ -5441,15 +5441,15 @@ function Greeting({ name }: { name: string }) {
     interviewQA: [
         {
             question: 'JSX nima va brauzer uni tushuna oladimi?',
-            answer: 'JSX — JavaScript XML — syntax sugar bo\'lib, HTML-ga o\'xshash sintaksis bilan UI yozish imkonini beradi. Brauzer JSX-ni TUSHMAYDI. Build vaqtida (Babel/TypeScript orqali) oddiy JavaScript-ga aylantiriladi. <h1>Salom</h1> → jsx(\'h1\', { children: \'Salom\' }) ga aylanadi.',
+            answer: `JSX — JavaScript XML — syntax sugar bo'lib, HTML-ga o'xshash sintaksis bilan UI yozish imkonini beradi. Brauzer JSX-ni TUSHMAYDI. Build vaqtida (Babel/TypeScript orqali) oddiy JavaScript-ga aylantiriladi. <h1>Salom</h1> → jsx('h1', { children: 'Salom' }) ga aylanadi.`,
         },
         {
             question: 'Old va New JSX transform farqi nima?',
-            answer: 'Old transform (React 16-): JSX React.createElement() ga aylanardi, shu sababli har faylda "import React from \'react\'" yozish SHART edi. New transform (React 17+): JSX jsx() funksiyaga aylanadi va import AVTOMATIK qo\'shiladi — "import React" yozish kerak emas. tsconfig.json da "jsx": "react-jsx" qo\'yiladi. Bundle hajmi ham bir oz kichikroq bo\'ladi.',
+            answer: `Old transform (React 16-): JSX React.createElement() ga aylanardi, shu sababli har faylda "import React from 'react'" yozish SHART edi. New transform (React 17+): JSX jsx() funksiyaga aylanadi va import AVTOMATIK qo'shiladi — "import React" yozish kerak emas. tsconfig.json da "jsx": "react-jsx" qo'yiladi. Bundle hajmi ham bir oz kichikroq bo'ladi.`,
         },
         {
             question: 'JSX-ning asosiy qoidalari qanday?',
-            answer: 'JSX qoidalari: 1) Bitta root element kerak (<div>, <Fragment>, yoki <>), 2) class emas className (JS da class kalit so\'z), 3) for emas htmlFor, 4) camelCase atributlar (onClick, onChange, tabIndex), 5) style object sifatida: style={{ color: \'red\' }}, 6) {expression} ichida JS yozish mumkin. Fragment (<></>) qo\'shimcha DOM element yaratmasdan bir nechta elementni qaytaradi.',
+            answer: `JSX qoidalari: 1) Bitta root element kerak (<div>, <Fragment>, yoki <>), 2) class emas className (JS da class kalit so'z), 3) for emas htmlFor, 4) camelCase atributlar (onClick, onChange, tabIndex), 5) style object sifatida: style={{ color: 'red' }}, 6) {expression} ichida JS yozish mumkin. Fragment (<></>) qo'shimcha DOM element yaratmasdan bir nechta elementni qaytaradi.`,
         },
     ],
     relatedTopics: [
