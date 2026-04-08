@@ -6,14 +6,15 @@ import SidebarTopic from './SidebarTopic'
 
 interface SidebarSectionProps {
   section: Section
+  forceExpand?: boolean
 }
 
-export default function SidebarSection({ section }: SidebarSectionProps) {
+export default function SidebarSection({ section, forceExpand = false }: SidebarSectionProps) {
   const expandedSections = useSidebarStore(s => s.expandedSections)
   const toggleSection = useSidebarStore(s => s.toggleSection)
   const { getSectionPercent } = useProgress()
 
-  const expanded = expandedSections.includes(section.id)
+  const expanded = forceExpand || expandedSections.includes(section.id)
   const percent = getSectionPercent(section.id, section.topics.length)
 
   return (
