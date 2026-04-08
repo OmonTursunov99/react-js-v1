@@ -49,9 +49,19 @@ export function getTotalTime(topicTimes: Record<string, number>): number {
 }
 
 export function formatTime(totalSeconds: number): string {
-  if (totalSeconds < 60) return `${totalSeconds}s`
-  const hours = Math.floor(totalSeconds / 3600)
+  if (totalSeconds <= 0) return '00:00:00'
+
+  const days = Math.floor(totalSeconds / 86400)
+  const hours = Math.floor((totalSeconds % 86400) / 3600)
   const minutes = Math.floor((totalSeconds % 3600) / 60)
-  if (hours > 0) return `${hours}h ${minutes}m`
-  return `${minutes}m`
+  const seconds = totalSeconds % 60
+
+  const hh = String(hours).padStart(2, '0')
+  const mm = String(minutes).padStart(2, '0')
+  const ss = String(seconds).padStart(2, '0')
+
+  if (days > 0) {
+    return `${days}d ${hh}:${mm}:${ss}`
+  }
+  return `${hh}:${mm}:${ss}`
 }
