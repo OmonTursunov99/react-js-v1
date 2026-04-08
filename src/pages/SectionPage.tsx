@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router'
 import { useSectionData } from '@/hooks/useSectionData'
 import { useProgress } from '@/hooks/useProgress'
+import { useTimeStore, getSectionTime, getTopicTime, formatTime } from '@/stores/time-store'
 import ProgressBar from '@/components/ui/ProgressBar'
 import StarRating from '@/components/ui/StarRating'
 import Badge from '@/components/ui/Badge'
@@ -9,6 +10,7 @@ export default function SectionPage() {
   const { sectionId } = useParams()
   const section = useSectionData(sectionId)
   const { getSectionPercent, isLearned, getLearnedCountForSection } = useProgress()
+  const topicTimes = useTimeStore(s => s.topicTimes)
 
   if (!section) {
     return (
@@ -45,9 +47,17 @@ export default function SectionPage() {
             {percent}%
           </span>
         </div>
-        <p className="text-xs text-gray-400 dark:text-gray-500">
-          {learnedCount} / {section.topics.length} mavzu o'rganildi
-        </p>
+        <div className="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
+          <span>{learnedCount} / {section.topics.length} mavzu o'rganildi</span>
+          {getSectionTime(topicTimes, section.id) > 0 && (
+            <span className="inline-flex items-center gap-1">
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
+              </svg>
+              {formatTime(getSectionTime(topicTimes, section.id))}
+            </span>
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -80,6 +90,11 @@ export default function SectionPage() {
                     {learned ? 'O\'rganildi' : 'Hali o\'rganilmagan'}
                   </span>
                 </div>
+                {getTopicTime(topicTimes, section.id, topic.id) > 0 && (
+                  <span className="text-xs text-gray-400 dark:text-gray-500">
+                    {formatTime(getTopicTime(topicTimes, section.id, topic.id))}
+                  </span>
+                )}
                 <svg className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>

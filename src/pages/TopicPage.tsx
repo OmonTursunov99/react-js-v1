@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router'
 import { useTopicData } from '@/hooks/useTopicData'
 import { useProgress } from '@/hooks/useProgress'
+import { useTimeTracker } from '@/hooks/useTimeTracker'
+import { useTimeStore, getTopicTime, formatTime } from '@/stores/time-store'
 import Tabs from '@/components/ui/Tabs'
 import ContentRenderer from '@/components/ui/ContentRenderer'
 import CodeBlock from '@/components/ui/CodeBlock'
@@ -13,6 +15,9 @@ export default function TopicPage() {
   const { sectionId, topicId } = useParams()
   const { section, topic } = useTopicData(sectionId, topicId)
   const { isLearned, toggleLearned } = useProgress()
+  useTimeTracker(sectionId, topicId)
+  const topicTimes = useTimeStore(s => s.topicTimes)
+  const timeSpent = sectionId && topicId ? getTopicTime(topicTimes, sectionId, topicId) : 0
 
   if (!section || !topic) {
     return (
@@ -110,6 +115,14 @@ export default function TopicPage() {
             <div className="flex items-center gap-3">
               <StarRating level={topic.importance} />
               <Badge learned={learned} />
+              {timeSpent > 0 && (
+                <span className="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
+                  </svg>
+                  {formatTime(timeSpent)}
+                </span>
+              )}
             </div>
           </div>
 
