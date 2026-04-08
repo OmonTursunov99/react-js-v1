@@ -23,7 +23,7 @@ export default function SidebarTopic({ topic, sectionId }: SidebarTopicProps) {
       }
     >
       <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${learned ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'}`} />
-      <span className="truncate">{topic.title}</span>
+      <span>{topic.title}</span>
     </NavLink>
   )
 }
