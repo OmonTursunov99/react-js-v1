@@ -218,7 +218,7 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
 
         if (block.type === 'code') {
           return (
-            <pre key={i} className="p-4 rounded-xl bg-gray-950 text-sm leading-relaxed overflow-x-auto border border-gray-800 font-mono">
+            <pre key={i} className="p-3 sm:p-4 rounded-xl bg-gray-950 text-xs sm:text-sm leading-relaxed overflow-x-auto border border-gray-800 font-mono">
               <SyntaxHighlighter code={block.content} />
             </pre>
           )

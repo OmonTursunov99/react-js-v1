@@ -19,13 +19,13 @@ export default function CodeBlock({ code, language = 'tsx', title }: CodeBlockPr
   return (
     <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
       {title && (
-        <div className="flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">{title}</span>
-          <span className="text-xs text-gray-400">{language}</span>
+        <div className="flex items-center justify-between px-3 sm:px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+          <span className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300 truncate mr-2">{title}</span>
+          <span className="text-xs text-gray-400 flex-shrink-0">{language}</span>
         </div>
       )}
       <div className="relative">
-        <pre className="p-4 overflow-x-auto bg-gray-950 text-sm leading-relaxed font-mono">
+        <pre className="p-3 sm:p-4 overflow-x-auto bg-gray-950 text-xs sm:text-sm leading-relaxed font-mono">
           <SyntaxHighlighter code={code} language={language} />
         </pre>
         <button

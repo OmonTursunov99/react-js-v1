@@ -93,8 +93,8 @@ export default function TopicPage() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-6">
-        <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500 mb-4">
+      <div className="mb-4 sm:mb-6">
+        <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-400 dark:text-gray-500 mb-3 sm:mb-4 flex-wrap">
           <Link to="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Bosh sahifa</Link>
           <span>/</span>
           <Link to={`/section/${section.id}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
@@ -104,13 +104,13 @@ export default function TopicPage() {
           <span className="text-gray-600 dark:text-gray-300">{topic.title}</span>
         </div>
 
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
               {topic.title}
             </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-3">{topic.description}</p>
-            <div className="flex items-center gap-3">
+            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 mb-3">{topic.description}</p>
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
               <StarRating level={topic.importance} />
               <Badge learned={learned} />
               <span className="inline-flex items-center gap-1 text-xs font-mono text-gray-400 dark:text-gray-500">

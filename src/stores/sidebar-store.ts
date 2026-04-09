@@ -2,11 +2,14 @@ import { create } from 'zustand'
 
 interface SidebarState {
   expandedSections: string[]
+  mobileOpen: boolean
   toggleSection: (sectionId: string) => void
+  setMobileOpen: (open: boolean) => void
 }
 
 export const useSidebarStore = create<SidebarState>()((set) => ({
   expandedSections: [],
+  mobileOpen: false,
 
   toggleSection: (sectionId) => {
     set(state => {
@@ -18,4 +21,6 @@ export const useSidebarStore = create<SidebarState>()((set) => ({
       }
     })
   },
+
+  setMobileOpen: (open) => set({ mobileOpen: open }),
 }))

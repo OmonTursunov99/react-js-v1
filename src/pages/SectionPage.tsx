@@ -25,21 +25,21 @@ export default function SectionPage() {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-4xl">{section.icon}</span>
+          <span className="text-3xl sm:text-4xl">{section.icon}</span>
           <div>
             <p className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">
               Bo'lim {section.number}
             </p>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
               {section.title}
             </h1>
           </div>
         </div>
-        <p className="text-gray-500 dark:text-gray-400 mb-4">{section.description}</p>
+        <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 mb-4">{section.description}</p>
 
-        <div className="flex items-center gap-4 mb-2">
+        <div className="flex items-center gap-3 sm:gap-4 mb-2">
           <div className="flex-1">
             <ProgressBar percent={percent} gradient={section.gradient} size="md" />
           </div>
@@ -60,7 +60,7 @@ export default function SectionPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {section.topics.map(topic => {
           const learned = isLearned(section.id, topic.id)
 
