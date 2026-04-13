@@ -23,6 +23,11 @@ function S({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<Loading />}>{children}</Suspense>
 }
 
+/** Sidebar yo'q sahifalar uchun scrollable wrapper */
+function Scroll({ children }: { children: React.ReactNode }) {
+  return <div className="flex-1 overflow-y-auto">{children}</div>
+}
+
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
@@ -30,17 +35,17 @@ const router = createBrowserRouter([
       // 1-daraja: Yo'nalishlar (Frontend, Backend...)
       {
         index: true,
-        element: <S><DirectionPage /></S>,
+        element: <Scroll><S><DirectionPage /></S></Scroll>,
       },
       // 2-daraja: Kategoriyalar (HTML, CSS, JS, React...)
       {
         path: ':directionId',
-        element: <S><CategoryPage /></S>,
+        element: <Scroll><S><CategoryPage /></S></Scroll>,
       },
       // 3-daraja: Texnologiyalar (React.js, Next.js...)
       {
         path: ':directionId/:categoryId',
-        element: <S><TechnologyPage /></S>,
+        element: <Scroll><S><TechnologyPage /></S></Scroll>,
       },
       // 4-6 daraja: Sidebar bilan (Tech selected)
       {
@@ -67,7 +72,7 @@ const router = createBrowserRouter([
       // 404
       {
         path: '*',
-        element: <S><NotFoundPage /></S>,
+        element: <Scroll><S><NotFoundPage /></S></Scroll>,
       },
     ],
   },

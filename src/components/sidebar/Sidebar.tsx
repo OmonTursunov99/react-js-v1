@@ -86,7 +86,7 @@ export default function Sidebar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-80 h-full sticky top-0 overflow-y-auto border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 flex-col gap-1">
+      <aside className="hidden md:flex w-80 min-h-0 self-stretch overflow-y-auto border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 flex-col gap-1 shrink-0">
         {sidebarContent}
       </aside>
 
