@@ -7,6 +7,9 @@ import { asyncJavascriptTopics } from './async-javascript'
 import { advancedTopics } from './advanced'
 import { domBrowserTopics } from './dom-browser'
 import { designPatternsTopics } from './design-patterns'
+import { errorHandlingTopics } from './error-handling'
+import { builtInMethodsTopics } from './built-in-methods'
+import { es6SecurityTopics } from './es6-security'
 
 export const sections: Section[] = [
   {
@@ -80,5 +83,32 @@ export const sections: Section[] = [
     icon: '🎨',
     gradient: 'from-amber-500 to-yellow-400',
     topics: designPatternsTopics,
+  },
+  {
+    id: 'error-handling',
+    number: 9,
+    title: 'Xatolarni Boshqarish',
+    description: 'try/catch, Error turlari, custom errors, async xatolar',
+    icon: '🛑',
+    gradient: 'from-red-500 to-orange-400',
+    topics: errorHandlingTopics,
+  },
+  {
+    id: 'built-in-methods',
+    number: 10,
+    title: 'Built-in Metodlar',
+    description: 'Array, String, Number, Date, JSON, structuredClone',
+    icon: '🧰',
+    gradient: 'from-emerald-500 to-teal-400',
+    topics: builtInMethodsTopics,
+  },
+  {
+    id: 'es6-security',
+    number: 11,
+    title: 'ES6+ va Xavfsizlik',
+    description: 'ES2020-2024 yangiliklar, XSS, CORS, CSP',
+    icon: '🔐',
+    gradient: 'from-rose-500 to-pink-400',
+    topics: es6SecurityTopics,
   },
 ]
