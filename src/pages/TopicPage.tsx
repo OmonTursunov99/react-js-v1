@@ -15,7 +15,7 @@ export default function TopicPage() {
   const { sectionId, topicId } = useParams()
   const { section, topic } = useTopicData(sectionId, topicId)
   const { isLearned, toggleLearned } = useProgress()
-  const timeSpent = useTimeTracker(sectionId, topicId)
+  const { liveTime: timeSpent, isPaused, togglePause } = useTimeTracker(sectionId, topicId)
 
   if (!section || !topic) {
     return (
@@ -118,6 +118,25 @@ export default function TopicPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
                 </svg>
                 {formatTime(timeSpent)}
+                <button
+                  onClick={togglePause}
+                  className={`ml-0.5 p-1 rounded-md transition-colors ${
+                    isPaused
+                      ? 'text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950'
+                      : 'text-red-400 hover:bg-red-50 dark:hover:bg-red-950'
+                  }`}
+                  aria-label={isPaused ? 'Davom ettirish' : "To'xtatish"}
+                >
+                  {isPaused ? (
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                    </svg>
+                  )}
+                </button>
               </span>
             </div>
           </div>
