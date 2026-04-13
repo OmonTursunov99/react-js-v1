@@ -5,16 +5,17 @@ import ProgressBar from './ProgressBar'
 
 interface CardProps {
   section: Section
+  basePath: string
+  techId: string
 }
 
-export default function Card({ section }: CardProps) {
-  const { getSectionPercent, getLearnedCountForSection } = useProgress()
-  const percent = getSectionPercent(section.id, section.topics.length)
-  const learned = getLearnedCountForSection(section.id)
+export default function Card({ section, basePath, techId }: CardProps) {
+  const { getSectionProgress } = useProgress()
+  const { learned, percent } = getSectionProgress(techId, section)
 
   return (
     <Link
-      to={`/section/${section.id}`}
+      to={`${basePath}/${section.id}`}
       className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 transition-all duration-300 hover:shadow-xl hover:shadow-gray-200/50 dark:hover:shadow-gray-900/50 hover:-translate-y-1"
     >
       <div className={`absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity bg-gradient-to-br ${section.gradient}`} />

@@ -1,7 +1,7 @@
 import { useState, useEffect, type RefObject } from 'react'
 
 interface ScrollToTopButtonProps {
-  mainRef: RefObject<HTMLElement | null>
+  mainRef: RefObject<HTMLDivElement | null>
 }
 
 export default function ScrollToTopButton({ mainRef }: ScrollToTopButtonProps) {

@@ -1,8 +1,9 @@
 import { useParams, Link } from 'react-router'
-import { useTopicData } from '@/hooks/useTopicData'
+import { useTechSections } from '@/hooks/useTechSections'
 import { useProgress } from '@/hooks/useProgress'
 import { useTimeTracker } from '@/hooks/useTimeTracker'
 import { formatTime } from '@/stores/time-store'
+import { findDirection, findCategory, findTechnologyMeta } from '@/data/directions'
 import Tabs from '@/components/ui/Tabs'
 import ContentRenderer from '@/components/ui/ContentRenderer'
 import CodeBlock from '@/components/ui/CodeBlock'
@@ -12,12 +13,19 @@ import StarRating from '@/components/ui/StarRating'
 import Badge from '@/components/ui/Badge'
 
 export default function TopicPage() {
-  const { sectionId, topicId } = useParams()
-  const { section, topic } = useTopicData(sectionId, topicId)
+  const { directionId, categoryId, techId, sectionId, topicId } = useParams()
+  const { sections } = useTechSections(techId)
   const { isLearned, toggleLearned } = useProgress()
-  const { liveTime: timeSpent, isPaused, togglePause } = useTimeTracker(sectionId, topicId)
+  const { liveTime: timeSpent, isPaused, togglePause } = useTimeTracker(techId, sectionId, topicId)
 
-  if (!section || !topic) {
+  const direction = findDirection(directionId!)
+  const category = findCategory(directionId!, categoryId!)
+  const techMeta = findTechnologyMeta(directionId!, categoryId!, techId!)
+  const section = sections?.find(s => s.id === sectionId)
+  const topic = section?.topics.find(t => t.id === topicId)
+  const basePath = `/${directionId}/${categoryId}/${techId}`
+
+  if (!section || !topic || !direction || !category || !techMeta) {
     return (
       <div className="text-center py-20">
         <p className="text-gray-500 dark:text-gray-400">Mavzu topilmadi</p>
@@ -25,7 +33,7 @@ export default function TopicPage() {
     )
   }
 
-  const learned = isLearned(section.id, topic.id)
+  const learned = isLearned(techId!, section.id, topic.id)
 
   const tabs = [
     {
@@ -94,10 +102,15 @@ export default function TopicPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-4 sm:mb-6">
+        {/* Breadcrumb */}
         <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-400 dark:text-gray-500 mb-3 sm:mb-4 flex-wrap">
           <Link to="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Bosh sahifa</Link>
           <span>/</span>
-          <Link to={`/section/${section.id}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+          <Link to={basePath} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+            {techMeta.icon} {techMeta.title}
+          </Link>
+          <span>/</span>
+          <Link to={`${basePath}/${section.id}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
             {section.icon} {section.title}
           </Link>
           <span>/</span>
@@ -143,7 +156,7 @@ export default function TopicPage() {
 
           <Checkbox
             checked={learned}
-            onChange={() => toggleLearned(section.id, topic.id)}
+            onChange={() => toggleLearned(techId!, section.id, topic.id)}
             label="O'rgandim"
           />
         </div>
@@ -159,8 +172,8 @@ export default function TopicPage() {
           <div className="flex flex-wrap gap-2">
             {topic.relatedTopics.map(related => (
               <Link
-                key={`${related.sectionId}/${related.topicId}`}
-                to={`/section/${related.sectionId}/${related.topicId}`}
+                key={`${related.techId}/${related.sectionId}/${related.topicId}`}
+                to={`/${directionId}/${categoryId}/${related.techId}/${related.sectionId}/${related.topicId}`}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
               >
                 <span className="text-gray-400 dark:text-gray-500">→</span>

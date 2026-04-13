@@ -1,19 +1,21 @@
-import { NavLink } from 'react-router'
+import { NavLink, useParams } from 'react-router'
 import { useProgress } from '@/hooks/useProgress'
 import type { Topic } from '@/data/types'
 
 interface SidebarTopicProps {
   topic: Topic
   sectionId: string
+  basePath: string
 }
 
-export default function SidebarTopic({ topic, sectionId }: SidebarTopicProps) {
+export default function SidebarTopic({ topic, sectionId, basePath }: SidebarTopicProps) {
+  const { techId } = useParams()
   const { isLearned } = useProgress()
-  const learned = isLearned(sectionId, topic.id)
+  const learned = techId ? isLearned(techId, sectionId, topic.id) : false
 
   return (
     <NavLink
-      to={`/section/${sectionId}/${topic.id}`}
+      to={`${basePath}/${sectionId}/${topic.id}`}
       className={({ isActive }) =>
         `flex items-center gap-2 px-3 py-1.5 rounded-md text-sm transition-all ${
           isActive

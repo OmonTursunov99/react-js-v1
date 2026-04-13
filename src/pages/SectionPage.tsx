@@ -1,18 +1,25 @@
 import { useParams, Link } from 'react-router'
-import { useSectionData } from '@/hooks/useSectionData'
+import { useTechSections } from '@/hooks/useTechSections'
 import { useProgress } from '@/hooks/useProgress'
 import { useTimeStore, getSectionTime, getTopicTime, formatTime } from '@/stores/time-store'
+import { findDirection, findCategory, findTechnologyMeta } from '@/data/directions'
 import ProgressBar from '@/components/ui/ProgressBar'
 import StarRating from '@/components/ui/StarRating'
 import Badge from '@/components/ui/Badge'
 
 export default function SectionPage() {
-  const { sectionId } = useParams()
-  const section = useSectionData(sectionId)
-  const { getSectionPercent, isLearned, getLearnedCountForSection } = useProgress()
+  const { directionId, categoryId, techId, sectionId } = useParams()
+  const { sections } = useTechSections(techId)
+  const { getSectionProgress, isLearned } = useProgress()
   const topicTimes = useTimeStore(s => s.topicTimes)
 
-  if (!section) {
+  const direction = findDirection(directionId!)
+  const category = findCategory(directionId!, categoryId!)
+  const techMeta = findTechnologyMeta(directionId!, categoryId!, techId!)
+  const section = sections?.find(s => s.id === sectionId)
+  const basePath = `/${directionId}/${categoryId}/${techId}`
+
+  if (!section || !direction || !category || !techMeta) {
     return (
       <div className="text-center py-20">
         <p className="text-gray-500 dark:text-gray-400">Bo'lim topilmadi</p>
@@ -20,11 +27,22 @@ export default function SectionPage() {
     )
   }
 
-  const percent = getSectionPercent(section.id, section.topics.length)
-  const learnedCount = getLearnedCountForSection(section.id)
+  const { learned: learnedCount, percent } = getSectionProgress(techId!, section)
+  const sectionTime = getSectionTime(topicTimes, techId!, section.id)
 
   return (
     <div className="max-w-5xl mx-auto">
+      {/* Breadcrumb */}
+      <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-400 dark:text-gray-500 mb-4 flex-wrap">
+        <Link to="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Bosh sahifa</Link>
+        <span>/</span>
+        <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{direction.title}</Link>
+        <span>/</span>
+        <Link to={basePath} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{techMeta.icon} {techMeta.title}</Link>
+        <span>/</span>
+        <span className="text-gray-600 dark:text-gray-300">{section.icon} {section.title}</span>
+      </div>
+
       <div className="mb-6 sm:mb-8">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl sm:text-4xl">{section.icon}</span>
@@ -49,12 +67,12 @@ export default function SectionPage() {
         </div>
         <div className="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
           <span>{learnedCount} / {section.topics.length} mavzu o'rganildi</span>
-          {getSectionTime(topicTimes, section.id) > 0 && (
+          {sectionTime > 0 && (
             <span className="inline-flex items-center gap-1">
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
               </svg>
-              {formatTime(getSectionTime(topicTimes, section.id))}
+              {formatTime(sectionTime)}
             </span>
           )}
         </div>
@@ -62,12 +80,13 @@ export default function SectionPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {section.topics.map(topic => {
-          const learned = isLearned(section.id, topic.id)
+          const learned = isLearned(techId!, section.id, topic.id)
+          const topicTime = getTopicTime(topicTimes, techId!, section.id, topic.id)
 
           return (
             <Link
               key={topic.id}
-              to={`/section/${section.id}/${topic.id}`}
+              to={`${basePath}/${section.id}/${topic.id}`}
               className="group relative overflow-hidden p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-700 hover:-translate-y-0.5 transition-all"
             >
               <div className="flex items-start justify-between mb-3">
@@ -87,12 +106,12 @@ export default function SectionPage() {
                 <div className="flex items-center gap-1.5">
                   <span className={`w-2 h-2 rounded-full ${learned ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'}`} />
                   <span className="text-xs text-gray-400 dark:text-gray-500">
-                    {learned ? 'O\'rganildi' : 'Hali o\'rganilmagan'}
+                    {learned ? "O'rganildi" : "Hali o'rganilmagan"}
                   </span>
                 </div>
-                {getTopicTime(topicTimes, section.id, topic.id) > 0 && (
+                {topicTime > 0 && (
                   <span className="text-xs text-gray-400 dark:text-gray-500">
-                    {formatTime(getTopicTime(topicTimes, section.id, topic.id))}
+                    {formatTime(topicTime)}
                   </span>
                 )}
                 <svg className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

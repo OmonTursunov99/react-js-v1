@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
-import { useLocation } from 'react-router'
-import { sections } from '@/data/sections'
+import { useLocation, useParams } from 'react-router'
 import { useSidebarStore } from '@/stores/sidebar-store'
+import { useTechSections } from '@/hooks/useTechSections'
 import SidebarSection from './SidebarSection'
 
 export default function Sidebar() {
@@ -9,13 +9,17 @@ export default function Sidebar() {
   const mobileOpen = useSidebarStore(s => s.mobileOpen)
   const setMobileOpen = useSidebarStore(s => s.setMobileOpen)
   const { pathname } = useLocation()
+  const { directionId, categoryId, techId } = useParams()
+  const { sections } = useTechSections(techId)
 
-  // Close sidebar on navigation (mobile)
+  const basePath = `/${directionId}/${categoryId}/${techId}`
+
   useEffect(() => {
     setMobileOpen(false)
   }, [pathname, setMobileOpen])
 
   const filteredSections = useMemo(() => {
+    if (!sections) return null
     const q = search.toLowerCase().trim()
     if (!q) return null
 
@@ -34,10 +38,10 @@ export default function Sidebar() {
         }
         return null
       })
-      .filter(Boolean) as typeof sections
-  }, [search])
+      .filter(Boolean) as NonNullable<typeof sections>
+  }, [search, sections])
 
-  const displaySections = filteredSections ?? sections
+  const displaySections = filteredSections ?? sections ?? []
 
   const sidebarContent = (
     <>
@@ -74,7 +78,7 @@ export default function Sidebar() {
         Bo'limlar {search && `(${filteredSections?.length ?? 0})`}
       </p>
       {displaySections.map(section => (
-        <SidebarSection key={section.id} section={section} forceExpand={!!search} />
+        <SidebarSection key={section.id} section={section} basePath={basePath} forceExpand={!!search} />
       ))}
     </>
   )
@@ -82,7 +86,7 @@ export default function Sidebar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-80 h-[calc(100vh-57px)] sticky top-[57px] overflow-y-auto border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 flex-col gap-1">
+      <aside className="hidden md:flex w-80 h-full sticky top-0 overflow-y-auto border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 flex-col gap-1">
         {sidebarContent}
       </aside>
 

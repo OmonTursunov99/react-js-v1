@@ -1,0 +1,466 @@
+import type { Topic } from '../../../types'
+
+export const useEffect: Topic = {
+    id: 'use-effect',
+    title: 'useEffect',
+    importance: 3,
+    status: 'to-learn',
+    description: 'Side effectlar va lifecycle boshqaruvi',
+    content: `useEffect — React komponentida "side effect" (yon ta'sir) bajarish uchun ishlatiladigan hook. Side effect — bu renderdan tashqari narsalar: API so'rov, DOM manipulyatsiya, timer, subscription, localStorage bilan ishlash.
+
+═══════════════════════════════════════
+  SINTAKSIS
+═══════════════════════════════════════
+
+  useEffect(setup, dependencies?)
+
+- setup — effect funksiyasi (nima bajariladi)
+- dependencies — qachon qayta ishlashi kerakligini aytuvchi massiv (ixtiyoriy)
+- setup funksiya cleanup funksiyasini QAYTARISHI mumkin
+
+═══════════════════════════════════════
+  3 TA VARIANT
+═══════════════════════════════════════
+
+1. Har renderda ishlaydi (dependency yo'q):
+
+  useEffect(() => {
+    console.log('Har renderda')
+  })
+
+2. Faqat MOUNT-da ishlaydi (bo'sh massiv):
+
+  useEffect(() => {
+    console.log('Faqat 1 marta — mount')
+  }, [])
+
+3. Dependency o'zgarganda ishlaydi:
+
+  useEffect(() => {
+    console.log('count o'zgarganda')
+  }, [count])
+
+═══════════════════════════════════════
+  LIFECYCLE BILAN TAQQOSLASH
+═══════════════════════════════════════
+
+Class component-larda 3 ta lifecycle metod bor edi:
+- componentDidMount — komponent DOM-ga qo'shilganda
+- componentDidUpdate — state/props o'zgarganda
+- componentWillUnmount — komponent DOM-dan o'chirilganda
+
+useEffect bularning HAMMASINI bitta hook-da qiladi:
+
+  useEffect(() => {
+    // componentDidMount + componentDidUpdate
+    // (mount va har dependency o'zgarganda ishlaydi)
+
+    return () => {
+      // componentWillUnmount
+      // (komponent o'chirilganda yoki keyingi effect oldidan ishlaydi)
+    }
+  }, [dependency])
+
+═══════════════════════════════════════
+  CLEANUP FUNKSIYASI
+═══════════════════════════════════════
+
+Cleanup — effect qaytargan funksiya. U 2 ta holatda ishlaydi:
+1. Komponent unmount bo'lganda (DOM-dan o'chirilganda)
+2. Keyingi effect ishga tushishidan OLDIN (eski effect tozalanadi)
+
+Cleanup SHART bo'lgan holatlar:
+- setInterval / setTimeout — tozalamasangiz memory leak
+- addEventListener — tozalamasangiz event ko'payib ketadi
+- WebSocket subscription — tozalamasangiz connection qoladi
+- AbortController — tozalamasangiz eski API so'rovlar keladi
+
+Cleanup KERAK EMAS holatlar:
+- Oddiy console.log
+- State yangilash (agar komponent hali mount)
+- Bir martalik API so'rov (cleanup ixtiyoriy)
+
+═══════════════════════════════════════
+  DEPENDENCY ARRAY QOIDALARI
+═══════════════════════════════════════
+
+Effect ichida ishlatilgan BARCHA tashqi o'zgaruvchilar dependency-ga kiritilishi SHART.
+
+  const [count, setCount] = useState(0)
+  const [name, setName] = useState('')
+
+  // NOTO'G'RI — count ishlatilgan lekin dependency-da yo'q:
+  useEffect(() => {
+    document.title = count + ' marta'
+  }, [])  // count eskiradi — stale closure!
+
+  // TO'G'RI:
+  useEffect(() => {
+    document.title = count + ' marta'
+  }, [count])
+
+ESLint react-hooks/exhaustive-deps qoidasi buni avtomatik tekshiradi.
+
+═══════════════════════════════════════
+  QACHON ISHLAYDI (TIMING)
+═══════════════════════════════════════
+
+useEffect ASINXRON — brauzer paint-dan KEYIN ishlaydi:
+
+1. React komponentni renderlydi (Virtual DOM)
+2. React DOM-ni yangilaydi (commit)
+3. Brauzer ekranga chizadi (paint)
+4. useEffect ishlaydi <-- SHU YERDA
+
+Bu degani — useEffect ekranga chizilgan KEYIN ishlaydi.
+Agar DOM o'lchash kerak bo'lsa — useLayoutEffect ishlatish kerak (paint OLDIDAN).
+
+═══════════════════════════════════════
+  STRICT MODE XULQI
+═══════════════════════════════════════
+
+React StrictMode-da (dev rejim) har bir effectni 2 MARTA ishlaydi:
+- Mount → effect → cleanup → effect
+
+Bu nima uchun? Cleanup to'g'ri yozilganini tekshirish uchun.
+Agar 2 marta ishlanganda muammo bo'lsa — cleanup noto'g'ri yozilgan.
+
+Production-da faqat 1 marta ishlaydi.
+
+═══════════════════════════════════════
+  ANTI-PATTERNS
+═══════════════════════════════════════
+
+1. Keraksiz effect — render vaqtida hisoblash mumkin bo'lgan narsalar:
+
+  // NOTO'G'RI:
+  useEffect(() => {
+    setFullName(first + ' ' + last)
+  }, [first, last])
+
+  // TO'G'RI — render vaqtida hisoblash:
+  const fullName = first + ' ' + last
+
+2. Effect ichida boshqa state yangilash (zanjirli effect):
+
+  // NOTO'G'RI — 2 ta render:
+  useEffect(() => {
+    setFiltered(items.filter(i => i.active))
+  }, [items])
+
+  // TO'G'RI — render vaqtida:
+  const filtered = items.filter(i => i.active)
+
+3. Object/array dependency:
+
+  // NOTO'G'RI — har renderda yangi object = cheksiz loop:
+  useEffect(() => {
+    fetch(options.url)
+  }, [options])  // options = { url: '...' } — har renderda yangi referens!
+
+  // TO'G'RI — primitive qiymatlarni olish:
+  useEffect(() => {
+    fetch(url)
+  }, [url])
+
+4. Fetch uchun useEffect — TanStack Query ishlatish yaxshiroq:
+
+  // Ishlaydi, lekin ko'p muammo: loading, error, cache, race condition
+  useEffect(() => {
+    fetch('/api/data').then(r => r.json()).then(setData)
+  }, [])
+
+  // YAXSHIROQ — TanStack Query:
+  const { data } = useQuery({ queryKey: ['data'], queryFn: fetchData })
+
+═══════════════════════════════════════
+  useEffect vs useLayoutEffect
+═══════════════════════════════════════
+
+- useEffect — paint KEYIN (asinxron, ko'p hollarda kerak)
+- useLayoutEffect — paint OLDIDAN (sinxron, faqat DOM o'lchash uchun)
+
+useLayoutEffect ishlatish kerak:
+- Element o'lchamini o'lchash (getBoundingClientRect)
+- Scroll pozitsiyasini o'rnatish
+- Tooltip/popover pozitsiyasini hisoblash
+
+Qolgan BARCHA holatlar uchun useEffect ishlatish kerak.`,
+    codeExamples: [
+      {
+        title: 'Document title yangilash',
+        language: 'tsx',
+        code: `import { useState, useEffect } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    // Har safar count o'zgarganda title yangilanadi
+    document.title = \`Hisob: \${count}\`
+  }, [count])  // <-- faqat count o'zgarganda
+
+  return (
+    <button onClick={() => setCount(c => c + 1)}>
+      {count}
+    </button>
+  )
+}`,
+        description: `Eng oddiy useEffect misoli. count o'zgarganda brauzer title-ni yangilaydi. Dependency array-da [count] bo'lgani uchun faqat count o'zgarganda ishlaydi.`,
+      },
+      {
+        title: `API dan ma'lumot olish (fetch)`,
+        language: 'tsx',
+        code: `import { useState, useEffect } from 'react'
+
+interface User {
+  id: number
+  name: string
+  email: string
+}
+
+function UserProfile({ userId }: { userId: number }) {
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    // AbortController — komponent unmount bo'lsa so'rovni bekor qiladi
+    const controller = new AbortController()
+
+    async function fetchUser() {
+      setLoading(true)
+      setError(null)
+      try {
+        const res = await fetch(
+          \`https://api.example.com/users/\${userId}\`,
+          { signal: controller.signal }
+        )
+        if (!res.ok) throw new Error('Xatolik: ' + res.status)
+        const data = await res.json()
+        setUser(data)
+      } catch (err) {
+        // AbortError — komponent unmount bo'lganda, xato emas
+        if (err instanceof Error && err.name !== 'AbortError') {
+          setError(err.message)
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchUser()
+
+    // Cleanup: userId o'zgarganda yoki unmount-da eski so'rovni bekor qilish
+    return () => controller.abort()
+  }, [userId])  // userId o'zgarganda qaytadan fetch
+
+  if (loading) return <p>Yuklanmoqda...</p>
+  if (error) return <p>Xatolik: {error}</p>
+  if (!user) return null
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  )
+}`,
+        description: `API fetch pattern — AbortController bilan. userId o'zgarganda eski so'rov bekor qilinadi (race condition oldini oladi). Production-da TanStack Query ishlatish yaxshiroq.`,
+      },
+      {
+        title: 'Event listener (cleanup bilan)',
+        language: 'tsx',
+        code: `import { useState, useEffect } from 'react'
+
+function WindowSize() {
+  const [size, setSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  })
+
+  useEffect(() => {
+    function handleResize() {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    // Cleanup — listener-ni olib tashlash
+    // Aks holda har renderda yangi listener qo'shiladi = memory leak
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])  // Bo'sh massiv — faqat mount/unmount
+
+  return (
+    <p>{size.width} x {size.height}</p>
+  )
+}`,
+        description: `addEventListener + cleanup pattern. Bo'sh dependency [] — faqat mount-da qo'shiladi, unmount-da olib tashlanadi. Cleanup yo'q bo'lsa memory leak bo'ladi.`,
+      },
+      {
+        title: 'setInterval (timer) + cleanup',
+        language: 'tsx',
+        code: `import { useState, useEffect } from 'react'
+
+function Timer() {
+  const [seconds, setSeconds] = useState(0)
+  const [isRunning, setIsRunning] = useState(false)
+
+  useEffect(() => {
+    if (!isRunning) return  // Timer to'xtatilgan bo'lsa hech narsa qilma
+
+    const id = setInterval(() => {
+      setSeconds(prev => prev + 1)  // updater function — stale closure yo'q
+    }, 1000)
+
+    // Cleanup — isRunning o'zgarganda yoki unmount-da timer tozalanadi
+    return () => clearInterval(id)
+  }, [isRunning])  // isRunning o'zgarganda qayta ishlaydi
+
+  return (
+    <div>
+      <p>{seconds} soniya</p>
+      <button onClick={() => setIsRunning(r => !r)}>
+        {isRunning ? 'To'xtatish' : 'Boshlash'}
+      </button>
+      <button onClick={() => { setIsRunning(false); setSeconds(0) }}>
+        Reset
+      </button>
+    </div>
+  )
+}`,
+        description: `setInterval pattern. MUHIM: clearInterval cleanup-da bo'lishi SHART, aks holda timerlar ko'payib ketadi. setSeconds(prev => prev + 1) — stale closure muammosini oldini oladi.`,
+      },
+      {
+        title: 'localStorage bilan sinxronizatsiya',
+        language: 'tsx',
+        code: `import { useState, useEffect } from 'react'
+
+function useLocalStorage<T>(key: string, initialValue: T) {
+  // Lazy initialization — localStorage faqat 1 marta o'qiladi
+  const [value, setValue] = useState<T>(() => {
+    const saved = localStorage.getItem(key)
+    return saved ? JSON.parse(saved) : initialValue
+  })
+
+  // value o'zgarganda localStorage-ga yozish
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value))
+  }, [key, value])
+
+  return [value, setValue] as const
+}
+
+// Ishlatish:
+function Settings() {
+  const [theme, setTheme] = useLocalStorage('theme', 'light')
+  const [lang, setLang] = useLocalStorage('lang', 'uz')
+
+  return (
+    <div>
+      <select value={theme} onChange={e => setTheme(e.target.value)}>
+        <option value="light">Yorug'</option>
+        <option value="dark">Qorong'u</option>
+      </select>
+      <select value={lang} onChange={e => setLang(e.target.value)}>
+        <option value="uz">O'zbekcha</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  )
+}`,
+        description: `Custom hook pattern — useLocalStorage. useState bilan useEffect birgalikda ishlaydi. Bu Real loyihalarda juda ko'p ishlatiladi.`,
+      },
+      {
+        title: 'Debounced search (cleanup + dependency)',
+        language: 'tsx',
+        code: `import { useState, useEffect } from 'react'
+
+function Search() {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState<string[]>([])
+
+  useEffect(() => {
+    // Bo'sh query — hech narsa qilma
+    if (!query.trim()) {
+      setResults([])
+      return
+    }
+
+    // 300ms kutish — har harf bosilganda emas, yozib bo'lgandan keyin
+    const timerId = setTimeout(async () => {
+      const res = await fetch(\`/api/search?q=\${query}\`)
+      const data = await res.json()
+      setResults(data)
+    }, 300)
+
+    // Cleanup: yangi harf bosilganda eski timer bekor qilinadi
+    return () => clearTimeout(timerId)
+  }, [query])  // Har safar query o'zgarganda
+
+  // Natija:
+  // "React" yozganda: R → [cleanup] → Re → [cleanup] → Rea → ... → React → 300ms → fetch!
+  // Faqat 1 ta API so'rov yuboriladi, 5 ta emas
+
+  return (
+    <div>
+      <input
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        placeholder="Qidirish..."
+      />
+      {results.map((r, i) => <p key={i}>{r}</p>)}
+    </div>
+  )
+}`,
+        description: `Debounce pattern — useEffect + setTimeout + cleanup. Foydalanuvchi yozayotganda har harfda emas, 300ms to'xtagandan keyin fetch qiladi. Cleanup eski timer-ni tozalaydi.`,
+      },
+    ],
+    interviewQA: [
+      {
+        question: 'useEffect qachon ishlaydi? Rendering cycle-da qayerda turadi?',
+        answer: `useEffect brauzer PAINT-dan KEYIN asinxron ishlaydi. Tartib: 1) React komponentni render qiladi (Virtual DOM), 2) React DOM-ni yangilaydi (commit fazasi), 3) Brauzer ekranga chizadi (paint), 4) useEffect ishlaydi. Shuning uchun useEffect ichida DOM o'zgartirsangiz, foydalanuvchi bir lahzalik "miltillash" ko'rishi mumkin — chunki avval eski holat chiziladi, keyin effect yangilaydi.`,
+      },
+      {
+        question: 'useEffect cleanup funksiyasi qachon ishlaydi?',
+        answer: `Cleanup 2 ta holatda ishlaydi: 1) Komponent unmount bo'lganda (DOM-dan o'chirilganda) — bu componentWillUnmount-ga teng. 2) Dependency o'zgarib, keyingi effect ishga tushishidan OLDIN — avval eski effect tozalanadi, keyin yangi effect ishlaydi. Bu muhim chunki aks holda subscription-lar, timer-lar, listener-lar ko'payib ketadi (memory leak).`,
+      },
+      {
+        question: 'useEffect dependency array-da [] va hech narsa bermaslik farqi nima?',
+        answer: `[] (bo'sh massiv) — effect faqat MOUNT-da 1 marta ishlaydi, cleanup faqat UNMOUNT-da ishlaydi. componentDidMount + componentWillUnmount-ga teng. Dependency bermaslik — effect HAR RENDERDA ishlaydi (state yoki props o'zgarganda). Bu odatda NOTO'G'RI va keraksiz — ko'pincha dependency qo'yish kerak. Har renderda ishlash kerak bo'lgan holat juda kam.`,
+      },
+      {
+        question: `useEffect ichida async funksiya to'g'ridan-to'g'ri ishlatish mumkinmi?`,
+        answer: `Yo'q! useEffect(() => async () => {}) deb yozsangiz, async funksiya Promise qaytaradi — lekin React cleanup uchun funksiya (yoki undefined) kutadi, Promise emas. To'g'ri usul: useEffect ichida alohida async funksiya e'lon qilib chaqirish: useEffect(() => { async function fetchData() { await ... } fetchData() }, []). Yoki IIFE: useEffect(() => { (async () => { ... })() }, []).`,
+      },
+      {
+        question: `useEffect dependency-da object/array bersa nima bo'ladi?`,
+        answer: `Cheksiz loop! React dependency-larni Object.is() bilan taqqoslaydi. Object/array har renderda YANGI referens oladi (hatto qiymati bir xil bo'lsa ham). Natija: effect har renderda ishlaydi → state yangilaydi → qayta render → effect yana ishlaydi → cheksiz. Yechim: 1) Primitive qiymatlarni dependency qilish (url, id), 2) useMemo bilan object-ni memoizatsiya qilish, 3) JSON.stringify bilan taqqoslash.`,
+      },
+      {
+        question: 'React StrictMode-da useEffect nima uchun 2 marta ishlaydi?',
+        answer: `StrictMode (faqat dev rejimda) har effect-ni mount → cleanup → mount qilib ishlaydi. Maqsad: cleanup to'g'ri yozilganini tekshirish. Agar 2 marta ishlanganda muammo bo'lsa — cleanup-da subscription/timer/listener tozalanmagan. Bu production-da BO'LMAYDI — faqat development-da. Masalan: WebSocket-ga 2 marta connect bo'lsa, cleanup-da disconnect yo'q degani.`,
+      },
+      {
+        question: 'useEffect vs useLayoutEffect — qachon nima ishlatiladi?',
+        answer: `useEffect — asinxron, paint KEYIN. 95% hollarda shu ishlatiladi: API fetch, subscription, timer, localStorage. useLayoutEffect — sinxron, paint OLDIDAN. Faqat DOM o'lchash kerak bo'lganda: getBoundingClientRect, scroll pozitsiya, tooltip pozitsiya hisoblash. useLayoutEffect sekin ishlaydi (paint-ni bloklaydi), shuning uchun faqat zarurat bo'lganda ishlatish kerak.`,
+      },
+      {
+        question: 'useEffect ichida state yangilash xavflimi? Qanday anti-pattern-lar bor?',
+        answer: `O'zi xavfli emas, lekin keraksiz effect ko'p. Anti-pattern-lar: 1) Props-dan derived state — effect bilan emas, render vaqtida hisoblash kerak (const fullName = first + " " + last). 2) Zanjirli effect-lar — bitta effect state yangilaydi, u boshqa effect-ni trigger qiladi = ortiqcha render. 3) Event handler logikasini effect-ga qo'yish — onClick ichida qilish kerak, effect-da emas. Qoida: "Bu render vaqtida hisoblanishi mumkinmi?" — agar ha, effect KERAK EMAS.`,
+      },
+      {
+        question: 'Race condition nima va useEffect-da qanday oldini olish mumkin?',
+        answer: `Race condition — 2 ta asinxron so'rov yuborilganda, birinchisi ikkinchisidan KEYIN javob qaytarishi. Masalan: userId 1 uchun fetch, keyin userId 2 uchun fetch — lekin 2-ning javobi avval keladi, 1-niki keyin. Natija: ekranda noto'g'ri ma'lumot. Yechim: 1) AbortController — eski so'rovni bekor qilish (eng yaxshi). 2) Boolean flag — let cancelled = false; return () => { cancelled = true }. 3) TanStack Query — avtomatik boshqaradi.`,
+      },
+    ],
+    relatedTopics: [
+      { techId: 'react-js', sectionId: 'react-core', topicId: 'use-layout-effect', label: 'useLayoutEffect farqi' },
+      { techId: 'react-js', sectionId: 'theory-questions', topicId: 'react-lifecycle', label: 'React Lifecycle' },
+      { techId: 'react-js', sectionId: 'theory-questions', topicId: 'closures-in-hooks', label: 'Stale Closures' },
+      { techId: 'react-js', sectionId: 'theory-questions', topicId: 'rules-of-hooks', label: 'Rules of Hooks' },
+    ],
+  }

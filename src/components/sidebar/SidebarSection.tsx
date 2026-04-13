@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router'
+import { NavLink, useParams } from 'react-router'
 import { useSidebarStore } from '@/stores/sidebar-store'
 import { useProgress } from '@/hooks/useProgress'
 import type { Section } from '@/data/types'
@@ -6,16 +6,18 @@ import SidebarTopic from './SidebarTopic'
 
 interface SidebarSectionProps {
   section: Section
+  basePath: string
   forceExpand?: boolean
 }
 
-export default function SidebarSection({ section, forceExpand = false }: SidebarSectionProps) {
+export default function SidebarSection({ section, basePath, forceExpand = false }: SidebarSectionProps) {
   const expandedSections = useSidebarStore(s => s.expandedSections)
   const toggleSection = useSidebarStore(s => s.toggleSection)
-  const { getSectionPercent } = useProgress()
+  const { techId } = useParams()
+  const { getSectionProgress } = useProgress()
 
   const expanded = forceExpand || expandedSections.includes(section.id)
-  const percent = getSectionPercent(section.id, section.topics.length)
+  const { percent } = techId ? getSectionProgress(techId, section) : { percent: 0 }
 
   return (
     <div>
@@ -36,7 +38,7 @@ export default function SidebarSection({ section, forceExpand = false }: Sidebar
         </button>
 
         <NavLink
-          to={`/section/${section.id}`}
+          to={`${basePath}/${section.id}`}
           className={({ isActive }) =>
             `flex-1 flex items-center gap-2 px-2 py-1.5 rounded-md text-sm font-medium transition-all ${
               isActive
@@ -44,6 +46,7 @@ export default function SidebarSection({ section, forceExpand = false }: Sidebar
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50'
             }`
           }
+          end
         >
           <span>{section.icon}</span>
           <span className="truncate flex-1">{section.number}. {section.title}</span>
@@ -56,7 +59,7 @@ export default function SidebarSection({ section, forceExpand = false }: Sidebar
       {expanded && (
         <div className="ml-6 mt-1 flex flex-col gap-0.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2">
           {section.topics.map(topic => (
-            <SidebarTopic key={topic.id} topic={topic} sectionId={section.id} />
+            <SidebarTopic key={topic.id} topic={topic} sectionId={section.id} basePath={basePath} />
           ))}
         </div>
       )}
