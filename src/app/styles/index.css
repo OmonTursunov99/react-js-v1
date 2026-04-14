@@ -9,3 +9,12 @@
 .animate-slide-in {
   animation: slide-in 0.2s ease-out;
 }
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+.animate-bounce-soft {
+  animation: bounce-soft 1.5s ease-in-out infinite;
+}
