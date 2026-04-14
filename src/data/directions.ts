@@ -10,8 +10,8 @@ export const directions: Direction[] = [
     categories: [
       // ── Markup ──
       {
-        id: 'html',
-        title: 'HTML',
+        id: 'markup',
+        title: 'Markup',
         description: 'Markup tillar — sahifa tuzilmasi',
         icon: '📄',
         gradient: 'from-orange-500 to-red-400',
@@ -37,8 +37,8 @@ export const directions: Direction[] = [
 
       // ── Styling ──
       {
-        id: 'css',
-        title: 'CSS',
+        id: 'styling',
+        title: 'Styling',
         description: 'Styling tillar — dizayn va tartib',
         icon: '🎨',
         gradient: 'from-blue-500 to-purple-400',
@@ -70,11 +70,11 @@ export const directions: Direction[] = [
         ],
       },
 
-      // ── JavaScript ──
+      // ── Tillar ──
       {
-        id: 'javascript',
-        title: 'JavaScript',
-        description: 'Dasturlash tillari — logika va interaktivlik',
+        id: 'tillar',
+        title: 'Tillar',
+        description: 'Dasturlash tillari — JavaScript, TypeScript',
         icon: '⚡',
         gradient: 'from-yellow-500 to-amber-400',
         technologies: [
@@ -118,8 +118,8 @@ export const directions: Direction[] = [
 
       // ── Vue ecosystem ──
       {
-        id: 'vue',
-        title: 'Vue',
+        id: 'vue-ecosystem',
+        title: 'Vue Ecosystem',
         description: 'Vue.js ekotizimi — progressive framework',
         icon: '💚',
         gradient: 'from-green-500 to-teal-400',
@@ -145,8 +145,8 @@ export const directions: Direction[] = [
 
       // ── React ecosystem ──
       {
-        id: 'react',
-        title: 'React',
+        id: 'react-ecosystem',
+        title: 'React Ecosystem',
         description: 'React ekotizimi — UI kutubxona va frameworklar',
         icon: '⚛️',
         gradient: 'from-cyan-500 to-blue-400',

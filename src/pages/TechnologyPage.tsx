@@ -16,16 +16,14 @@ export default function TechnologyPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6 md:p-8">
+    <div className="max-w-5xl mx-auto">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-400 dark:text-gray-500 mb-6 flex-wrap">
+      <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-400 dark:text-gray-500 mb-4 flex-wrap">
         <Link to="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Bosh sahifa</Link>
         <span>/</span>
-        <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-          {direction.icon} {direction.title}
-        </Link>
+        <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{direction.title}</Link>
         <span>/</span>
-        <span className="text-gray-600 dark:text-gray-300">{category.icon} {category.title}</span>
+        <span className="text-gray-600 dark:text-gray-300">{category.title}</span>
       </div>
 
       <div className="mb-8">

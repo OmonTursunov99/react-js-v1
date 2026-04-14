@@ -9,6 +9,7 @@ const TechnologyPage = lazy(() => import('@/pages/TechnologyPage'))
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'))
 const SectionPage = lazy(() => import('@/pages/SectionPage'))
 const TopicPage = lazy(() => import('@/pages/TopicPage'))
+const StatsPage = lazy(() => import('@/pages/StatsPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 function Loading() {
@@ -25,7 +26,7 @@ function S({ children }: { children: React.ReactNode }) {
 
 /** Sidebar yo'q sahifalar uchun scrollable wrapper */
 function Scroll({ children }: { children: React.ReactNode }) {
-  return <div className="flex-1 overflow-y-auto">{children}</div>
+  return <div className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6">{children}</div>
 }
 
 const router = createBrowserRouter([
@@ -68,6 +69,11 @@ const router = createBrowserRouter([
             element: <S><TopicPage /></S>,
           },
         ],
+      },
+      // Statistika
+      {
+        path: 'stats',
+        element: <Scroll><S><StatsPage /></S></Scroll>,
       },
       // 404
       {

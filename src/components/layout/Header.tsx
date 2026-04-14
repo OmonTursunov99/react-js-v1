@@ -1,11 +1,9 @@
 import { useTheme } from '@/hooks/useTheme'
-import { useProgress } from '@/hooks/useProgress'
 import { useSidebarStore } from '@/stores/sidebar-store'
 import { Link, useParams } from 'react-router'
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme()
-  const { totalLearned } = useProgress()
   const mobileOpen = useSidebarStore(s => s.mobileOpen)
   const setMobileOpen = useSidebarStore(s => s.setMobileOpen)
   const { techId } = useParams()
@@ -35,13 +33,16 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
-          {totalLearned > 0 && (
-            <span className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
-              {totalLearned} o'rganildi
-            </span>
-          )}
-
+        <div className="flex items-center gap-1 sm:gap-2">
+          <Link
+            to="/stats"
+            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            title="Statistika"
+          >
+            <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 13h2v8H3zm6-4h2v12H9zm6-6h2v18h-2zm6 10h2v8h-2z" />
+            </svg>
+          </Link>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"

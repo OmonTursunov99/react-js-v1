@@ -100,23 +100,23 @@ export default function TopicPage() {
   ]
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-5xl mx-auto">
       <div className="mb-4 sm:mb-6">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-400 dark:text-gray-500 mb-3 sm:mb-4 flex-wrap">
+        <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-400 dark:text-gray-500 mb-4 flex-wrap">
           <Link to="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Bosh sahifa</Link>
           <span>/</span>
-          <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{direction.icon} {direction.title}</Link>
+          <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{direction.title}</Link>
+          {category.technologies.length > 1 && (
+            <>
+              <span>/</span>
+              <Link to={`/${directionId}/${categoryId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{category.title}</Link>
+            </>
+          )}
           <span>/</span>
-          <Link to={`/${directionId}/${categoryId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{category.icon} {category.title}</Link>
+          <Link to={basePath} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{techMeta.title}</Link>
           <span>/</span>
-          <Link to={basePath} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-            {techMeta.icon} {techMeta.title}
-          </Link>
-          <span>/</span>
-          <Link to={`${basePath}/${section.id}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-            {section.icon} {section.title}
-          </Link>
+          <Link to={`${basePath}/${section.id}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{section.title}</Link>
           <span>/</span>
           <span className="text-gray-600 dark:text-gray-300">{topic.title}</span>
         </div>

@@ -34,15 +34,15 @@ export default function DashboardPage() {
       <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-400 dark:text-gray-500 mb-4 flex-wrap">
         <Link to="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Bosh sahifa</Link>
         <span>/</span>
-        <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-          {direction.icon} {direction.title}
-        </Link>
+        <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{direction.title}</Link>
+        {category.technologies.length > 1 && (
+          <>
+            <span>/</span>
+            <Link to={`/${directionId}/${categoryId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{category.title}</Link>
+          </>
+        )}
         <span>/</span>
-        <Link to={`/${directionId}/${categoryId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-          {category.icon} {category.title}
-        </Link>
-        <span>/</span>
-        <span className="text-gray-600 dark:text-gray-300">{techMeta.icon} {techMeta.title}</span>
+        <span className="text-gray-600 dark:text-gray-300">{techMeta.title}</span>
       </div>
 
       <div className="mb-6 sm:mb-8">
