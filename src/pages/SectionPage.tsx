@@ -36,7 +36,9 @@ export default function SectionPage() {
       <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-400 dark:text-gray-500 mb-4 flex-wrap">
         <Link to="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Bosh sahifa</Link>
         <span>/</span>
-        <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{direction.title}</Link>
+        <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{direction.icon} {direction.title}</Link>
+        <span>/</span>
+        <Link to={`/${directionId}/${categoryId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{category.icon} {category.title}</Link>
         <span>/</span>
         <Link to={basePath} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">{techMeta.icon} {techMeta.title}</Link>
         <span>/</span>

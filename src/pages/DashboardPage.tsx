@@ -35,14 +35,14 @@ export default function DashboardPage() {
         <Link to="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Bosh sahifa</Link>
         <span>/</span>
         <Link to={`/${directionId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-          {direction.title}
+          {direction.icon} {direction.title}
         </Link>
         <span>/</span>
         <Link to={`/${directionId}/${categoryId}`} className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-          {category.title}
+          {category.icon} {category.title}
         </Link>
         <span>/</span>
-        <span className="text-gray-600 dark:text-gray-300">{techMeta.title}</span>
+        <span className="text-gray-600 dark:text-gray-300">{techMeta.icon} {techMeta.title}</span>
       </div>
 
       <div className="mb-6 sm:mb-8">
