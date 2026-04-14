@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
-import { Outlet, useLocation } from 'react-router'
+import { Outlet, useLocation, useNavigate } from 'react-router'
 import Sidebar from '@/components/sidebar/Sidebar'
+import { useFooterNavStore } from '@/stores/footer-nav-store'
 
 export default function TechLayout() {
   const mainRef = useRef<HTMLDivElement>(null)
   const { pathname } = useLocation()
+  const navigate = useNavigate()
   const [scrollPercent, setScrollPercent] = useState(0)
+
+  const { tabIds, activeTabId, goToTab, prevTopicPath, nextTopicPath } = useFooterNavStore()
+  const hasNav = tabIds.length > 0
 
   useEffect(() => {
     mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
@@ -35,6 +40,18 @@ export default function TechLayout() {
     mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  // Tab navigation
+  const tabIndex = tabIds.indexOf(activeTabId)
+  const canPrevTab = tabIndex > 0
+  const canNextTab = tabIndex < tabIds.length - 1
+
+  function goPrevTab() {
+    if (canPrevTab && goToTab) goToTab(tabIds[tabIndex - 1])
+  }
+  function goNextTab() {
+    if (canNextTab && goToTab) goToTab(tabIds[tabIndex + 1])
+  }
+
   return (
     <div className="flex flex-1 min-h-0">
       <Sidebar />
@@ -51,28 +68,79 @@ export default function TechLayout() {
               style={{ width: `${scrollPercent}%` }}
             />
           </div>
-          <div className="relative h-full flex items-center px-4">
+          <div className="relative h-full flex items-center px-2 sm:px-4">
+            {/* Left: percentage */}
             <span
               className={`text-xs font-mono font-bold transition-colors duration-200 ${
-                scrollPercent > 50
-                  ? 'text-white/80'
-                  : 'text-gray-400 dark:text-gray-500'
+                scrollPercent > 50 ? 'text-white/80' : 'text-gray-400 dark:text-gray-500'
               }`}
             >
               {scrollPercent > 0 && `${scrollPercent}%`}
             </span>
 
-            {/* Button inside footer — only when at bottom */}
-            {atBottom && (
-              <button
-                onClick={scrollToTop}
-                className="absolute left-1/2 -translate-x-1/2 -top-3 flex items-center gap-2 px-8 py-2.5 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium text-sm shadow-lg hover:scale-105 transition-all animate-bounce-soft"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-                </svg>
-                Yuqoriga
-              </button>
+            {/* Center: nav buttons */}
+            {(hasNav || atBottom) && (
+              <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-0.5 rounded-lg bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm px-1 py-0.5">
+                {hasNav && (
+                  <button
+                    onClick={() => prevTopicPath && navigate(prevTopicPath)}
+                    disabled={!prevTopicPath}
+                    className={`p-1.5 rounded-md transition-colors ${prevTopicPath ? 'text-gray-900 dark:text-white hover:bg-black/10 dark:hover:bg-white/10' : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'}`}
+                    title="Oldingi mavzu"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M18.5 19l-7-7 7-7M11.5 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                )}
+                {hasNav && (
+                  <button
+                    onClick={goPrevTab}
+                    disabled={!canPrevTab}
+                    className={`p-1.5 rounded-md transition-colors ${canPrevTab ? 'text-gray-900 dark:text-white hover:bg-black/10 dark:hover:bg-white/10' : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'}`}
+                    title="Oldingi tab"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                )}
+                {atBottom && (
+                  <button
+                    onClick={scrollToTop}
+                    className="p-1.5 rounded-md text-gray-900 dark:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+                    title="Yuqoriga"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+                    </svg>
+                  </button>
+                )}
+                {hasNav && (
+                  <button
+                    onClick={goNextTab}
+                    disabled={!canNextTab}
+                    className={`p-1.5 rounded-md transition-colors ${canNextTab ? 'text-gray-900 dark:text-white hover:bg-black/10 dark:hover:bg-white/10' : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'}`}
+                    title="Keyingi tab"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                )}
+                {hasNav && (
+                  <button
+                    onClick={() => nextTopicPath && navigate(nextTopicPath)}
+                    disabled={!nextTopicPath}
+                    className={`p-1.5 rounded-md transition-colors ${nextTopicPath ? 'text-gray-900 dark:text-white hover:bg-black/10 dark:hover:bg-white/10' : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'}`}
+                    title="Keyingi mavzu"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5.5 5l7 7-7 7M12.5 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                )}
+              </div>
             )}
           </div>
         </div>

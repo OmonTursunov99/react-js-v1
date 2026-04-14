@@ -1,8 +1,10 @@
+import { useState, useEffect, useCallback } from 'react'
 import { useParams, Link } from 'react-router'
 import { useTechSections } from '@/hooks/useTechSections'
 import { useProgress } from '@/hooks/useProgress'
 import { useTimeTracker } from '@/hooks/useTimeTracker'
 import { formatTime } from '@/stores/time-store'
+import { useFooterNavStore } from '@/stores/footer-nav-store'
 import { findDirection, findCategory, findTechnologyMeta } from '@/data/directions'
 import Tabs from '@/components/ui/Tabs'
 import ContentRenderer from '@/components/ui/ContentRenderer'
@@ -14,6 +16,7 @@ import Badge from '@/components/ui/Badge'
 
 export default function TopicPage() {
   const { directionId, categoryId, techId, sectionId, topicId } = useParams()
+  const [activeTab, setActiveTab] = useState('info')
   const { sections } = useTechSections(techId)
   const { isLearned, toggleLearned } = useProgress()
   const { liveTime: timeSpent, isPaused, togglePause } = useTimeTracker(techId, sectionId, topicId)
@@ -34,6 +37,29 @@ export default function TopicPage() {
   }
 
   const learned = isLearned(techId!, section.id, topic.id)
+
+  // Topic navigation
+  const topicIndex = section.topics.findIndex(t => t.id === topicId)
+  const prevTopic = topicIndex > 0 ? section.topics[topicIndex - 1] : null
+  const nextTopic = topicIndex < section.topics.length - 1 ? section.topics[topicIndex + 1] : null
+  const prevTopicPath = prevTopic ? `${basePath}/${sectionId}/${prevTopic.id}` : null
+  const nextTopicPath = nextTopic ? `${basePath}/${sectionId}/${nextTopic.id}` : null
+
+  const tabIds = ['info', 'code', 'interview']
+
+  // Reset tab on topic change
+  useEffect(() => { setActiveTab('info') }, [topicId])
+
+  // Sync footer nav store
+  const setNav = useFooterNavStore(s => s.setNav)
+  const clearNav = useFooterNavStore(s => s.clearNav)
+  const stableSetActiveTab = useCallback((id: string) => setActiveTab(id), [])
+
+  useEffect(() => {
+    setNav({ tabIds, activeTabId: activeTab, goToTab: stableSetActiveTab, prevTopicPath, nextTopicPath })
+  }, [activeTab, topicId, sectionId, prevTopicPath, nextTopicPath, setNav, stableSetActiveTab])
+
+  useEffect(() => clearNav, [clearNav])
 
   const tabs = [
     {
@@ -166,7 +192,7 @@ export default function TopicPage() {
         </div>
       </div>
 
-      <Tabs tabs={tabs} />
+      <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
       {topic.relatedTopics && topic.relatedTopics.length > 0 && (
         <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
