@@ -1,12 +1,18 @@
 import type { Topic } from '../../../types'
 import { composables } from './composables'
-import { reactivityDeep } from './reactivity-deep'
-import { stateManagement } from './state-management'
-import { vueRouter } from './vue-router'
+import { renderFunctions } from './render-functions'
+import { customDirectives } from './custom-directives'
+import { plugins } from './plugins'
+import { asyncComponents } from './async-components'
+import { transitions } from './transitions'
+import { errorHandling } from './error-handling'
 
 export const vueAdvancedTopics: Topic[] = [
   composables,
-  reactivityDeep,
-  stateManagement,
-  vueRouter,
+  renderFunctions,
+  customDirectives,
+  plugins,
+  asyncComponents,
+  transitions,
+  errorHandling,
 ]

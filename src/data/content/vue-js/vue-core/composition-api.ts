@@ -261,7 +261,7 @@ const singleRef = toRef(state, 'x')          // bitta property
   ],
   relatedTopics: [
     { techId: 'vue-js', sectionId: 'vue-core', topicId: 'lifecycle', label: 'Lifecycle Hooks' },
-    { techId: 'vue-js', sectionId: 'vue-advanced', topicId: 'reactivity-deep', label: 'Reaktivlik chuqur' },
+    { techId: 'vue-js', sectionId: 'vue-reactivity', topicId: 'reactivity-deep', label: 'Reaktivlik chuqur' },
     { techId: 'vue-js', sectionId: 'vue-advanced', topicId: 'composables', label: 'Composables' },
     { techId: 'vue-js', sectionId: 'vue-patterns', topicId: 'vue-vs-react', label: 'Vue vs React' },
   ],

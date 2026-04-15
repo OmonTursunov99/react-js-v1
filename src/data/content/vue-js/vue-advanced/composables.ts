@@ -316,7 +316,7 @@ const { targetRef } = useIntersectionObserver(
   ],
   relatedTopics: [
     { techId: 'vue-js', sectionId: 'vue-core', topicId: 'composition-api', label: 'Composition API' },
-    { techId: 'vue-js', sectionId: 'vue-advanced', topicId: 'reactivity-deep', label: 'Reaktivlik chuqur' },
+    { techId: 'vue-js', sectionId: 'vue-reactivity', topicId: 'reactivity-deep', label: 'Reaktivlik chuqur' },
     { techId: 'vue-js', sectionId: 'vue-core', topicId: 'lifecycle', label: 'Lifecycle Hooks' },
   ],
 }
