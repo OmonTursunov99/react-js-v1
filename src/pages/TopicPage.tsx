@@ -28,20 +28,12 @@ export default function TopicPage() {
   const topic = section?.topics.find(t => t.id === topicId)
   const basePath = `/${directionId}/${categoryId}/${techId}`
 
-  if (!section || !topic || !direction || !category || !techMeta) {
-    return (
-      <div className="text-center py-20">
-        <p className="text-gray-500 dark:text-gray-400">Mavzu topilmadi</p>
-      </div>
-    )
-  }
-
-  const learned = isLearned(techId!, section.id, topic.id)
+  const learned = section && topic ? isLearned(techId!, section.id, topic.id) : false
 
   // Topic navigation
-  const topicIndex = section.topics.findIndex(t => t.id === topicId)
-  const prevTopic = topicIndex > 0 ? section.topics[topicIndex - 1] : null
-  const nextTopic = topicIndex < section.topics.length - 1 ? section.topics[topicIndex + 1] : null
+  const topicIndex = section ? section.topics.findIndex(t => t.id === topicId) : -1
+  const prevTopic = topicIndex > 0 ? section!.topics[topicIndex - 1] : null
+  const nextTopic = section && topicIndex < section.topics.length - 1 ? section.topics[topicIndex + 1] : null
   const prevTopicPath = prevTopic ? `${basePath}/${sectionId}/${prevTopic.id}` : null
   const nextTopicPath = nextTopic ? `${basePath}/${sectionId}/${nextTopic.id}` : null
 
@@ -56,10 +48,19 @@ export default function TopicPage() {
   const stableSetActiveTab = useCallback((id: string) => setActiveTab(id), [])
 
   useEffect(() => {
+    if (!section || !topic) return
     setNav({ tabIds, activeTabId: activeTab, goToTab: stableSetActiveTab, prevTopicPath, nextTopicPath })
-  }, [activeTab, topicId, sectionId, prevTopicPath, nextTopicPath, setNav, stableSetActiveTab])
+  }, [activeTab, topicId, sectionId, prevTopicPath, nextTopicPath, setNav, stableSetActiveTab, section, topic])
 
   useEffect(() => clearNav, [clearNav])
+
+  if (!section || !topic || !direction || !category || !techMeta) {
+    return (
+      <div className="text-center py-20">
+        <p className="text-gray-500 dark:text-gray-400">Mavzu topilmadi</p>
+      </div>
+    )
+  }
 
   const tabs = [
     {
