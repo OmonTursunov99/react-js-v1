@@ -7,10 +7,10 @@ import { singleton } from './singleton'
 import { strategyPattern } from './strategy-pattern'
 
 export const designPatternsTopics: Topic[] = [
-  decoratorPattern,
-  factoryPattern,
-  modulePattern,
-  observerPattern,
   singleton,
+  factoryPattern,
+  observerPattern,
   strategyPattern,
+  modulePattern,
+  decoratorPattern,
 ]

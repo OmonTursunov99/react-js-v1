@@ -7,14 +7,16 @@ import { mapSet } from './map-set'
 import { regex } from './regex'
 import { modules } from './modules'
 import { memoryManagement } from './memory-management'
+import { debounceThrottle } from './debounce-throttle'
 
 export const advancedTopics: Topic[] = [
-  proxyReflect,
+  modules,
+  mapSet,
+  weakmapWeakset,
   symbol,
   iteratorsGenerators,
-  weakmapWeakset,
-  mapSet,
+  proxyReflect,
   regex,
-  modules,
+  debounceThrottle,
   memoryManagement,
 ]

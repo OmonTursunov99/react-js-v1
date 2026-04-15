@@ -5,14 +5,18 @@ import { events } from './events'
 import { fetchApi } from './fetch-api'
 import { observers } from './observers'
 import { webStorage } from './web-storage'
+import { serviceWorkers } from './service-workers'
 import { webWorkers } from './web-workers'
+import { websocket } from './websocket'
 
 export const domBrowserTopics: Topic[] = [
-  domManipulation,
   domTree,
+  domManipulation,
   events,
-  fetchApi,
-  observers,
   webStorage,
+  fetchApi,
+  websocket,
+  observers,
   webWorkers,
+  serviceWorkers,
 ]

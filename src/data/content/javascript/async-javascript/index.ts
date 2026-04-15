@@ -7,10 +7,10 @@ import { promiseMethodsTopic } from './promise-methods'
 import { microtasksMacrotasksTopic } from './microtasks-macrotasks'
 
 export const asyncJavascriptTopics: Topic[] = [
-  eventLoopTopic,
   callbacksTopic,
   promisesTopic,
   asyncAwaitTopic,
   promiseMethodsTopic,
+  eventLoopTopic,
   microtasksMacrotasksTopic,
 ]

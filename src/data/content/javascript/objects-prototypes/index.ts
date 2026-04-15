@@ -10,9 +10,9 @@ import { newKeyword } from './new-keyword'
 export const objectsPrototypesTopics: Topic[] = [
   objectBasics,
   destructuringSpread,
-  propertyDescriptors,
-  prototypeChain,
-  objectCreate,
   thisKeyword,
+  prototypeChain,
   newKeyword,
+  objectCreate,
+  propertyDescriptors,
 ]
